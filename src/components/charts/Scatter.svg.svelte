@@ -25,10 +25,10 @@
       data-id={i}
       {cx}
       {cy}
-      r={d.recent ? 12 : r}
+      r={d.highlight ? 10 : r}
       fill={d.highlight ? fillv : "#888"}
       {stroke}
-      stroke-width={d.recent ? 4 : strokeWidth}
+      stroke-width={d.highlight ? 4 : strokeWidth}
     />
     {#if d.highlight && showText}
       <text text-anchor="middle" x={cx} y={cy} dy="-24">{timeFormat("%B %d, %Y")(d.date)}</text>
