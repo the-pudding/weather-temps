@@ -67,64 +67,8 @@
 
 <article>
   <Slider bind:this={slider} bind:active={activeSlide}>
-    <Slide>
-      <p>
-        Was yesterday a heat record in <select><option>Boston</option></select>?
-      </p>
-    </Slide>
-    <Slide>
-      <p>
-        Yesterday was not a heat record in <span>Boston</span>, but
-        <span>four weeks ago</span>
-        was one of the hottest days ever in <span>March</span>.
-      </p>
-      <p>
-        <small
-          >Let’s look at the last 30 days of daily temperatures highs in
-          <span>Boston</span>.</small
-        >
-      </p>
-    </Slide>
-    <Slide>
-      <p>
-        Each line represents a single day’s max temperature, going all the way
-        back to <span>1887</span>.
-      </p>
-    </Slide>
-    <Slide>
-      <p>
-        Here was <span>last Wednesday</span>, a scorcher for a day in
-        <span>March</span>!
-      </p>
-    </Slide>
-    <Slide>
-      <p>
-        And these are the hottest recorded temperatures for each of the last 30
-        days.
-      </p>
-    </Slide>
-    <Slide>
-      <p>Let’s zoom out.</p>
-    </Slide>
-    <Slide>
-      <p>
-        Each dot is the hottest temperature its ever been in <span>Boston</span>
-        for each day of the year.
-      </p>
-    </Slide>
-    <Slide>
-      <p>
-        The most recent daily record was <span>February 2, 2007</span>, the
-        hottest <span>Febuary 2nd</span> ever.
-      </p>
-    </Slide>
-    <Slide>
-      <p>
-        This record was set in <span>1933</span>, when it was the hottest it’s
-        ever been,
-        <span>109°F</span>.
-      </p>
-    </Slide>
+    <Slide><p>Tk text slide 1.</p></Slide>
+    <Slide><p>Tk text slide 2.</p></Slide>
   </Slider>
 </article>
 <Tap debug={false} full={true} size="50%" on:tap={onTap} />
@@ -138,9 +82,5 @@
     height: 100%;
     left: 50%;
     transform: translate(-50%, 0);
-  }
-
-  span {
-    color: yellow;
   }
 </style>
