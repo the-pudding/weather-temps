@@ -13,31 +13,41 @@
   $: daysInView = $xDomain[1] - $xDomain[0];
   $: margin = daysInView <= 30 ? 2 : 0;
   $: paddedWidth = $width - $xPadding[0] - $xPadding[1];
-  $: w = Math.floor(paddedWidth / daysInView - margin);
+  $: w = Math.max(3, Math.floor(paddedWidth / daysInView - margin));
   $: h = 3;
 
   $: renderData = $data.filter(filter);
 </script>
 
 <g>
-  {#each renderData as d}
+  {#each renderData as d (d.daysSinceNow)}
     {@const x = $xGet(d) - w / 2}
     {@const y = $yGet(d) - h / 2}
-    {@const f = fill}
     <rect
+      class={d.class}
       {x}
       {y}
       width={w}
       height={h}
       style:stroke
-      style:fill={f}
       style:stroke-width={strokeWidth}
     />
   {/each}
 </g>
 
 <style>
-  /* rect {
-    stroke: "#000";
-  } */
+  rect {
+    display: none;
+    fill: rgba(255, 255, 255, 0.25);
+  }
+
+  rect.primary {
+    display: block;
+    fill: #6f9;
+  }
+
+  rect.secondary {
+    display: block;
+    fill: #f69;
+  }
 </style>

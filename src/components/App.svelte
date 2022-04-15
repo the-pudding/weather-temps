@@ -3,36 +3,43 @@
   import { LayerCake, Canvas, Svg } from "layercake";
   import { fade } from "svelte/transition";
   import { tweened } from "svelte/motion";
-  import { cubicInOut } from "svelte/easing";
+  import { cubicInOut, cubicOut } from "svelte/easing";
   import WIP from "$components/helpers/WIP.svelte";
   import Slider from "$components/helpers/Slider.svelte";
   import Slide from "$components/helpers/Slider.Slide.svelte";
   import Tap from "$components/helpers/Tap.svelte";
+  import AxisX from "$components/charts/AxisX.svg.svelte";
+  import AxisY from "$components/charts/AxisY.svg.svelte";
   import Scatter from "$components/charts/Scatter.svg.svelte";
   import Scatter2 from "$components/charts/Scatter.canvas.svelte";
-  import data from "$data/bos.js";
+  import rawData from "$data/bos.js";
 
   const position = "absolute";
   const x = "day";
   const y = "temp";
   const z = "rank";
   const fill = "rgba(255,255,255,0.25)";
-  const highlight = "#6f9";
-  const padding = 20;
-  const xPadding = [padding, padding];
-  const dayRecentExtent = extent(
-    data.filter((d) => d.recent),
-    (d) => d.day
-  );
-  const dayRecordsExtent = extent(
-    data.filter((d) => d.rank !== undefined),
-    (d) => d.day
-  );
-  const xExtent = tweened(dayRecentExtent);
+  const primary = "#6f9";
+  const secondary = "#f96";
+  const padding = 24;
+  const xPadding = [padding * 2, padding * 2];
+  const yPadding = [padding, padding];
   const yDomain = [0, null];
-  const filterRecent = (d) => d.recent;
-  const filterRecords = (d) => d.rank === 0;
+  const extentDayRecent = extent(
+    rawData.filter((d) => d.recent),
+    (d) => d.day
+  );
+  const extentDayRecords = extent(
+    rawData.filter((d) => d.rank !== undefined),
+    (d) => d.day
+  );
 
+  const tweenExtentDay = tweened(extentDayRecent);
+
+  const filterRecent = (d) => d.recent;
+  const filterRecords = (d) => d.rank !== undefined;
+
+  let data = [...rawData];
   let slider = undefined;
   let activeSlide = 0;
 
@@ -41,23 +48,46 @@
     else slider.prev();
   };
 
-  $: xDomain = $xExtent;
   $: visible = activeSlide > 1;
   $: showDaily = activeSlide < 5 && activeSlide > 1;
   $: showRecord = activeSlide > 2;
-  $: extentTarget = activeSlide < 5 ? dayRecentExtent : dayRecordsExtent;
+  $: targetExtentDay = activeSlide < 5 ? extentDayRecent : extentDayRecords;
   $: duration = activeSlide < 5 ? 0 : 2000;
-  $: xExtent.set(extentTarget, { duration, easing: cubicInOut });
+  $: tweenExtentDay.set(targetExtentDay, { duration, easing: cubicInOut });
+  $: xDomain = $tweenExtentDay;
+  $: {
+    if (activeSlide === 3) {
+      const index = data.findIndex((d) => d.rank !== undefined);
+      data.forEach((d, i) => (d.class = i === index ? "secondary" : ""));
+    } else if (activeSlide > 3) {
+      data.forEach((d, i) => (d.class = d.rank === 0 ? "primary" : ""));
+    }
+    data = [...data];
+  }
 </script>
 
 <!-- <WIP /> -->
 
 <figure class:visible>
-  <LayerCake {xDomain} {xPadding} {position} {x} {y} {z} {yDomain} {data}>
+  <LayerCake
+    {xDomain}
+    {xPadding}
+    {yPadding}
+    {position}
+    {x}
+    {y}
+    {z}
+    {yDomain}
+    {data}
+  >
     {#if showDaily}
       <div transition:fade>
+        <Svg>
+          <AxisX />
+          <AxisY />
+        </Svg>
         <Canvas>
-          <Scatter2 {fill} {highlight} filter={filterRecent} />
+          <Scatter2 {fill} {primary} {secondary} filter={filterRecent} />
         </Canvas>
       </div>
     {/if}
@@ -67,8 +97,7 @@
     {#if showRecord}
       <div transition:fade>
         <Svg>
-          <!-- <Scatter {fill} {highlight} filter={filterRecent} /> -->
-          <Scatter fill={highlight} {highlight} filter={filterRecords} />
+          <Scatter {fill} {primary} {secondary} filter={filterRecords} />
         </Svg>
       </div>
     {/if}

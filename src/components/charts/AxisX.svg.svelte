@@ -32,18 +32,29 @@
 
 <g class="axis x-axis" class:snapTicks>
   {#each tickVals as tick, i}
-    <g class="tick tick-{i}" transform="translate({$xScale(tick)},{$yRange[0]})">
+    <g
+      class="tick tick-{i}"
+      transform="translate({$xScale(tick)},{$yRange[0]})"
+    >
       {#if gridlines !== false}
         <line class="gridline" y1={$height * -1} y2="0" x1="0" x2="0" />
       {/if}
       {#if tickMarks === true}
         <line class="tick-mark" y1={0} y2={6} x1={0} x2={0} />
       {/if}
-      <text x={0} y={yTick} dx="" dy="" text-anchor={textAnchor(i)}>{formatTick(tick)}</text>
+      <text x={0} y={yTick} dx="" dy="" text-anchor={textAnchor(i)}
+        >{formatTick(tick)}</text
+      >
     </g>
   {/each}
   {#if baseline === true}
-    <line class="baseline" y1={$height + 0.5} y2={$height + 0.5} x1="0" x2={$width} />
+    <line
+      class="baseline"
+      y1={$height + 0.5}
+      y2={$height + 0.5}
+      x1="0"
+      x2={$width}
+    />
   {/if}
 </g>
 
@@ -55,8 +66,7 @@
 
   line,
   .tick line {
-    stroke: var(--color-gray-300);
-    stroke-dasharray: 2;
+    display: none;
   }
 
   .tick text {

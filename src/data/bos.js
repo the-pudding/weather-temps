@@ -17,7 +17,7 @@ const daily = rawDaily.filter(d => d.temp !== "M").map((d) => ({
 }))
 	.map(d => ({
 		...d,
-		daysSinceNow: Math.floor((today - d.date) / MS_DAY)
+		daysSinceNow: Math.floor((today - d.date) / MS_DAY),
 	}));
 
 daily.sort((a, b) => ascending(a.daysSinceNow, b.daysSinceNow));
