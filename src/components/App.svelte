@@ -216,6 +216,6 @@
   }
 
   span {
-    color: yellow;
+    border-bottom: 1px solid currentColor;
   }
 </style>
