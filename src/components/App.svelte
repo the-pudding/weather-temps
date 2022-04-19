@@ -107,74 +107,90 @@
 <article>
   <Slider bind:this={slider} bind:active={activeSlide} duration="0">
     <Slide>
-      <p>
-        <small
-          >Was yesterday a heat record in <select
-            ><option>Boston</option></select
-          >?</small
-        >
-      </p>
+      <div class:active={activeSlide === 0}>
+        <p>
+          <small
+            >Was yesterday a heat record in <select
+              ><option>Boston</option></select
+            >?</small
+          >
+        </p>
+      </div>
     </Slide>
     <Slide>
-      <p>
-        Yesterday was not a heat record in <span>Boston</span>, but
-        <span>four weeks ago</span>
-        was one of the hottest days ever in <span>March</span>.
-      </p>
-      <p>
-        <small
-          >Let’s look at the last 30 days of daily temperatures highs in
-          <span>Boston</span>.</small
-        >
-      </p>
+      <div class:active={activeSlide === 1}>
+        <p>
+          Yesterday was not a heat record in <span>Boston</span>, but
+          <span>four weeks ago</span>
+          was one of the hottest days ever in <span>March</span>.
+        </p>
+        <p>
+          <small
+            >Let’s look at the last 30 days of daily temperatures highs in
+            <span>Boston</span>.</small
+          >
+        </p>
+      </div>
     </Slide>
     <Slide>
-      <!-- fade in non-records -->
-      <!-- bonus: animate positions (tweened on values) -->
-      <p>
-        Each line represents a single day’s max temperature, going all the way
-        back to <span>1887</span>.
-      </p>
+      <div class:active={activeSlide === 2}>
+        <!-- fade in non-records -->
+        <!-- bonus: animate positions (tweened on values) -->
+        <p>
+          Each line represents a single day’s max temperature, going all the way
+          back to <span>1887</span>.
+        </p>
+      </div>
     </Slide>
     <Slide>
-      <!-- highlight one day -->
-      <!-- add annotation -->
-      <p>
-        Here was <span>last Wednesday</span>, a scorcher for a day in
-        <span>March</span>!
-      </p>
+      <div class:active={activeSlide === 3}>
+        <!-- highlight one day -->
+        <!-- add annotation -->
+        <p>
+          Here was <span>last Wednesday</span>, a scorcher for a day in
+          <span>March</span>!
+        </p>
+      </div>
     </Slide>
     <Slide>
-      <!-- highlight rank = 0 -->
-      <!-- fade out daily -->
-      <p>
-        And these are the hottest recorded temperatures for each of the last 30
-        days.
-      </p>
+      <div class:active={activeSlide === 4}>
+        <!-- highlight rank = 0 -->
+        <!-- fade out daily -->
+        <p>
+          And these are the hottest recorded temperatures for each of the last
+          30 days. Let’s zoom out...
+        </p>
+      </div>
     </Slide>
     <Slide>
-      <!-- transition axis -->
-      <p>
-        Let’s zoom out. Each dot is the hottest temperature its ever been in <span
-          >Boston</span
-        >
-        for each day of the year.
-      </p>
+      <div class:active={activeSlide === 5}>
+        <!-- transition axis -->
+        <p>
+          Each dot is the hottest temperature its ever been in <span
+            >Boston</span
+          >
+          for each day of the year.
+        </p>
+      </div>
     </Slide>
     <Slide>
-      <!-- highlight -->
-      <p>
-        The most recent daily record was <span>February 2, 2007</span>, the
-        hottest <span>Febuary 2nd</span> ever.
-      </p>
+      <div class:active={activeSlide === 6}>
+        <!-- highlight -->
+        <p>
+          The most recent daily record was <span>February 2, 2007</span>, the
+          hottest <span>Febuary 2nd</span> ever.
+        </p>
+      </div>
     </Slide>
     <Slide>
-      <!-- highlight -->
-      <p>
-        This record was set in <span>1933</span>, when it was the hottest it’s
-        ever been,
-        <span>109°F</span>.
-      </p>
+      <div class:active={activeSlide === 7}>
+        <!-- highlight -->
+        <p>
+          This record was set in <span>1933</span>, when it was the hottest it’s
+          ever been,
+          <span>109°F</span>.
+        </p>
+      </div>
     </Slide>
   </Slider>
 </article>
@@ -213,6 +229,15 @@
 
   article {
     font-size: 2em;
+  }
+
+  article div {
+    opacity: 0;
+    transition: opacity 1s 0.5s ease-in-out;
+  }
+
+  article div.active {
+    opacity: 1;
   }
 
   span {
