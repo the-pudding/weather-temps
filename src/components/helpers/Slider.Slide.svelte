@@ -2,11 +2,12 @@
   import { getContext } from "svelte";
   const { direction, width, height } = getContext("Slider");
 
+  export let center;
   $: w = $direction === "horizontal" ? `${$width}px` : "100%";
   $: h = $direction === "vertical" ? `${$height}px` : "100%";
 </script>
 
-<div class="slide" style="width: {w}; height: {h};">
+<div class="slide" class:center style="width: {w}; height: {h};">
   <slot />
 </div>
 
@@ -18,6 +19,9 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-    padding-bottom: 4rem;
+  }
+
+  .slide.center {
+    justify-content: center;
   }
 </style>

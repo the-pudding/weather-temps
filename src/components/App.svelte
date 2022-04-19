@@ -6,13 +6,14 @@
   import { cubicInOut, cubicOut } from "svelte/easing";
   import WIP from "$components/helpers/WIP.svelte";
   import Slider from "$components/helpers/Slider.svelte";
-  import Slide from "$components/helpers/Slider.Slide.svelte";
   import Tap from "$components/helpers/Tap.svelte";
   import AxisX from "$components/charts/AxisX.svg.svelte";
   import AxisY from "$components/charts/AxisY.svg.svelte";
   import Scatter from "$components/charts/Scatter.svg.svelte";
   import Scatter2 from "$components/charts/Scatter.canvas.svelte";
+  import ArticleSlide from "$components/ArticleSlide.svelte";
   import rawData from "$data/bos.js";
+  import copy from "$data/doc.json";
 
   const position = "absolute";
   const x = "day";
@@ -48,8 +49,9 @@
     else slider.prev();
   };
 
-  $: visible = activeSlide > 1;
-  $: showDaily = activeSlide < 5 && activeSlide > 1;
+  $: visible = activeSlide > 0;
+  $: tease = activeSlide < 2;
+  $: showDaily = activeSlide < 5 && activeSlide > 0;
   $: showRecord = activeSlide > 2;
   $: targetExtentDay = activeSlide < 5 ? extentDayRecent : extentDayRecords;
   $: duration = activeSlide < 5 ? 0 : 2000;
@@ -68,7 +70,7 @@
 
 <!-- <WIP /> -->
 
-<figure class:visible>
+<figure class:visible class:tease>
   <LayerCake
     {xDomain}
     {xPadding}
@@ -106,92 +108,9 @@
 
 <article>
   <Slider bind:this={slider} bind:active={activeSlide} duration="0">
-    <Slide>
-      <div class:active={activeSlide === 0}>
-        <p>
-          <small
-            >Was yesterday a heat record in <select
-              ><option>Boston</option></select
-            >?</small
-          >
-        </p>
-      </div>
-    </Slide>
-    <Slide>
-      <div class:active={activeSlide === 1}>
-        <p>
-          Yesterday was not a heat record in <span>Boston</span>, but
-          <span>four weeks ago</span>
-          was one of the hottest days ever in <span>March</span>.
-        </p>
-        <p>
-          <small
-            >Let’s look at the last 30 days of daily temperatures highs in
-            <span>Boston</span>.</small
-          >
-        </p>
-      </div>
-    </Slide>
-    <Slide>
-      <div class:active={activeSlide === 2}>
-        <!-- fade in non-records -->
-        <!-- bonus: animate positions (tweened on values) -->
-        <p>
-          Each line represents a single day’s max temperature, going all the way
-          back to <span>1887</span>.
-        </p>
-      </div>
-    </Slide>
-    <Slide>
-      <div class:active={activeSlide === 3}>
-        <!-- highlight one day -->
-        <!-- add annotation -->
-        <p>
-          Here was <span>last Wednesday</span>, a scorcher for a day in
-          <span>March</span>!
-        </p>
-      </div>
-    </Slide>
-    <Slide>
-      <div class:active={activeSlide === 4}>
-        <!-- highlight rank = 0 -->
-        <!-- fade out daily -->
-        <p>
-          And these are the hottest recorded temperatures for each of the last
-          30 days. Let’s zoom out...
-        </p>
-      </div>
-    </Slide>
-    <Slide>
-      <div class:active={activeSlide === 5}>
-        <!-- transition axis -->
-        <p>
-          Each dot is the hottest temperature its ever been in <span
-            >Boston</span
-          >
-          for each day of the year.
-        </p>
-      </div>
-    </Slide>
-    <Slide>
-      <div class:active={activeSlide === 6}>
-        <!-- highlight -->
-        <p>
-          The most recent daily record was <span>February 2, 2007</span>, the
-          hottest <span>Febuary 2nd</span> ever.
-        </p>
-      </div>
-    </Slide>
-    <Slide>
-      <div class:active={activeSlide === 7}>
-        <!-- highlight -->
-        <p>
-          This record was set in <span>1933</span>, when it was the hottest it’s
-          ever been,
-          <span>109°F</span>.
-        </p>
-      </div>
-    </Slide>
+    {#each copy.slides as { text, subtext, center }, i}
+      <ArticleSlide active={activeSlide === i} {text} {subtext} {center} {i} />
+    {/each}
   </Slider>
 </article>
 <Tap
@@ -210,37 +129,25 @@
     max-width: 80rem;
     height: 100%;
     left: 50%;
-    transform: translate(-50%, 0);
+    transform: translate3d(-50%, 0, 0);
   }
 
   figure {
     opacity: 0;
     overflow: hidden;
+    transition: transform 1s ease-in-out, filter 0.5s 1s;
   }
 
   figure.visible {
     opacity: 1;
   }
 
-  :global(figure.hideDaily canvas) {
-    /* opacity: 0; */
-    /* transition: opacity 500ms ease-in-out; */
+  figure.tease {
+    filter: blur(4px);
+    transform: translate3d(-50%, 50%, 0);
   }
 
   article {
-    font-size: 2em;
-  }
-
-  article div {
-    opacity: 0;
-    transition: opacity 1s 0.5s ease-in-out;
-  }
-
-  article div.active {
-    opacity: 1;
-  }
-
-  span {
-    border-bottom: 1px solid currentColor;
+    font-size: clamp(20px, 2vw, 36px);
   }
 </style>
