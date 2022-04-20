@@ -1,19 +1,16 @@
 <script>
   import { getContext } from "svelte";
 
-  const { data, xGet, yGet, z, width, height, xPadding, xDomain } =
+  const { data, xGet, yGet, z, width, height, xDomain } =
     getContext("LayerCake");
 
-  export let fill = "#ccc";
-  export let highlight = "#ccc";
   export let stroke = "#000";
   export let strokeWidth = 0;
   export let filter = () => true;
 
-  $: daysInView = $xDomain[1] - $xDomain[0];
+  $: daysInView = $xDomain[1] - $xDomain[0] + 1;
   $: margin = daysInView <= 30 ? 2 : 0;
-  $: paddedWidth = $width - $xPadding[0] - $xPadding[1];
-  $: w = Math.max(3, Math.floor(paddedWidth / daysInView - margin));
+  $: w = Math.max(3, Math.floor($width / daysInView - margin));
   $: h = 3;
 
   $: renderData = $data.filter(filter);

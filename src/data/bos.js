@@ -17,6 +17,7 @@ const daily = rawDaily.filter(d => d.temp !== "M").map((d) => ({
 }))
 	.map(d => ({
 		...d,
+		date: new Date(d.date.setDate(d.date.getDate() + 1)),
 		daysSinceNow: Math.floor((today - d.date) / MS_DAY),
 	}));
 

@@ -22,10 +22,8 @@
   const fill = "rgba(255,255,255,0.25)";
   const primary = "#6f9";
   const secondary = "#f69";
-  const pad = 24;
-  const xPadding = [pad * 2, pad * 2];
-  const yPadding = [pad, pad];
-  const padding = { top: 0, right: 0, bottom: pad * 8, left: 0 };
+  const pad = 32;
+  const padding = { top: pad, right: pad, bottom: pad * 6, left: pad };
   const yDomain = [0, null];
   const extentDayRecent = extent(
     rawData.filter((d) => d.recent),
@@ -47,15 +45,18 @@
   let data = [...rawData];
   let slider = undefined;
   let activeSlide = 0;
+  let figureWidth = 0;
 
   const formatDay = (d) => {
-    const { date } = justRecords.find((j) => j.day === d);
-    return timeFormat("%b %e")(date);
+    const match = justRecords.find((j) => j.day === d);
+    if (!match) return "";
+    return timeFormat("%b %d")(match.date);
   };
 
   const formatMonth = (d) => {
-    const { date } = justRecords.find((j) => j.day === d);
-    return timeFormat("%b")(date);
+    const match = justRecords.find((j) => j.day === d);
+    if (!match) return "";
+    return timeFormat("%b")(match.date);
   };
 
   const onTap = ({ detail }) => {
@@ -71,8 +72,10 @@
   $: duration = activeSlide < 5 ? 0 : 2000;
   $: tweenExtentDay.set(targetExtentDay, { duration, easing: cubicInOut });
   $: xDomain = $tweenExtentDay;
+  $: halfBar = Math.floor(figureWidth / (xDomain[1] - xDomain[0]));
+  $: xPadding = [halfBar, halfBar];
   $: formatTick = activeSlide > 4 ? formatMonth : formatDay;
-  $: ticks = activeSlide > 4 ? 4 : 2;
+  $: ticks = undefined;
   $: {
     if (activeSlide === 3) {
       const index = data.findIndex((d) => d.rank !== undefined);
@@ -86,18 +89,17 @@
 
 <!-- <WIP /> -->
 
-<figure class:visible class:tease>
+<figure class:visible class:tease bind:clientWidth={figureWidth}>
   <LayerCake
     {xDomain}
     {padding}
-    {xPadding}
-    {yPadding}
     {position}
     {x}
     {y}
     {z}
     {yDomain}
     {data}
+    {xPadding}
   >
     {#if showDaily || showRecord}
       <div transition:fade>
@@ -173,6 +175,7 @@
   }
 
   article {
+    pointer-events: none;
     font-size: clamp(20px, 2vw, 36px);
   }
 </style>

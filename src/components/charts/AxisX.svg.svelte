@@ -1,21 +1,20 @@
 <script>
   import { getContext } from "svelte";
-  const { width, height, xScale, yRange } = getContext("LayerCake");
+  const { width, height, xScale, yRange, xRange, xDomain, padding } =
+    getContext("LayerCake");
 
   export let gridlines = true;
-  export let tickMarks = false;
-  export let baseline = false;
+  export let tickMarks = true;
+  export let baseline = true;
   export let snapTicks = false;
   export let yTick = 16;
   export let formatTick = (d) => d;
-  export let ticks = undefined;
   /** If this is a number, it passes that along to the [d3Scale.ticks](https://github.com/d3/d3-scale) function. If this is an array, hardcodes the ticks to those values. If it's a function, passes along the default tick values and expects an array of tick values in return. If nothing, it uses the default ticks supplied by the D3 function. */
 
-  $: tickVals = Array.isArray(ticks)
-    ? ticks
-    : typeof ticks === "function"
-    ? ticks($xScale.ticks())
-    : $xScale.ticks(ticks);
+  $: ticks = $xDomain[1] - $xDomain[0];
+  $: tickVals = $xScale
+    .ticks(ticks)
+    .filter((d) => d >= $xDomain[0] && d <= $xDomain[1]);
 
   const textAnchor = (i) => {
     if (snapTicks === true) {
@@ -30,32 +29,21 @@
   };
 </script>
 
-<g class="axis x-axis" class:snapTicks>
+<g class="axis x-axis">
   {#each tickVals as tick, i}
-    <g
-      class="tick tick-{i}"
-      transform="translate({$xScale(tick)},{$yRange[0]})"
-    >
-      {#if gridlines !== false}
-        <line class="gridline" y1={$height * -1} y2="0" x1="0" x2="0" />
-      {/if}
-      {#if tickMarks === true}
-        <line class="tick-mark" y1={0} y2={6} x1={0} x2={0} />
-      {/if}
-      <text x={0} y={yTick} dx="" dy="" text-anchor={textAnchor(i)}
-        >{formatTick(tick)}</text
+    {@const visible = i === 0 || i === tickVals.length - 1}
+    {@const j = i === 0 ? 0 : 1}
+    {#if visible}
+      <g
+        class="tick tick-{i}"
+        transform="translate({$xRange[j]},{$yRange[0] + $padding.top})"
       >
-    </g>
+        <text x={0} y={yTick} dx="" dy="" text-anchor={textAnchor(i)}
+          >{formatTick(tick)}</text
+        >
+      </g>
+    {/if}
   {/each}
-  {#if baseline === true}
-    <line
-      class="baseline"
-      y1={$height + 0.5}
-      y2={$height + 0.5}
-      x1="0"
-      x2={$width}
-    />
-  {/if}
 </g>
 
 <style>
@@ -64,21 +52,18 @@
     font-weight: 200;
   }
 
-  line,
-  .tick line {
-    display: none;
+  .tick.hack:first-of-type {
+    /* display: none; */
+  }
+
+  .tick.hack {
+    /* display: none; */
   }
 
   .tick text {
     fill: var(--color-fg);
   }
 
-  .tick .tick-mark,
-  .baseline {
-    stroke-dasharray: 0;
-  }
-
-  /* This looks slightly better */
   .axis.snapTicks .tick:last-child text {
     transform: translateX(3px);
   }

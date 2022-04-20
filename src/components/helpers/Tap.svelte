@@ -17,8 +17,10 @@
   const dispatch = createEventDispatcher();
   let innerHeight;
 
-  $: getW = (dir) => (["left", "right"].includes(dir) ? size : full ? "100%" : size);
-  $: getH = (dir) => (["up", "down"].includes(dir) ? size : full ? "100%" : size);
+  $: getW = (dir) =>
+    ["left", "right"].includes(dir) ? size : full ? "100%" : size;
+  $: getH = (dir) =>
+    ["up", "down"].includes(dir) ? size : full ? "100%" : size;
 
   $: onKeyDown = (e) => {
     const dir = e.key.replace("Arrow", "").toLowerCase();
@@ -48,7 +50,11 @@
     >
       {#if visibleArrows.includes(dir)}
         <span style="font-size: {arrowSize};"
-          ><Icon name="chevron-{dir}" stroke={arrowStroke} strokeWidth={arrowStrokeWidth} /></span
+          ><Icon
+            name="chevron-{dir}"
+            stroke={arrowStroke}
+            strokeWidth={arrowStrokeWidth}
+          /></span
         >
       {/if}
     </button>
@@ -74,7 +80,7 @@
     outline: none;
     border: none;
     box-shadow: none;
-    pointer-events: auto;
+    /* pointer-events: auto; */
     display: flex;
   }
 
