@@ -1,7 +1,7 @@
 <script>
   import { getContext } from "svelte";
 
-  const { padding, xRange, yScale } = getContext("LayerCake");
+  const { padding, xPadding, xRange, yScale } = getContext("LayerCake");
 
   export let gridlines = true;
   export let tickMarks = false;
@@ -28,7 +28,13 @@
       transform="translate({$xRange[0]}, {$yScale(tick)})"
     >
       {#if gridlines !== false}
-        <line class="gridline" x2="100%" y1={yTick} y2={yTick} />
+        <line
+          class="gridline"
+          x1={$xPadding[0] / 2}
+          x2={$xRange[1] - $xPadding[1] / 2}
+          y1={yTick}
+          y2={yTick}
+        />
       {/if}
       {#if tickMarks === true}
         <line class="tick-mark" x1="0" x2={6} y1={yTick} y2={yTick} />

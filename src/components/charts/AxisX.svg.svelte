@@ -36,7 +36,7 @@
     {#if visible}
       <g
         class="tick tick-{i}"
-        transform="translate({$xRange[j]},{$yRange[0] + $padding.top})"
+        transform="translate({$xScale(tick)},{$yRange[0] + $padding.top})"
       >
         <text x={0} y={yTick} dx="" dy="" text-anchor={textAnchor(i)}
           >{formatTick(tick)}</text

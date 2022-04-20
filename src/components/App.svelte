@@ -3,6 +3,7 @@
   import { LayerCake, Canvas, Svg } from "layercake";
   import { fade } from "svelte/transition";
   import { tweened } from "svelte/motion";
+  import { onMount } from "svelte";
   import { cubicInOut, cubicOut } from "svelte/easing";
   import WIP from "$components/helpers/WIP.svelte";
   import Slider from "$components/helpers/Slider.svelte";
@@ -37,7 +38,6 @@
   const tweenExtentDay = tweened(extentDayRecent);
 
   const filterRecent = (d) => d.recent;
-  const filterRecords = (d) => d.rank !== undefined;
 
   const justRecords = rawData.filter((d) => d.rank === 0);
   justRecords.sort((a, b) => ascending(a.day, b.day));
@@ -46,6 +46,7 @@
   let slider = undefined;
   let activeSlide = 0;
   let figureWidth = 0;
+  let mounted;
 
   const formatDay = (d) => {
     const match = justRecords.find((j) => j.day === d);
@@ -68,6 +69,10 @@
   $: tease = activeSlide < 2;
   $: showDaily = activeSlide < 5 && activeSlide > 0;
   $: showRecord = activeSlide > 2;
+  $: filterRecords = (d) =>
+    d.rank !== undefined && showDaily
+      ? d.day >= xDomain[0] && d.day <= xDomain[1]
+      : true;
   $: targetExtentDay = activeSlide < 5 ? extentDayRecent : extentDayRecords;
   $: duration = activeSlide < 5 ? 0 : 2000;
   $: tweenExtentDay.set(targetExtentDay, { duration, easing: cubicInOut });
@@ -75,7 +80,7 @@
   $: halfBar = Math.floor(figureWidth / (xDomain[1] - xDomain[0]));
   $: xPadding = [halfBar, halfBar];
   $: formatTick = activeSlide > 4 ? formatMonth : formatDay;
-  $: ticks = undefined;
+  $: padding.bottom = figureWidth * 0.2;
   $: {
     if (activeSlide === 3) {
       const index = data.findIndex((d) => d.rank !== undefined);
@@ -85,6 +90,10 @@
     }
     data = [...data];
   }
+
+  onMount(() => {
+    mounted = true;
+  });
 </script>
 
 <!-- <WIP /> -->
@@ -104,7 +113,7 @@
     {#if showDaily || showRecord}
       <div transition:fade>
         <Svg>
-          <AxisX {formatTick} {ticks} />
+          <AxisX {formatTick} />
           <AxisY />
         </Svg>
       </div>
@@ -126,7 +135,7 @@
   </LayerCake>
 </figure>
 
-<article>
+<article class:mounted>
   <Slider bind:this={slider} bind:active={activeSlide} duration="0">
     {#each copy.slides as { text, subtext, center, color }, i}
       <ArticleSlide
@@ -153,13 +162,13 @@
   figure {
     position: absolute;
     width: 100%;
-    max-width: 80rem;
     height: 100%;
     left: 50%;
     transform: translate3d(-50%, 0, 0);
   }
 
   figure {
+    max-width: 80rem;
     opacity: 0;
     overflow: hidden;
     transition: transform 1s ease-in-out, filter 0.5s 1s;
@@ -175,7 +184,12 @@
   }
 
   article {
-    pointer-events: none;
+    visibility: hidden;
+    max-width: 65rem;
     font-size: clamp(20px, 2vw, 36px);
+  }
+
+  article.mounted {
+    visibility: visible;
   }
 </style>
