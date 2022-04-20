@@ -44,3 +44,11 @@ figure svg {
 	font-family: var(--font-form);
 	color: var(--color-white);
 }
+
+p.color-primary {
+	color: var(--color-primary);
+}
+
+p.color-secondary {
+	color: var(--color-secondary);
+}

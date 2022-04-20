@@ -41,6 +41,14 @@
         style="text-anchor:{textAnchor};"
         >{i === tickVals.length - 1 ? formatTick(tick) : tick}</text
       >
+      <text
+        x={$xRange[1]}
+        y={yTick}
+        dx={dxTick}
+        dy={dyTick}
+        style="text-anchor:{textAnchor};"
+        >{i === tickVals.length - 1 ? formatTick(tick) : tick}</text
+      >
     </g>
   {/each}
 </g>
@@ -56,10 +64,16 @@
   }
 
   .tick line {
-    stroke: var(--color-gray-700);
+    stroke: var(--color-fg);
+    stroke-opacity: 0.33;
   }
 
-  .tick text {
-    fill: var(--color-gray-600);
+  .tick text:first-of-type {
+    stroke: var(--color-bg);
+    stroke-width: 4px;
+  }
+
+  .tick text:last-of-type {
+    fill: var(--color-fg);
   }
 </style>

@@ -1,5 +1,5 @@
 <script>
-  import { extent } from "d3";
+  import { ascending, extent, timeFormat } from "d3";
   import { LayerCake, Canvas, Svg } from "layercake";
   import { fade } from "svelte/transition";
   import { tweened } from "svelte/motion";
@@ -21,10 +21,11 @@
   const z = "rank";
   const fill = "rgba(255,255,255,0.25)";
   const primary = "#6f9";
-  const secondary = "#f96";
-  const padding = 24;
-  const xPadding = [padding * 2, padding * 2];
-  const yPadding = [padding, padding];
+  const secondary = "#f69";
+  const pad = 24;
+  const xPadding = [pad * 2, pad * 2];
+  const yPadding = [pad, pad];
+  const padding = { top: 0, right: 0, bottom: pad * 8, left: 0 };
   const yDomain = [0, null];
   const extentDayRecent = extent(
     rawData.filter((d) => d.recent),
@@ -40,9 +41,22 @@
   const filterRecent = (d) => d.recent;
   const filterRecords = (d) => d.rank !== undefined;
 
+  const justRecords = rawData.filter((d) => d.rank === 0);
+  justRecords.sort((a, b) => ascending(a.day, b.day));
+
   let data = [...rawData];
   let slider = undefined;
   let activeSlide = 0;
+
+  const formatDay = (d) => {
+    const { date } = justRecords.find((j) => j.day === d);
+    return timeFormat("%b %e")(date);
+  };
+
+  const formatMonth = (d) => {
+    const { date } = justRecords.find((j) => j.day === d);
+    return timeFormat("%b")(date);
+  };
 
   const onTap = ({ detail }) => {
     if (detail === "right") slider.next();
@@ -57,6 +71,8 @@
   $: duration = activeSlide < 5 ? 0 : 2000;
   $: tweenExtentDay.set(targetExtentDay, { duration, easing: cubicInOut });
   $: xDomain = $tweenExtentDay;
+  $: formatTick = activeSlide > 4 ? formatMonth : formatDay;
+  $: ticks = activeSlide > 4 ? 4 : 2;
   $: {
     if (activeSlide === 3) {
       const index = data.findIndex((d) => d.rank !== undefined);
@@ -73,6 +89,7 @@
 <figure class:visible class:tease>
   <LayerCake
     {xDomain}
+    {padding}
     {xPadding}
     {yPadding}
     {position}
@@ -82,20 +99,21 @@
     {yDomain}
     {data}
   >
-    {#if showDaily}
+    {#if showDaily || showRecord}
       <div transition:fade>
         <Svg>
-          <AxisX />
+          <AxisX {formatTick} {ticks} />
           <AxisY />
         </Svg>
+      </div>
+    {/if}
+    {#if showDaily}
+      <div transition:fade>
         <Canvas>
           <Scatter2 {fill} {primary} {secondary} filter={filterRecent} />
         </Canvas>
       </div>
     {/if}
-    <!-- <Canvas>
-      <Scatter2 {fill} {highlight} filter={filterRecords} />
-    </Canvas> -->
     {#if showRecord}
       <div transition:fade>
         <Svg>
@@ -108,8 +126,15 @@
 
 <article>
   <Slider bind:this={slider} bind:active={activeSlide} duration="0">
-    {#each copy.slides as { text, subtext, center }, i}
-      <ArticleSlide active={activeSlide === i} {text} {subtext} {center} {i} />
+    {#each copy.slides as { text, subtext, center, color }, i}
+      <ArticleSlide
+        active={activeSlide === i}
+        {i}
+        {text}
+        {subtext}
+        {center}
+        {color}
+      />
     {/each}
   </Slider>
 </article>
