@@ -14,7 +14,6 @@
   import ScatterCanvas from "$components/charts/Scatter.canvas.svelte";
   import ArticleSlide from "$components/ArticleSlide.svelte";
   import rawData from "$data/bos.js";
-  import rawTest from "$data/test.js";
   import copy from "$data/doc.json";
   import { color } from "$data/variables.json";
 
