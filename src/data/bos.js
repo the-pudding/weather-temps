@@ -27,6 +27,7 @@ const recentDays = daily.filter(d => d.daysSinceNow < DAY_THRESHOLD).map(d => d.
 
 const filtered = daily.filter(d => recentDays.includes(d.day) || d.rank !== undefined);
 
+// TODO dedupe ties
 const data = filtered.map(d => ({
 	...d,
 	recent: recentDays.includes(d.day)

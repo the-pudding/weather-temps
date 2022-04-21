@@ -1,5 +1,5 @@
 <script>
-  import { ascending, extent, timeFormat } from "d3";
+  import { ascending, max, extent, timeFormat } from "d3";
   import { LayerCake, Canvas, Svg } from "layercake";
   import { fade } from "svelte/transition";
   import { tweened } from "svelte/motion";
@@ -10,34 +10,32 @@
   import Tap from "$components/helpers/Tap.svelte";
   import AxisX from "$components/charts/AxisX.svg.svelte";
   import AxisY from "$components/charts/AxisY.svg.svelte";
-  import Scatter from "$components/charts/Scatter.svg.svelte";
-  import Scatter2 from "$components/charts/Scatter.canvas.svelte";
+  import ScatterSvg from "$components/charts/Scatter.svg.svelte";
+  import ScatterCanvas from "$components/charts/Scatter.canvas.svelte";
   import ArticleSlide from "$components/ArticleSlide.svelte";
   import rawData from "$data/bos.js";
+  import rawTest from "$data/test.js";
   import copy from "$data/doc.json";
+  import { color } from "$data/variables.json";
 
   const position = "absolute";
   const x = "day";
   const y = "temp";
   const z = "rank";
   const fill = "rgba(255,255,255,0.25)";
-  const primary = "#6f9";
-  const secondary = "#f69";
+  const primary = "green";
+  const secondary = "pink";
   const pad = 32;
   const padding = { top: pad, right: pad, bottom: pad * 6, left: pad };
-  const yDomain = [0, null];
+  const maxTemp = max(rawData, (d) => d.temp);
+  const yDomain = [0, maxTemp + 1];
   const extentDayRecent = extent(
     rawData.filter((d) => d.recent),
     (d) => d.day
   );
-  const extentDayRecords = extent(
-    rawData.filter((d) => d.rank !== undefined),
-    (d) => d.day
-  );
+  const extentDayRecords = extent(rawData, (d) => d.day);
 
   const tweenExtentDay = tweened(extentDayRecent);
-
-  const filterRecent = (d) => d.recent;
 
   const justRecords = rawData.filter((d) => d.rank === 0);
   justRecords.sort((a, b) => ascending(a.day, b.day));
@@ -67,12 +65,9 @@
 
   $: visible = activeSlide > 0;
   $: tease = activeSlide < 2;
-  $: showDaily = activeSlide < 5 && activeSlide > 0;
-  $: showRecord = activeSlide > 2;
-  $: filterRecords = (d) =>
-    d.rank !== undefined && showDaily
-      ? d.day >= xDomain[0] && d.day <= xDomain[1]
-      : true;
+  $: showRecent = activeSlide < 5 && activeSlide > 0;
+  $: showAll = activeSlide > 4;
+  $: filterTemps = (d) => (showAll ? d.rank === 0 : d.recent);
   $: targetExtentDay = activeSlide < 5 ? extentDayRecent : extentDayRecords;
   $: duration = activeSlide < 5 ? 0 : 2000;
   $: tweenExtentDay.set(targetExtentDay, { duration, easing: cubicInOut });
@@ -82,12 +77,26 @@
   $: formatTick = activeSlide > 4 ? formatMonth : formatDay;
   $: padding.bottom = figureWidth * 0.2;
   $: {
-    if (activeSlide === 3) {
-      const index = data.findIndex((d) => d.rank !== undefined);
-      data.forEach((d, i) => (d.class = i === index ? "secondary" : ""));
-    } else if (activeSlide > 3) {
-      data.forEach((d, i) => (d.class = d.rank === 0 ? "primary" : ""));
+    // update color
+    let p = [];
+    let s = [];
+
+    if (activeSlide > 3) {
+      data.forEach((d, i) => {
+        if (d.rank === 0) p.push(i);
+      });
     }
+
+    if (activeSlide === 3) s.push(data.findIndex((d) => d.rank !== undefined));
+
+    data.forEach((d, i) => {
+      d.fill = p.includes(i)
+        ? color[primary]
+        : s.includes(i)
+        ? color[secondary]
+        : undefined;
+    });
+
     data = [...data];
   }
 
@@ -98,6 +107,7 @@
 
 <!-- <WIP /> -->
 
+<p>slide: {activeSlide}</p>
 <figure class:visible class:tease bind:clientWidth={figureWidth}>
   <LayerCake
     {xDomain}
@@ -110,7 +120,7 @@
     {data}
     {xPadding}
   >
-    {#if showDaily || showRecord}
+    {#if showRecent || showAll}
       <div transition:fade>
         <Svg>
           <AxisX {formatTick} />
@@ -118,20 +128,20 @@
         </Svg>
       </div>
     {/if}
-    {#if showDaily}
+    {#if showRecent || showAll}
       <div transition:fade>
         <Canvas>
-          <Scatter2 {fill} {primary} {secondary} filter={filterRecent} />
+          <ScatterCanvas {fill} filter={filterTemps} />
         </Canvas>
       </div>
     {/if}
-    {#if showRecord}
+    <!-- {#if showAll}
       <div transition:fade>
         <Svg>
-          <Scatter {fill} {primary} {secondary} filter={filterRecords} />
+          <ScatterSvg {fill} filter={filterRecords} />
         </Svg>
       </div>
-    {/if}
+    {/if} -->
   </LayerCake>
 </figure>
 
@@ -158,6 +168,14 @@
 />
 
 <style>
+  p {
+    position: absolute;
+    top: 0;
+    left: 1rem;
+    z-index: 111111111;
+    color: white;
+  }
+
   article,
   figure {
     position: absolute;
@@ -185,7 +203,7 @@
 
   article {
     visibility: hidden;
-    max-width: 65rem;
+    max-width: 80rem;
     font-size: clamp(20px, 2vw, 36px);
   }
 

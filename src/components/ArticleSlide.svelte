@@ -45,7 +45,8 @@
   p {
     background: var(--color-bg);
     padding: 1rem;
-    margin: 0;
+    max-width: 65rem;
+    margin: 0 auto;
   }
 
   p:last-of-type {

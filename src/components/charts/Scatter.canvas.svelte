@@ -1,19 +1,18 @@
 <script>
   import { getContext } from "svelte";
   import { scaleCanvas } from "layercake";
-  import { color } from "$data/variables.json";
 
   const { data, xGet, yGet, z, width, height, xDomain, xScale } =
     getContext("LayerCake");
 
   const { ctx } = getContext("canvas");
-  const fill = "rgba(255, 255, 255, 0.25)";
 
+  export let fill = "#ccc";
   export let stroke = "#000";
   export let strokeWidth = 0;
   export let filter = () => true;
 
-  $: daysInView = $xDomain[1] - $xDomain[0] + 2;
+  $: daysInView = $xDomain[1] - $xDomain[0] + 4;
   $: margin = daysInView <= 30 ? 2 : 0;
   $: w = Math.max(3, Math.floor($width / daysInView - margin));
   $: h = 3;
@@ -31,7 +30,7 @@
       $ctx.lineWidth = strokeWidth;
       $ctx.strokeStyle = stroke;
       $ctx.stroke();
-      $ctx.fillStyle = fill;
+      $ctx.fillStyle = d.fill ?? fill;
       $ctx.fill();
     });
   }
