@@ -18,10 +18,30 @@
     height: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
+    font-size: 1.5rem;
   }
 
-  .slide.center {
-    justify-content: center;
+  :global(.subtext) {
+    font-family: var(--sans);
+    font-size: 0.9rem;
+  }
+
+  @media only screen and (min-width: 640px) {
+    .slide {
+      font-size: 2rem;
+    }
+
+    :global(.subtext) {
+      font-size: 1rem;
+    }
+  }
+
+  @media only screen and (min-width: 1024px) {
+    .slide {
+      font-size: 2.5rem;
+    }
+    :global(.subtext) {
+      font-size: 1.25rem;
+    }
   }
 </style>

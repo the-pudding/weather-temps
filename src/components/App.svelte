@@ -12,6 +12,7 @@
   import AxisY from "$components/charts/AxisY.svg.svelte";
   import ScatterSvg from "$components/charts/Scatter.svg.svelte";
   import ScatterCanvas from "$components/charts/Scatter.canvas.svelte";
+  import IntroSlide from "$components/IntroSlide.svelte";
   import ArticleSlide from "$components/ArticleSlide.svelte";
   import rawData from "$data/bos.js";
   import copy from "$data/doc.json";
@@ -62,9 +63,8 @@
     else slider.prev();
   };
 
-  $: visible = activeSlide > 0;
-  $: tease = activeSlide < 2;
-  $: showRecent = activeSlide < 5 && activeSlide > 0;
+  $: tease = activeSlide === 0;
+  $: showRecent = activeSlide < 5;
   $: showAll = activeSlide > 4;
   $: filterTemps = (d) => (showAll ? d.rank === 0 : d.recent);
   $: targetExtentDay = activeSlide < 5 ? extentDayRecent : extentDayRecords;
@@ -107,7 +107,7 @@
 <!-- <WIP /> -->
 
 <p>slide: {activeSlide}</p>
-<figure class:visible class:tease bind:clientWidth={figureWidth}>
+<figure class:tease bind:clientWidth={figureWidth}>
   <LayerCake
     {xDomain}
     {padding}
@@ -146,15 +146,10 @@
 
 <article class:mounted>
   <Slider bind:this={slider} bind:active={activeSlide} duration="0">
-    {#each copy.slides as { text, subtext, center, color }, i}
-      <ArticleSlide
-        active={activeSlide === i}
-        {i}
-        {text}
-        {subtext}
-        {center}
-        {color}
-      />
+    <IntroSlide {...copy.intro} active={activeSlide === 0} />
+    {#each copy.slides as { slide, text, subtext, color }}
+      {@const active = activeSlide === +slide}
+      <ArticleSlide {active} {text} {subtext} {color} />
     {/each}
   </Slider>
 </article>
@@ -186,13 +181,8 @@
 
   figure {
     max-width: 80rem;
-    opacity: 0;
     overflow: hidden;
     transition: transform 1s ease-in-out, filter 0.5s 1s;
-  }
-
-  figure.visible {
-    opacity: 1;
   }
 
   figure.tease {
@@ -202,8 +192,7 @@
 
   article {
     visibility: hidden;
-    max-width: 80rem;
-    font-size: clamp(20px, 2vw, 36px);
+    max-width: 60rem;
   }
 
   article.mounted {

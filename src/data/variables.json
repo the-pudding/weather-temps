@@ -22,8 +22,9 @@
     "gray-800": "rgb(55, 55, 55)",
     "gray-900": "rgb(38, 38, 38)",
     "gray-1000": "rgb(25, 25, 25)",
-    "green": "#6f9",
-    "pink": "#f69",
+    "green": "#9fa",
+    "blue": "#9df",
+    "pink": "#f9d",
     "yellow": "#FFF9EA",
     "orange": "#FCDBC2"
   }

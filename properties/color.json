@@ -40,10 +40,13 @@
 			"value": "rgb(25, 25, 25)"
 		},
 		"green": {
-			"value": "#6f9"
+			"value": "#9fa"
+		},
+		"blue": {
+			"value": "#9df"
 		},
 		"pink": {
-			"value": "#f69"
+			"value": "#f9d"
 		},
 		"yellow": {
 			"value": "#FFF9EA"

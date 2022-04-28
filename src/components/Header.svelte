@@ -10,12 +10,18 @@
 
 <style>
   .wordmark {
-    max-width: 10em;
-    margin: 0 auto;
-    padding: 2em 0;
+    padding: 1rem 1.5rem;
+    text-align: right;
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: var(--z-top);
   }
 
   .wordmark a {
+    display: inline-block;
+    max-width: 10rem;
+    width: 100%;
     border: none;
     color: var(--color-fg);
   }

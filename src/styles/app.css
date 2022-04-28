@@ -22,17 +22,18 @@
 	--font-form: var(--sans);
 	--color-bg: var(--color-black);
 	--color-fg: var(--color-yellow);
+	--color-fg-alt: var(--color-orange);
 	--color-placeholder: var(--color-gray-300);
-  --color-link: var(--color-pink);
-  --color-focus: var(--color-pink);
+  --color-link: var(--color-white);
+  --color-focus: var(--color-white);
   --color-form-bg: var(--color-gray-300);
 	--color-form-fg: var(--color-gray-900);
 	--color-border: var(--color-gray-300);
 	--color-selection: var(--color-gray-300);
-  --color-highlight: var(--color-pink);	
+  --color-highlight: var(--color-white);	
 	--color-primary: var(--color-green);
-	--color-secondary: var(--color-pink);
-	--color-tertiary: var(--color-orange);
+	--color-secondary: var(--color-blue);
+	--color-tertiary: var(--color-pink);
 }
 
 html, body, main {
@@ -40,15 +41,38 @@ html, body, main {
 	overflow: hidden;
 }
 
+
 figure svg {
 	font-family: var(--font-form);
 	color: var(--color-white);
 }
 
-p.color-primary {
+.color-primary .text {
 	color: var(--color-primary);
 }
 
-p.color-secondary {
+.color-secondary .text {
 	color: var(--color-secondary);
 }
+
+.color-tertiary .text {
+	color: var(--color-tertiary);
+}
+
+.subtext mark {
+	padding: 0;
+	background: none;
+}
+
+.color-primary .subtext mark {
+	color: var(--color-primary);
+}
+
+.color-seocndary .subtext mark {
+	color: var(--color-secondary);
+}
+
+.color-tertiary .subtext mark {
+	color: var(--color-tertiary);
+}
+
