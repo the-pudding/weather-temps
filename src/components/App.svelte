@@ -6,7 +6,7 @@
   // import FigureAnnual from "$components/Figure.Annual.svelte";
   import IntroSlide from "$components/IntroSlide.svelte";
   import ArticleSlide from "$components/ArticleSlide.svelte";
-  import data from "$data/bos.js";
+  import rawData from "$data/bos.js";
   import copy from "$data/doc.json";
   import { color } from "$data/variables.json";
   import { activeSlide } from "$stores/misc.js";
@@ -76,7 +76,7 @@
 <p>slide: {$activeSlide}</p>
 <figure class:tease bind:clientWidth={width}>
   <FigureRecent
-    {data}
+    {rawData}
     {fill}
     {primary}
     {secondary}

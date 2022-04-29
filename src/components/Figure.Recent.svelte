@@ -10,7 +10,7 @@
   import ScatterCanvas from "$components/charts/Scatter.canvas.svelte";
   import { activeSlide } from "$stores/misc.js";
 
-  export let data;
+  export let rawData;
   export let fill;
   export let primary;
   export let secondary;
@@ -22,9 +22,9 @@
   const x = "daysSinceNowFake";
   const y = "temp";
   const z = "rank";
-  const maxTemp = max(data, (d) => d.temp);
+  const maxTemp = max(rawData, (d) => d.temp);
   const yDomain = [0, maxTemp + 1];
-  const extentDay = extent(data, (d) => d[x]);
+  const extentDay = extent(rawData, (d) => d[x]);
   const tweenExtentDay = tweened(extentDay);
 
   const formatTick = (d) => {
@@ -36,10 +36,18 @@
   let targetExtentDay = extentDay;
 
   $: duration = 2000;
+  $: {
+    targetExtentDay =
+      $activeSlide < 2 ? [extentDay[1] - 5, extentDay[1]] : extentDay;
+  }
   $: tweenExtentDay.set(targetExtentDay, { duration, easing: cubicInOut });
   $: xDomain = $tweenExtentDay;
-  $: halfBar = Math.floor(width / (xDomain[1] - xDomain[0]));
-  $: xPadding = [halfBar, halfBar];
+  $: bar = Math.floor(width / (xDomain[1] - xDomain[0]));
+  $: console.log(bar);
+  $: xPadding = [bar, bar];
+  $: data = rawData.filter((d) =>
+    $activeSlide < 2 ? d.daysSinceNowFake === extentDay[1] : true
+  );
 </script>
 
 <LayerCake
