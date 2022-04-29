@@ -1,158 +1,104 @@
 <script>
-  import { ascending, max, extent, timeFormat } from "d3";
-  import { LayerCake, Canvas, Svg } from "layercake";
   import { fade } from "svelte/transition";
-  import { tweened } from "svelte/motion";
-  import { onMount } from "svelte";
-  import { cubicInOut, cubicOut } from "svelte/easing";
-  import WIP from "$components/helpers/WIP.svelte";
   import Slider from "$components/helpers/Slider.svelte";
   import Tap from "$components/helpers/Tap.svelte";
-  import AxisX from "$components/charts/AxisX.svg.svelte";
-  import AxisY from "$components/charts/AxisY.svg.svelte";
-  import ScatterSvg from "$components/charts/Scatter.svg.svelte";
-  import ScatterCanvas from "$components/charts/Scatter.canvas.svelte";
+  import FigureRecent from "$components/Figure.Recent.svelte";
+  // import FigureAnnual from "$components/Figure.Annual.svelte";
   import IntroSlide from "$components/IntroSlide.svelte";
   import ArticleSlide from "$components/ArticleSlide.svelte";
-  import rawData from "$data/bos.js";
+  import data from "$data/bos.js";
   import copy from "$data/doc.json";
   import { color } from "$data/variables.json";
+  import { activeSlide } from "$stores/misc.js";
 
-  const position = "absolute";
-  const x = "day";
-  const y = "temp";
-  const z = "rank";
   const fill = "rgba(255,255,255,0.25)";
   const primary = "green";
-  const secondary = "pink";
+  const secondary = "blue";
+  const tertiary = "pink";
   const pad = 32;
-  const padding = { top: pad, right: pad, bottom: pad * 6, left: pad };
-  const maxTemp = max(rawData, (d) => d.temp);
-  const yDomain = [0, maxTemp + 1];
-  const extentDayRecent = extent(
-    rawData.filter((d) => d.recent),
-    (d) => d.day
-  );
-  const extentDayRecords = extent(rawData, (d) => d.day);
+  const padding = { top: pad, right: pad, bottom: pad, left: pad };
 
-  const tweenExtentDay = tweened(extentDayRecent);
-
-  const justRecords = rawData.filter((d) => d.rank === 0);
-  justRecords.sort((a, b) => ascending(a.day, b.day));
-
-  let data = [...rawData];
   let slider = undefined;
-  let activeSlide = 0;
-  let figureWidth = 0;
-  let mounted;
+  let width = 0;
 
-  const formatDay = (d) => {
-    const match = justRecords.find((j) => j.day === d);
-    if (!match) return "";
-    return timeFormat("%b %d")(match.date);
-  };
-
-  const formatMonth = (d) => {
-    const match = justRecords.find((j) => j.day === d);
-    if (!match) return "";
-    return timeFormat("%b")(match.date);
-  };
+  // const formatMonth = (d) => {
+  //   const match = justRecords.find((j) => j.day === d);
+  //   if (!match) return "";
+  //   return timeFormat("%b")(match.date);
+  // };
 
   const onTap = ({ detail }) => {
     if (detail === "right") slider.next();
     else slider.prev();
   };
 
-  $: tease = activeSlide === 0;
-  $: showRecent = activeSlide < 5;
-  $: showAll = activeSlide > 4;
-  $: filterTemps = (d) => (showAll ? d.rank === 0 : d.recent);
-  $: targetExtentDay = activeSlide < 5 ? extentDayRecent : extentDayRecords;
-  $: duration = activeSlide < 5 ? 0 : 2000;
-  $: tweenExtentDay.set(targetExtentDay, { duration, easing: cubicInOut });
-  $: xDomain = $tweenExtentDay;
-  $: halfBar = Math.floor(figureWidth / (xDomain[1] - xDomain[0]));
-  $: xPadding = [halfBar, halfBar];
-  $: formatTick = activeSlide > 4 ? formatMonth : formatDay;
-  $: padding.bottom = figureWidth * 0.2;
-  $: {
-    // update color
-    let p = [];
-    let s = [];
+  $: tease = $activeSlide === 0;
+  // $: showRecent = $activeSlide < 5;
+  // $: showAll = $activeSlide > 4;
+  // $: filterTemps = (d) => (showAll ? d.rank === 0 : d.recentDay);
+  // $: duration = $activeSlide < 5 ? 0 : 2000;
 
-    if (activeSlide > 3) {
-      data.forEach((d, i) => {
-        if (d.rank === 0) p.push(i);
-      });
-    }
+  // $: formatTick = $activeSlide > 4 ? formatMonth : formatDay;
+  // $: {
+  //   // update domains
+  //   if ($activeSlide <= 1) {
+  //     targetExtentDay = extentDayRecent;
+  //   } else if ($activeSlide <= 3) {
+  //   } else if ($activeSlide <= 6) {
+  //   } else if ($activeSlide <= 8) {
+  //   }
+  // }
+  // $: {
+  //   // update highlights
+  //   let p = [];
+  //   let s = [];
 
-    if (activeSlide === 3) s.push(data.findIndex((d) => d.rank !== undefined));
+  //   if ($activeSlide > 3) {
+  //     data.forEach((d, i) => {
+  //       if (d.rank === 0) p.push(i);
+  //     });
+  //   }
 
-    data.forEach((d, i) => {
-      d.fill = p.includes(i)
-        ? color[primary]
-        : s.includes(i)
-        ? color[secondary]
-        : undefined;
-    });
+  //   if ($activeSlide === 3) s.push(data.findIndex((d) => d.rank !== undefined));
 
-    data = [...data];
-  }
+  //   data.forEach((d, i) => {
+  //     d.fill = p.includes(i)
+  //       ? color[primary]
+  //       : s.includes(i)
+  //       ? color[secondary]
+  //       : undefined;
+  //   });
 
-  onMount(() => {
-    mounted = true;
-  });
+  //   data = [...data];
+  // }
 </script>
 
-<!-- <WIP /> -->
-
-<p>slide: {activeSlide}</p>
-<figure class:tease bind:clientWidth={figureWidth}>
-  <LayerCake
-    {xDomain}
-    {padding}
-    {position}
-    {x}
-    {y}
-    {z}
-    {yDomain}
+<p>slide: {$activeSlide}</p>
+<figure class:tease bind:clientWidth={width}>
+  <FigureRecent
     {data}
-    {xPadding}
-  >
-    {#if showRecent || showAll}
-      <div transition:fade>
-        <Svg>
-          <AxisX {formatTick} />
-          <AxisY />
-        </Svg>
-      </div>
-    {/if}
-    {#if showRecent || showAll}
-      <div transition:fade>
-        <Canvas>
-          <ScatterCanvas {fill} filter={filterTemps} />
-        </Canvas>
-      </div>
-    {/if}
-    <!-- {#if showAll}
-      <div transition:fade>
-        <Svg>
-          <ScatterSvg {fill} filter={filterRecords} />
-        </Svg>
-      </div>
-    {/if} -->
-  </LayerCake>
+    {fill}
+    {primary}
+    {secondary}
+    {tertiary}
+    {pad}
+    {padding}
+    {width}
+  />
+  <!-- <FigureAnnual /> -->
 </figure>
 
-<article class:mounted>
-  <Slider bind:this={slider} bind:active={activeSlide} duration="0">
-    <IntroSlide {...copy.intro} active={activeSlide === 0} />
+<article>
+  <Slider bind:this={slider} bind:active={$activeSlide} duration="0">
+    <IntroSlide {...copy.intro} active={$activeSlide === 0} />
+
     {#each copy.slides as { slide, text, subtext, color }}
-      {@const active = activeSlide === +slide}
+      {@const active = $activeSlide === +slide}
       <ArticleSlide {active} {text} {subtext} {color} />
     {/each}
   </Slider>
 </article>
+
 <Tap
   debug={false}
   full={true}
@@ -176,11 +122,14 @@
     width: 100%;
     height: 100%;
     left: 50%;
+    top: 0;
     transform: translate3d(-50%, 0, 0);
   }
 
   figure {
     max-width: 80rem;
+    height: 70%;
+    top: 15%;
     overflow: hidden;
     transition: transform 1s ease-in-out, filter 0.5s 1s;
   }
@@ -191,11 +140,6 @@
   }
 
   article {
-    visibility: hidden;
     max-width: 60rem;
-  }
-
-  article.mounted {
-    visibility: visible;
   }
 </style>

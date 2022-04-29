@@ -4,6 +4,7 @@
   import Select from "$components/Select.svelte";
   import tapSvg from "$svg/tap.svg";
 
+  export let active;
   export let text;
   export let text2;
   export let text_alt;
@@ -11,7 +12,7 @@
   export let prompt;
 </script>
 
-<section>
+<section class:active>
   <Header />
   <Slide>
     <div>
@@ -26,6 +27,15 @@
 </section>
 
 <style>
+  section {
+    opacity: 0;
+    transition: opacity 1s 0.5s ease-in-out;
+  }
+
+  section.active {
+    opacity: 1;
+  }
+
   div {
     margin-top: 2rem;
   }
