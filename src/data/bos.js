@@ -8,7 +8,7 @@ const MS_DAY = 86400000;
 // TODO
 // const today = Date.now();
 const today = new Date(2022, 3, 14);
-console.log(today);
+
 const daily = rawDaily.filter(d => d.temp !== "M").map((d) => ({
 	...d,
 	day: +d.day,
