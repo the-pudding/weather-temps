@@ -26,6 +26,7 @@
     "blue": "#9df",
     "pink": "#f9d",
     "yellow": "#FFF9EA",
-    "orange": "#FCDBC2"
+    "orange": "#FCDBC2",
+    "transparent": "rgba(255,255,255,0.25)"
   }
 }

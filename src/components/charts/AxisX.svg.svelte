@@ -1,6 +1,6 @@
 <script>
   import { getContext } from "svelte";
-  const { width, height, xScale, yRange, xRange, xDomain, padding } =
+  const { width, height, xScale, yRange, xRange, xDomain, xPadding, padding } =
     getContext("LayerCake");
 
   export let yTick = 16;
@@ -24,16 +24,15 @@
     {#if visible}
       <g
         class="tick tick-{i}"
-        transform="translate({j === 0
-          ? 0
-          : $width - $padding.right},{$yRange[0] + $padding.top})"
+        transform="translate({j === 0 ? 0 : $width - $xPadding[1]},{$yRange[0] +
+          $padding.top})"
       >
         <text
           x={0}
           y={yTick}
           dx=""
           dy=""
-          text-anchor={j === 0 ? "start" : "middle"}>{formatTick(tick)}</text
+          text-anchor={j === 0 ? "start" : "end"}>{formatTick(tick)}</text
         >
       </g>
     {/if}

@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Thu, 28 Apr 2022 14:35:35 GMT
+ * Generated on Mon, 02 May 2022 17:15:29 GMT
  */
 
 :root {
@@ -29,4 +29,5 @@
   --color-pink: #ff99dd;
   --color-yellow: #fff9ea;
   --color-orange: #fcdbc2;
+  --color-transparent: rgba(255, 255, 255, 0.25);
 }

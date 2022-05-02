@@ -1,4 +1,4 @@
-import { ascending } from "d3";
+import { ascending, descending } from "d3";
 import rawDaily from "$data/bos_data.csv";
 
 const MIN_DAYS = 30;
@@ -8,7 +8,7 @@ const MS_DAY = 86400000;
 // TODO
 // const today = Date.now();
 const today = new Date(2022, 3, 14);
-
+console.log(today);
 const daily = rawDaily.filter(d => d.temp !== "M").map((d) => ({
 	...d,
 	day: +d.day,
@@ -21,7 +21,7 @@ const daily = rawDaily.filter(d => d.temp !== "M").map((d) => ({
 		...d,
 		date: new Date(d.date.setDate(d.date.getDate() + 1)),
 		daysSinceNow: Math.floor((today - d.date) / MS_DAY),
-	}));
+	})).filter(d => d.daysSinceNow >= 0);
 
 daily.sort((a, b) => ascending(a.daysSinceNow, b.daysSinceNow));
 
@@ -39,11 +39,22 @@ const getFake = (d) => {
 };
 
 // TODO dedupe ties
-const data = filtered.map(d => ({
+const clean = filtered.map(d => ({
 	...d,
 	recent: d.daysSinceNow < threshold,
 	daysSinceNowFake: getFake(d),
 	recentDay: recentDays.includes(d.day)
 }));
 
-export default data;
+// latest
+const latest = clean.find(d => d.daysSinceNow === 0);
+latest.highlight = "latest";
+// hot not latest not top
+const hot = clean.find(d => d.daysSinceNow > 0 && d.rank !== undefined && d.rank > 0);
+hot.highlight = "hot";
+// top + same day as hot not top
+const top = clean.find(d => hot.day == d.day && d.rank === 0);
+top.highlight = "top";
+
+clean.sort((a, b) => ascending(a.highlight ? 1 : 0, b.highlight ? 1 : 0));
+export default clean;

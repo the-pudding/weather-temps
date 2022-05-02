@@ -1,9 +1,11 @@
 <script>
+  import { max } from "d3";
+  import { setContext } from "svelte";
   import { fade } from "svelte/transition";
   import Slider from "$components/helpers/Slider.svelte";
   import Tap from "$components/helpers/Tap.svelte";
   import FigureRecent from "$components/Figure.Recent.svelte";
-  // import FigureAnnual from "$components/Figure.Annual.svelte";
+  import FigureAnnual from "$components/Figure.Annual.svelte";
   import IntroSlide from "$components/IntroSlide.svelte";
   import ArticleSlide from "$components/ArticleSlide.svelte";
   import rawData from "$data/bos.js";
@@ -11,15 +13,29 @@
   import { color } from "$data/variables.json";
   import { activeSlide } from "$stores/misc.js";
 
-  const fill = "rgba(255,255,255,0.25)";
-  const primary = "green";
-  const secondary = "blue";
-  const tertiary = "pink";
-  const pad = 32;
-  const padding = { top: pad, right: pad, bottom: pad, left: pad };
+  const position = "absolute";
+  const pad = 16;
+  const padding = { top: pad, right: pad, bottom: pad * 3, left: pad };
+  const yDomain = [0, max(rawData, (d) => d.temp) + 1];
+  const highlightDelay = 3000;
 
   let slider = undefined;
   let width = 0;
+
+  setContext("App", {
+    rawData,
+    position,
+    pad,
+    padding,
+    yDomain,
+    highlightDelay,
+    color: {
+      primary: color.green,
+      secondary: color.blue,
+      tertiary: color.pink,
+      default: color.transparent
+    }
+  });
 
   // const formatMonth = (d) => {
   //   const match = justRecords.find((j) => j.day === d);
@@ -75,17 +91,16 @@
 
 <p>slide: {$activeSlide}</p>
 <figure class:tease bind:clientWidth={width}>
-  <FigureRecent
-    {rawData}
-    {fill}
-    {primary}
-    {secondary}
-    {tertiary}
-    {pad}
-    {padding}
-    {width}
-  />
-  <!-- <FigureAnnual /> -->
+  {#if $activeSlide < 4}
+    <div out:fade={{ duration: 100 }}>
+      <FigureRecent {width} />
+    </div>
+  {/if}
+  {#if $activeSlide >= 3}
+    <div in:fade={{ delay: highlightDelay, duration: 0 }}>
+      <FigureAnnual {width} />
+    </div>
+  {/if}
 </figure>
 
 <article>
@@ -127,16 +142,26 @@
   }
 
   figure {
-    max-width: 80rem;
+    /* max-width: 80rem; */
+    width: 1000px;
     height: 70%;
     top: 15%;
     overflow: hidden;
     transition: transform 1s ease-in-out, filter 0.5s 1s;
+    /* outline: 2px dashed red; */
   }
 
   figure.tease {
     filter: blur(4px);
     transform: translate3d(-50%, 50%, 0);
+  }
+
+  figure div {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
   }
 
   article {

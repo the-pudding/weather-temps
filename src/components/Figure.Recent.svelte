@@ -1,5 +1,6 @@
 <script>
-  import { ascending, max, extent, timeFormat } from "d3";
+  import { getContext } from "svelte";
+  import { ascending, extent, timeFormat } from "d3";
   import { LayerCake, Canvas, Svg } from "layercake";
   import { tweened } from "svelte/motion";
   import { cubicInOut } from "svelte/easing";
@@ -10,57 +11,70 @@
   import ScatterCanvas from "$components/charts/Scatter.canvas.svelte";
   import { activeSlide } from "$stores/misc.js";
 
-  export let rawData;
-  export let fill;
-  export let primary;
-  export let secondary;
-  export let pad;
-  export let padding;
   export let width;
 
-  const position = "absolute";
+  const { rawData, color, pad, padding, position, yDomain, highlightDelay } =
+    getContext("App");
+
+  const MIN_DAYS = 5;
+
   const x = "daysSinceNowFake";
   const y = "temp";
-  const z = "rank";
-  const maxTemp = max(rawData, (d) => d.temp);
-  const yDomain = [0, maxTemp + 1];
   const extentDay = extent(rawData, (d) => d[x]);
-  const tweenExtentDay = tweened(extentDay);
+  const tweenExtentDay = tweened();
+  const tweenHi = tweened(0, { duration: highlightDelay });
 
   const formatTick = (d) => {
-    const match = data.find((e) => e[x] === d);
+    const match = rawData.find((e) => e[x] === d);
     if (!match) return "";
     return timeFormat("%b %d")(match.date);
   };
 
+  const getFill = ({ rank, highlight }, hiTop) => {
+    if (highlight === "latest" && $activeSlide < 3) return color.tertiary;
+    if (highlight === "hot" && $activeSlide >= 2 && $activeSlide < 4)
+      return color.secondary;
+    if (highlight === "top" && $activeSlide >= 3) return color.primary;
+    if (rank === 0 && hiTop) return color.primary;
+    return color.default;
+  };
+
   let targetExtentDay = extentDay;
+  let highlightTop = false;
 
   $: duration = 2000;
   $: {
     targetExtentDay =
-      $activeSlide < 2 ? [extentDay[1] - 5, extentDay[1]] : extentDay;
+      $activeSlide < 2 ? [extentDay[1] - MIN_DAYS, extentDay[1]] : extentDay;
   }
   $: tweenExtentDay.set(targetExtentDay, { duration, easing: cubicInOut });
   $: xDomain = $tweenExtentDay;
-  $: bar = Math.floor(width / (xDomain[1] - xDomain[0]));
-  $: console.log(bar);
-  $: xPadding = [bar, bar];
-  $: data = rawData.filter((d) =>
-    $activeSlide < 2 ? d.daysSinceNowFake === extentDay[1] : true
-  );
+  $: daysInView = xDomain[1] - xDomain[0];
+  $: m = daysInView <= 90 ? 2 : 0;
+  $: margin = daysInView * m * 2;
+  $: sidePadding = pad * 2;
+  $: w = (width - sidePadding * 2) / daysInView - m;
+  $: half = Math.floor(w / 2);
+  $: h = 3;
+  $: xPadding = [0, sidePadding];
+  $: if ($activeSlide === 3) {
+    tweenHi.set(1).then(() => {
+      if ($activeSlide === 3) highlightTop = true;
+    });
+  }
+  $: data = rawData
+    .filter((d) =>
+      $activeSlide < 2
+        ? d[x] === extentDay[1]
+        : d[x] >= extentDay[0] && d[x] <= extentDay[1]
+    )
+    .map((d) => ({
+      ...d,
+      fill: getFill(d, highlightTop)
+    }));
 </script>
 
-<LayerCake
-  {xDomain}
-  {padding}
-  {position}
-  {x}
-  {y}
-  {z}
-  {yDomain}
-  {data}
-  {xPadding}
->
+<LayerCake {xDomain} {padding} {position} {x} {y} {yDomain} {data} {xPadding}>
   {#if true}
     <div transition:fade>
       <Svg>
@@ -72,7 +86,7 @@
   {#if true}
     <div transition:fade>
       <Canvas>
-        <ScatterCanvas {fill} />
+        <ScatterCanvas {w} {h} />
       </Canvas>
     </div>
   {/if}

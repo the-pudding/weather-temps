@@ -29,7 +29,6 @@
 <style>
   section {
     opacity: 0;
-    transition: opacity 1s 0.5s ease-in-out;
   }
 
   section.active {
@@ -44,6 +43,7 @@
     max-width: 65rem;
     height: 15%;
     transform: translate(-50%, 0);
+    opacity: 0;
   }
 
   .above p,
@@ -54,9 +54,16 @@
 
   .above {
     top: 0;
+    transition: opacity 1s 0.25s ease-in-out;
   }
 
   .below {
     top: 85%;
+    transition: opacity 1s 1.5s ease-in-out;
+  }
+
+  .active .above,
+  .active .below {
+    opacity: 1;
   }
 </style>
