@@ -7,7 +7,6 @@
   import { fade } from "svelte/transition";
   import AxisX from "$components/charts/AxisX.svg.svelte";
   import AxisY from "$components/charts/AxisY.svg.svelte";
-  import ScatterSvg from "$components/charts/Scatter.svg.svelte";
   import ScatterCanvas from "$components/charts/Scatter.canvas.svelte";
   import { activeSlide } from "$stores/misc.js";
   import getExtentOverlay from "$utils/getExtentOverlay.js";

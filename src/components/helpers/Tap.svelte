@@ -42,7 +42,7 @@
   {#each directions as dir}
     <button
       on:click={dispatch("tap", dir)}
-      style="width: {getW(dir)}; height: {getH(dir)};"
+      style="height: {getH(dir)};"
       aria-label={dir}
       class="{dir} {arrowPosition}"
       class:full
@@ -95,12 +95,14 @@
   .left {
     left: 0;
     top: 0;
+    width: 20%;
     /* text-align: left; */
   }
 
   .right {
     right: 0;
     top: 0;
+    width: 80%;
     /* text-align: right; */
   }
 

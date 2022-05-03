@@ -32,7 +32,10 @@
       primary: color.green,
       secondary: color.blue,
       tertiary: color.pink,
-      default: color.transparent
+      default: color.transparent,
+      primaryT: color["green-transparent"],
+      secondaryT: color["blue-transparent"],
+      tertiaryT: color["pink-transparent"]
     }
   });
 
@@ -63,7 +66,6 @@
     </div>
   {/if}
 </figure>
-
 <article>
   <Slider bind:this={slider} bind:active={$activeSlide} duration="0">
     <IntroSlide {...copy.intro} active={$activeSlide === 0} />

@@ -57,4 +57,7 @@ const top = clean.find(d => hot.day == d.day && d.rank === 0);
 top.highlight = "top";
 
 clean.sort((a, b) => ascending(a.highlight ? 1 : 0, b.highlight ? 1 : 0));
-export default clean;
+
+const reduced = clean.filter(d => d.recentDay || d.rank !== undefined);
+
+export default reduced;

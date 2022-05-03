@@ -56,6 +56,15 @@
 		},
 		"transparent": {
 			"value": "rgba(255,255,255,0.25)"
+		},
+		"green-transparent": {
+			"value": "rgba(204, 255, 213, 0.2)"
+		},
+		"blue-transparent": {
+			"value": "rgba(229, 246, 255, 0.2)"
+		},
+		"pink-transparent": {
+			"value": "rgba(255, 229, 246, 0.2)"
 		}
 	}
 }

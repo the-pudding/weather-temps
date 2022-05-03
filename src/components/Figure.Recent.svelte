@@ -1,14 +1,15 @@
 <script>
   import { getContext } from "svelte";
   import { extent, timeFormat } from "d3";
-  import { LayerCake, Canvas, Svg } from "layercake";
+  import { LayerCake, Canvas, Svg, Html } from "layercake";
   import { tweened } from "svelte/motion";
   import { cubicInOut } from "svelte/easing";
   import { fade } from "svelte/transition";
   import AxisX from "$components/charts/AxisX.svg.svelte";
   import AxisY from "$components/charts/AxisY.svg.svelte";
-  import ScatterSvg from "$components/charts/Scatter.svg.svelte";
   import ScatterCanvas from "$components/charts/Scatter.canvas.svelte";
+  import Column from "$components/Column.svelte";
+  import Annotation from "$components/Annotation.svelte";
   import { activeSlide } from "$stores/misc.js";
 
   export let width;
@@ -37,7 +38,7 @@
   };
 
   let targetExtentDay = extentDay;
-  let highlightTop = false;
+  let column;
 
   $: duration = 2000;
   $: {
@@ -49,7 +50,7 @@
   $: daysInView = xDomain[1] - xDomain[0];
   $: m = daysInView <= 90 ? 2 : 0;
   $: margin = daysInView * m * 2;
-  $: sidePadding = pad * 2;
+  $: sidePadding = pad * 2.5;
   $: w = (width - sidePadding * 2) / daysInView - m;
   $: half = Math.floor(w / 2);
   $: h = 3;
@@ -64,22 +65,41 @@
       ...d,
       fill: getFill(d)
     }));
+  $: {
+    if ($activeSlide < 2)
+      column = { ...rawData.find((d) => d.highlight === "latest") };
+    else if ($activeSlide == 2)
+      column = { ...rawData.find((d) => d.highlight === "hot") };
+    else if ($activeSlide == 3)
+      column = { ...rawData.find((d) => d.highlight === "top") };
+    else column = undefined;
+  }
 </script>
 
-<LayerCake {xDomain} {padding} {position} {x} {y} {yDomain} {data} {xPadding}>
-  {#if true}
-    <div transition:fade>
-      <Svg>
-        <AxisX {formatTick} />
-        <AxisY />
-      </Svg>
-    </div>
-  {/if}
-  {#if true}
-    <div transition:fade>
-      <Canvas>
-        <ScatterCanvas {w} {h} />
-      </Canvas>
-    </div>
-  {/if}
-</LayerCake>
+{#if width}
+  <LayerCake {xDomain} {padding} {position} {x} {y} {yDomain} {data} {xPadding}>
+    {#if true}
+      <div transition:fade>
+        <Svg>
+          <AxisX {formatTick} />
+          <AxisY />
+        </Svg>
+        <Html>
+          {#if column}
+            <Column d={column} {w} {m} />
+          {/if}
+        </Html>
+      </div>
+    {/if}
+    {#if true}
+      <div transition:fade>
+        <Canvas>
+          <ScatterCanvas {w} {h} />
+        </Canvas>
+        <Html>
+          <Annotation />
+        </Html>
+      </div>
+    {/if}
+  </LayerCake>
+{/if}
