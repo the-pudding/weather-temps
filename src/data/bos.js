@@ -49,12 +49,15 @@ const clean = filtered.map(d => ({
 // latest
 const latest = clean.find(d => d.daysSinceNow === 0);
 latest.highlight = "latest";
+latest.annotation = "Yesterday";
 // hot not latest not top
 const hot = clean.find(d => d.daysSinceNow > 0 && d.rank !== undefined && d.rank > 0);
 hot.highlight = "hot";
+hot.annotation = `DATE was the Xnd hottest DATE ever`;
 // top + same day as hot not top
 const top = clean.find(d => hot.day == d.day && d.rank === 0);
 top.highlight = "top";
+top.annotation = `DATE was the hottest DATE ever at TEMP`;
 
 clean.sort((a, b) => ascending(a.highlight ? 1 : 0, b.highlight ? 1 : 0));
 

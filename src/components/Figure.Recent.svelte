@@ -68,9 +68,9 @@
   $: {
     if ($activeSlide < 2)
       column = { ...rawData.find((d) => d.highlight === "latest") };
-    else if ($activeSlide == 2)
+    else if ($activeSlide === 2)
       column = { ...rawData.find((d) => d.highlight === "hot") };
-    else if ($activeSlide == 3)
+    else if ($activeSlide === 3)
       column = { ...rawData.find((d) => d.highlight === "top") };
     else column = undefined;
   }
@@ -96,9 +96,11 @@
         <Canvas>
           <ScatterCanvas {w} {h} />
         </Canvas>
-        <Html>
-          <Annotation />
-        </Html>
+        {#if column}
+          <Html>
+            <Annotation d={column} {w} {m} />
+          </Html>
+        {/if}
       </div>
     {/if}
   </LayerCake>
