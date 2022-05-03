@@ -39,7 +39,6 @@
   p {
     --fill: var(--color-fg);
     --tx: 0;
-    background: rgba(0, 0, 0, 0.5);
     color: var(--fill);
     font-family: var(--font-form);
     font-size: 0.8em;
@@ -47,9 +46,31 @@
     margin: 0;
     padding: 0.5em;
     max-width: 8em;
-    transform: translate(var(--tx), -1.2rem);
-    text-shadow: -1px -1px 0 var(--color-bg), 1px -1px 0 var(--color-bg),
-      -1px 1px 0 var(--color-bg), 1px 1px 0 var(--color-bg);
+    transform: translate(var(--tx), -0.7em);
+    text-shadow: -3px -3px 1px var(--color-bg), -3px -2px 1px var(--color-bg),
+      -3px -1px 1px var(--color-bg), -3px 0px 1px var(--color-bg),
+      -3px 1px 1px var(--color-bg), -3px 2px 1px var(--color-bg),
+      -3px 3px 1px var(--color-bg), -2px -3px 1px var(--color-bg),
+      -2px -2px 1px var(--color-bg), -2px -1px 1px var(--color-bg),
+      -2px 0px 1px var(--color-bg), -2px 1px 1px var(--color-bg),
+      -2px 2px 1px var(--color-bg), -2px 3px 1px var(--color-bg),
+      -1px -3px 1px var(--color-bg), -1px -2px 1px var(--color-bg),
+      -1px -1px 1px var(--color-bg), -1px 0px 1px var(--color-bg),
+      -1px 1px 1px var(--color-bg), -1px 2px 1px var(--color-bg),
+      -1px 3px 1px var(--color-bg), 0px -3px 1px var(--color-bg),
+      0px -2px 1px var(--color-bg), 0px -1px 1px var(--color-bg),
+      0px 1px 1px var(--color-bg), 0px 2px 1px var(--color-bg),
+      0px 3px 1px var(--color-bg), 1px -3px 1px var(--color-bg),
+      1px -2px 1px var(--color-bg), 1px -1px 1px var(--color-bg),
+      1px 0px 1px var(--color-bg), 1px 1px 1px var(--color-bg),
+      1px 2px 1px var(--color-bg), 1px 3px 1px var(--color-bg),
+      2px -3px 1px var(--color-bg), 2px -2px 1px var(--color-bg),
+      2px -1px 1px var(--color-bg), 2px 0px 1px var(--color-bg),
+      2px 1px 1px var(--color-bg), 2px 2px 1px var(--color-bg),
+      2px 3px 1px var(--color-bg), 3px -3px 1px var(--color-bg),
+      3px -2px 1px var(--color-bg), 3px -1px 1px var(--color-bg),
+      3px 0px 1px var(--color-bg), 3px 1px 1px var(--color-bg),
+      3px 2px 1px var(--color-bg), 3px 3px 1px var(--color-bg);
     z-index: var(--z-top);
   }
 </style>

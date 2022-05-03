@@ -28,8 +28,8 @@
     "yellow": "#FFF9EA",
     "orange": "#FCDBC2",
     "transparent": "rgba(255,255,255,0.25)",
-    "green-transparent": "rgba(204, 255, 213, 0.3)",
-    "blue-transparent": "rgba(229, 246, 255, 0.3)",
-    "pink-transparent": "rgba(255, 229, 246, 0.3)"
+    "green-transparent": "rgba(204, 255, 213, 0.15)",
+    "blue-transparent": "rgba(229, 246, 255, 0.15)",
+    "pink-transparent": "rgba(255, 229, 246, 0.15)"
   }
 }
