@@ -38,7 +38,6 @@
 
   const extentDay = extent(rawData, (d) => d[x]);
   const extentDayRecent = getExtentOverlay(rawData);
-  console.log(extentDayRecent);
   const tweenExtentDay = tweened();
 
   const formatTick = (d) => {

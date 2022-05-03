@@ -9,13 +9,17 @@
 </header>
 
 <style>
-  .wordmark {
-    padding: 1rem 1.5rem;
-    text-align: right;
+  header {
     position: absolute;
     top: 0;
     right: 0;
-    z-index: var(--z-top);
+    z-index: var(--z-overlay);
+    width: 100%;
+    padding: 1rem 0;
+  }
+
+  .wordmark {
+    width: 100%;
   }
 
   .wordmark a {
@@ -28,6 +32,11 @@
 
   .wordmark a:hover {
     background-color: transparent;
+  }
+
+  :global(.wordmark svg) {
+    display: block;
+    width: 100%;
   }
 
   :global(.wordmark svg path) {

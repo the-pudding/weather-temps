@@ -13,8 +13,8 @@
 </script>
 
 <section class:active>
-  <Header />
   <Slide>
+    <Header />
     <div>
       <p class="text">{text} <Select /></p>
       <p class="text">{text2}</p>
@@ -37,7 +37,7 @@
   }
 
   div {
-    margin-top: 2rem;
+    margin-top: 8rem;
   }
 
   p:nth-of-type(n + 2) {

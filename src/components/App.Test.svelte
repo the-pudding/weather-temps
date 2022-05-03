@@ -33,7 +33,6 @@
   xDomain.reverse();
   $: data = rawData[index];
   $: yDomain = [0, 50];
-  $: console.log(data);
 </script>
 
 <button on:click={play}>Play</button>
