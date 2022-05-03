@@ -28,7 +28,6 @@
     pad,
     padding,
     yDomain,
-    highlightDelay,
     color: {
       primary: color.green,
       secondary: color.blue,
@@ -49,44 +48,6 @@
   };
 
   $: tease = $activeSlide === 0;
-  // $: showRecent = $activeSlide < 5;
-  // $: showAll = $activeSlide > 4;
-  // $: filterTemps = (d) => (showAll ? d.rank === 0 : d.recentDay);
-  // $: duration = $activeSlide < 5 ? 0 : 2000;
-
-  // $: formatTick = $activeSlide > 4 ? formatMonth : formatDay;
-  // $: {
-  //   // update domains
-  //   if ($activeSlide <= 1) {
-  //     targetExtentDay = extentDayRecent;
-  //   } else if ($activeSlide <= 3) {
-  //   } else if ($activeSlide <= 6) {
-  //   } else if ($activeSlide <= 8) {
-  //   }
-  // }
-  // $: {
-  //   // update highlights
-  //   let p = [];
-  //   let s = [];
-
-  //   if ($activeSlide > 3) {
-  //     data.forEach((d, i) => {
-  //       if (d.rank === 0) p.push(i);
-  //     });
-  //   }
-
-  //   if ($activeSlide === 3) s.push(data.findIndex((d) => d.rank !== undefined));
-
-  //   data.forEach((d, i) => {
-  //     d.fill = p.includes(i)
-  //       ? color[primary]
-  //       : s.includes(i)
-  //       ? color[secondary]
-  //       : undefined;
-  //   });
-
-  //   data = [...data];
-  // }
 </script>
 
 <p>slide: {$activeSlide}</p>
@@ -97,7 +58,7 @@
     </div>
   {/if}
   {#if $activeSlide >= 3}
-    <div in:fade={{ delay: highlightDelay, duration: 0 }}>
+    <div in:fade={{ delay: highlightDelay }}>
       <FigureAnnual {width} />
     </div>
   {/if}

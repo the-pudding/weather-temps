@@ -1,6 +1,6 @@
 <script>
   import { getContext } from "svelte";
-  import { ascending, extent, timeFormat } from "d3";
+  import { extent, timeFormat, range } from "d3";
   import { LayerCake, Canvas, Svg } from "layercake";
   import { tweened } from "svelte/motion";
   import { cubicInOut } from "svelte/easing";
@@ -23,11 +23,22 @@
       fill: color.primary
     }));
 
+  // add fake dupe negatives
+  range(-90, 0).forEach((i) => {
+    const wrap = 366 - i;
+    const match = rankData.find((d) => d.day === i);
+    rankData.push({
+      ...match,
+      day: i
+    });
+  });
+
   const x = "day";
   const y = "temp";
 
   const extentDay = extent(rawData, (d) => d[x]);
   const extentDayRecent = getExtentOverlay(rawData);
+  console.log(extentDayRecent);
   const tweenExtentDay = tweened();
 
   const formatTick = (d) => {

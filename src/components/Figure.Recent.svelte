@@ -1,6 +1,6 @@
 <script>
   import { getContext } from "svelte";
-  import { ascending, extent, timeFormat } from "d3";
+  import { extent, timeFormat } from "d3";
   import { LayerCake, Canvas, Svg } from "layercake";
   import { tweened } from "svelte/motion";
   import { cubicInOut } from "svelte/easing";
@@ -13,8 +13,7 @@
 
   export let width;
 
-  const { rawData, color, pad, padding, position, yDomain, highlightDelay } =
-    getContext("App");
+  const { rawData, color, pad, padding, position, yDomain } = getContext("App");
 
   const MIN_DAYS = 5;
 
@@ -22,7 +21,6 @@
   const y = "temp";
   const extentDay = extent(rawData, (d) => d[x]);
   const tweenExtentDay = tweened();
-  const tweenHi = tweened(0, { duration: highlightDelay });
 
   const formatTick = (d) => {
     const match = rawData.find((e) => e[x] === d);
@@ -30,12 +28,11 @@
     return timeFormat("%b %d")(match.date);
   };
 
-  const getFill = ({ rank, highlight }, hiTop) => {
+  const getFill = ({ rank, highlight }) => {
     if (highlight === "latest" && $activeSlide < 3) return color.tertiary;
     if (highlight === "hot" && $activeSlide >= 2 && $activeSlide < 4)
       return color.secondary;
     if (highlight === "top" && $activeSlide >= 3) return color.primary;
-    if (rank === 0 && hiTop) return color.primary;
     return color.default;
   };
 
@@ -57,11 +54,6 @@
   $: half = Math.floor(w / 2);
   $: h = 3;
   $: xPadding = [0, sidePadding];
-  $: if ($activeSlide === 3) {
-    tweenHi.set(1).then(() => {
-      if ($activeSlide === 3) highlightTop = true;
-    });
-  }
   $: data = rawData
     .filter((d) =>
       $activeSlide < 2
@@ -70,7 +62,7 @@
     )
     .map((d) => ({
       ...d,
-      fill: getFill(d, highlightTop)
+      fill: getFill(d)
     }));
 </script>
 
