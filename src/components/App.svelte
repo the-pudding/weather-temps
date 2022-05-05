@@ -8,22 +8,26 @@
   import FigureAnnual from "$components/Figure.Annual.svelte";
   import IntroSlide from "$components/IntroSlide.svelte";
   import ArticleSlide from "$components/ArticleSlide.svelte";
-  import rawData from "$data/bos.js";
+  import { rawData, threshold } from "$data/bos.js";
   import copy from "$data/doc.json";
   import { color } from "$data/variables.json";
-  import { activeSlide } from "$stores/misc.js";
+  import { activeSlide, dir } from "$stores/misc.js";
 
   const position = "absolute";
   const pad = 16;
   const padding = { top: pad, right: pad, bottom: pad * 3, left: pad };
   const yDomain = [0, max(rawData, (d) => d.temp) + 1];
   const highlightDelay = 3000;
+  const minDays = 5;
 
   let slider = undefined;
   let width = 0;
+  let height = 0;
 
   setContext("App", {
     rawData,
+    threshold,
+    minDays,
     position,
     pad,
     padding,
@@ -48,21 +52,22 @@
   const onTap = ({ detail }) => {
     if (detail === "right") slider.next();
     else slider.prev();
+    $dir = detail;
   };
 
   $: tease = $activeSlide === 0;
 </script>
 
 <p>slide: {$activeSlide}</p>
-<figure class:tease bind:clientWidth={width}>
+<figure class:tease bind:clientWidth={width} bind:offsetHeight={height}>
   {#if $activeSlide < 4}
     <div out:fade={{ duration: 100 }}>
-      <FigureRecent {width} />
+      <FigureRecent {width} {height} />
     </div>
   {/if}
   {#if $activeSlide >= 3}
     <div in:fade={{ delay: highlightDelay }}>
-      <FigureAnnual {width} />
+      <FigureAnnual {width} {height} />
     </div>
   {/if}
 </figure>

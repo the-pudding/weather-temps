@@ -2,7 +2,7 @@
   import { getContext } from "svelte";
   import { scaleCanvas } from "layercake";
 
-  const { data, xGet, yGet, z, width, height, xDomain, xScale } =
+  const { data, xGet, yGet, width, height, xDomain, xScale } =
     getContext("LayerCake");
 
   const { ctx } = getContext("canvas");
@@ -21,6 +21,7 @@
       $ctx.beginPath();
       const x = $xGet(d) - w;
       const y = $yGet(d) - h / 2;
+      // if (d.day === 103 && d.highlight) console.log(x);
       $ctx.rect(x, y, w, h);
       $ctx.lineWidth = strokeWidth;
       $ctx.strokeStyle = stroke;
