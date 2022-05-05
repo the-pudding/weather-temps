@@ -9,7 +9,7 @@
   import AxisY from "$components/charts/AxisY.svg.svelte";
   import ScatterCanvas from "$components/charts/Scatter.canvas.svelte";
   import Column from "$components/Column.svelte";
-  import Annotation from "$components/Annotation.svelte";
+  import Annotation from "$components/Annotation.Recent.svelte";
   import { activeSlide, dir } from "$stores/misc.js";
 
   export let width;
@@ -26,10 +26,12 @@
   } = getContext("App");
 
   const recentData = rawData.filter((d) => d.recentDay);
+  const exampleData = rawData.filter((d) => d.exampleDay);
   const x = "day";
   const y = "temp";
   const xReverse = true;
   const extentDay = extent(recentData, (d) => d[x]);
+  const extentExample = extent(exampleData, (d) => d[x]);
   const tweenExtentDay = tweened();
   const tweenDaysInView = tweened();
 
@@ -48,14 +50,16 @@
     return color.default;
   };
 
-  let column;
+  let highlight;
 
   $: duration = $dir === "right" ? 2000 : 0;
 
   $: targetExtentDay =
     $activeSlide < 2
       ? [extentDay[1] - minDays, extentDay[1]]
-      : [extentDay[0], extentDay[1]];
+      : $activeSlide < 7
+      ? [extentDay[0], extentDay[1]]
+      : [extentExample[1] - minDays, extentExample[1]];
   $: tweenExtentDay.set(targetExtentDay, { duration, easing: cubicInOut });
   $: xDomain = $tweenExtentDay;
 
@@ -70,19 +74,21 @@
 
   $: {
     if ($activeSlide < 2)
-      column = { ...rawData.find((d) => d.highlight === "latest") };
+      highlight = { ...rawData.find((d) => d.highlight === "latest") };
     else if ($activeSlide === 2)
-      column = { ...rawData.find((d) => d.highlight === "hot") };
+      highlight = { ...rawData.find((d) => d.highlight === "hot") };
     else if ($activeSlide === 3)
-      column = { ...rawData.find((d) => d.highlight === "top") };
-    else column = undefined;
+      highlight = { ...rawData.find((d) => d.highlight === "top") };
+    else highlight = undefined;
   }
 
   $: data = rawData
     .filter((d) =>
       $activeSlide < 2
         ? d[x] === extentDay[1]
-        : d[x] > extentDay[0] && d[x] <= extentDay[1]
+        : $activeSlide < 6
+        ? d[x] > extentDay[0] && d[x] <= extentDay[1]
+        : d[x] === extentExample[1]
     )
     .map((d) => ({
       ...d,
@@ -99,8 +105,8 @@
           <AxisY />
         </Svg>
         <Html>
-          {#if column}
-            <Column d={column} {w} {m} />
+          {#if highlight}
+            <Column d={highlight} {w} {m} />
           {/if}
         </Html>
       </div>
@@ -110,9 +116,9 @@
         <Canvas>
           <ScatterCanvas {w} {h} />
         </Canvas>
-        {#if column}
+        {#if highlight}
           <Html>
-            <Annotation d={column} {w} {m} />
+            <Annotation d={highlight} {w} {m} />
           </Html>
         {/if}
       </div>

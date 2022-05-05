@@ -1,13 +1,14 @@
 <script>
   import { getContext } from "svelte";
   import { extent, timeFormat, range } from "d3";
-  import { LayerCake, Canvas, Svg } from "layercake";
+  import { LayerCake, Canvas, Svg, Html } from "layercake";
   import { tweened } from "svelte/motion";
   import { cubicInOut } from "svelte/easing";
   import { fade } from "svelte/transition";
   import AxisX from "$components/charts/AxisX.svg.svelte";
   import AxisY from "$components/charts/AxisY.svg.svelte";
   import ScatterCanvas from "$components/charts/Scatter.canvas.svelte";
+  import Annotation from "$components/Annotation.Annual.svelte";
   import { activeSlide, dir } from "$stores/misc.js";
   import getExtentOverlay from "$utils/getExtentOverlay.js";
 
@@ -55,6 +56,7 @@
     return timeFormat("%b %d")(match.date);
   };
 
+  let highlight;
   let targetExtentDay = extentDay;
 
   $: duration = $dir === "right" ? 2000 : 0;
@@ -73,6 +75,18 @@
   $: w = Math.max(3, realW / daysInView);
   $: h = $activeSlide === 3 ? Math.max(2, Math.floor(height * 0.0075)) : 3;
   $: xPadding = [pad, pad * 3];
+
+  $: {
+    if ($activeSlide === 4)
+      highlight = rawData.filter((d) => d.highlight === "alltime");
+    else if ($activeSlide === 5)
+      highlight = rawData.filter(
+        (d) => d.highlight === "record5" && d.annotation
+      );
+    else if ($activeSlide === 6)
+      highlight = rawData.filter((d) => d.highlight === "record5");
+    else highlight = undefined;
+  }
 
   $: data = rankData.filter((d) =>
     $activeSlide > 3
@@ -96,6 +110,11 @@
         <Canvas>
           <ScatterCanvas {w} {h} />
         </Canvas>
+        {#if highlight}
+          <Html>
+            <Annotation data={highlight} {w} {m} />
+          </Html>
+        {/if}
       </div>
     {/if}
   </LayerCake>

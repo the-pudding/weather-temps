@@ -1,4 +1,4 @@
-import { ascending, descending } from "d3";
+import { ascending, max } from "d3";
 import rawDaily from "$data/bos_data.csv";
 
 const BUFFER = 1.33; // for padding so recent hot day not flush left
@@ -39,28 +39,21 @@ const threshold = Math.max(recentIndex, MIN_DAYS) * BUFFER;
 const recent = daily.filter(d => d.daysSinceNow < threshold);
 const recentDayValues = recent.map(d => d.day);
 
-// console.log({ recentDays });
-
-// keep only recent days or ranked ones, trash the rest
-const filtered = daily.filter(d => recentDayValues.includes(d.day) || d.rank !== undefined);
-
-// const getInverted = (d) => {
-// 	const match = recent.find(r => r.day === d.day);
-// 	return match ? threshold - match.daysSinceNow - 1 : undefined;
-// };
-
 // TODO dedupe ties
-const clean = filtered.map(d => ({
+const clean = daily.map(d => ({
 	...d,
 	recent: d.daysSinceNow < threshold,
 	// daysSinceNowInverted: getInverted(d),
 	recentDay: recentDayValues.includes(d.day)
 }));
 
+// annotations
+
 // latest
 const latest = clean[0];
 latest.highlight = "latest";
 latest.annotation = {
+	figure: "recent",
 	text: "Yesterday",
 	type: "temp"
 };
@@ -68,6 +61,7 @@ latest.annotation = {
 const hot = clean.find((d, i) => i > 0 && d.rank !== undefined && d.rank > 0);
 hot.highlight = "hot";
 hot.annotation = {
+	figure: "recent",
 	text: `DATE was the Xnd hottest DATE ever`,
 	type: "arrow"
 };
@@ -75,12 +69,42 @@ hot.annotation = {
 const top = clean.find(d => hot.day == d.day && d.rank === 0);
 top.highlight = "top";
 top.annotation = {
+	figure: "recent",
 	text: `DATE was the hottest DATE ever at TEMP`,
 	type: "arrow"
 };
 
+// alltime
+const maxTemp = max(clean, d => d.temp);
+const alltime = clean.find(d => d.temp === maxTemp);
+alltime.highlight = "alltime";
+alltime.annotation = {
+	figure: "annual",
+	text: `All-time high`
+};
+
+// most recent record
+const record = clean.find(d => d.rank === 0);
+record.highlight = "record";
+record.annotation = {
+	figure: "annual",
+	text: `This was set X weeks ago, when it was a record X°F`,
+};
+
+// recent 5 records
+clean.filter(d => d.rank === 0).slice(0, 5).forEach(d => {
+	d.highlight = "record5";
+});
+
+// recent 5 that also had the most recent 2nd place
+const record5Days = clean.filter(d => d.highlight === "record5").map(d => d.day);
+const record5Rank2 = clean.find(d => record5Days.includes(d.day) && d.rank === 1);
+const exampleDay = record5Rank2.day;
+clean.filter(d => d.day === exampleDay).forEach(d => d.exampleDay = true);
+
 clean.sort((a, b) => ascending(a.highlight ? 1 : 0, b.highlight ? 1 : 0));
 
-const rawData = clean;
+// keep only recent days or ranked ones, trash the rest
+const rawData = clean.filter(d => d.recentDay || d.exampleDay || d.rank !== undefined);
 
 export { rawData, threshold };

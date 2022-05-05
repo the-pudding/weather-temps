@@ -17,7 +17,7 @@
   const pad = 16;
   const padding = { top: pad, right: pad, bottom: pad * 3, left: pad };
   const yDomain = [0, max(rawData, (d) => d.temp) + 1];
-  const highlightDelay = 3000;
+  const highlightDelay = 2000;
   const minDays = 5;
 
   let slider = undefined;
@@ -58,18 +58,18 @@
   $: tease = $activeSlide === 0;
 </script>
 
-<p>slide: {$activeSlide}</p>
 <figure class:tease bind:clientWidth={width} bind:offsetHeight={height}>
-  {#if $activeSlide < 4}
+  {#if $activeSlide < 4 || $activeSlide > 6}
     <div out:fade={{ duration: 100 }}>
       <FigureRecent {width} {height} />
     </div>
   {/if}
-  {#if $activeSlide >= 3}
+  {#if $activeSlide >= 3 && $activeSlide < 7}
     <div in:fade={{ delay: highlightDelay }}>
       <FigureAnnual {width} {height} />
     </div>
   {/if}
+  <p class="shadow">City, State</p>
 </figure>
 <article>
   <Slider bind:this={slider} bind:active={$activeSlide} duration="0">
@@ -91,14 +91,6 @@
 />
 
 <style>
-  p {
-    position: absolute;
-    top: 0;
-    left: 1rem;
-    z-index: 111111111;
-    color: white;
-  }
-
   article,
   figure {
     position: absolute;
@@ -110,13 +102,11 @@
   }
 
   figure {
-    /* max-width: 80rem; */
     width: 1000px;
     height: 70%;
     top: 15%;
     overflow: hidden;
     transition: transform 1s ease-in-out, filter 0.5s 1s;
-    /* outline: 2px dashed red; */
   }
 
   figure.tease {
@@ -130,6 +120,14 @@
     left: 0;
     width: 100%;
     height: 100%;
+  }
+
+  figure p {
+    position: absolute;
+    top: 1rem;
+    left: 0;
+    color: var(--color-fg-alt);
+    font-family: var(--sans);
   }
 
   article {

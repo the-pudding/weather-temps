@@ -76,3 +76,29 @@ figure svg {
 	color: var(--color-tertiary);
 }
 
+.shadow {
+	text-shadow: -3px -3px 1px var(--color-bg), -3px -2px 1px var(--color-bg),
+      -3px -1px 1px var(--color-bg), -3px 0px 1px var(--color-bg),
+      -3px 1px 1px var(--color-bg), -3px 2px 1px var(--color-bg),
+      -3px 3px 1px var(--color-bg), -2px -3px 1px var(--color-bg),
+      -2px -2px 1px var(--color-bg), -2px -1px 1px var(--color-bg),
+      -2px 0px 1px var(--color-bg), -2px 1px 1px var(--color-bg),
+      -2px 2px 1px var(--color-bg), -2px 3px 1px var(--color-bg),
+      -1px -3px 1px var(--color-bg), -1px -2px 1px var(--color-bg),
+      -1px -1px 1px var(--color-bg), -1px 0px 1px var(--color-bg),
+      -1px 1px 1px var(--color-bg), -1px 2px 1px var(--color-bg),
+      -1px 3px 1px var(--color-bg), 0px -3px 1px var(--color-bg),
+      0px -2px 1px var(--color-bg), 0px -1px 1px var(--color-bg),
+      0px 1px 1px var(--color-bg), 0px 2px 1px var(--color-bg),
+      0px 3px 1px var(--color-bg), 1px -3px 1px var(--color-bg),
+      1px -2px 1px var(--color-bg), 1px -1px 1px var(--color-bg),
+      1px 0px 1px var(--color-bg), 1px 1px 1px var(--color-bg),
+      1px 2px 1px var(--color-bg), 1px 3px 1px var(--color-bg),
+      2px -3px 1px var(--color-bg), 2px -2px 1px var(--color-bg),
+      2px -1px 1px var(--color-bg), 2px 0px 1px var(--color-bg),
+      2px 1px 1px var(--color-bg), 2px 2px 1px var(--color-bg),
+      2px 3px 1px var(--color-bg), 3px -3px 1px var(--color-bg),
+      3px -2px 1px var(--color-bg), 3px -1px 1px var(--color-bg),
+      3px 0px 1px var(--color-bg), 3px 1px 1px var(--color-bg),
+      3px 2px 1px var(--color-bg), 3px 3px 1px var(--color-bg);
+}

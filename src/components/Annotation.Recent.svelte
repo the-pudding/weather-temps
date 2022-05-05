@@ -30,6 +30,7 @@
 {#key d.highlight}
   <p
     transition:fade
+    class="shadow"
     class:arrow
     style:left
     style:top
@@ -52,30 +53,6 @@
     text-align: right;
     font-size: 12px;
     z-index: var(--z-top);
-    text-shadow: -3px -3px 1px var(--color-bg), -3px -2px 1px var(--color-bg),
-      -3px -1px 1px var(--color-bg), -3px 0px 1px var(--color-bg),
-      -3px 1px 1px var(--color-bg), -3px 2px 1px var(--color-bg),
-      -3px 3px 1px var(--color-bg), -2px -3px 1px var(--color-bg),
-      -2px -2px 1px var(--color-bg), -2px -1px 1px var(--color-bg),
-      -2px 0px 1px var(--color-bg), -2px 1px 1px var(--color-bg),
-      -2px 2px 1px var(--color-bg), -2px 3px 1px var(--color-bg),
-      -1px -3px 1px var(--color-bg), -1px -2px 1px var(--color-bg),
-      -1px -1px 1px var(--color-bg), -1px 0px 1px var(--color-bg),
-      -1px 1px 1px var(--color-bg), -1px 2px 1px var(--color-bg),
-      -1px 3px 1px var(--color-bg), 0px -3px 1px var(--color-bg),
-      0px -2px 1px var(--color-bg), 0px -1px 1px var(--color-bg),
-      0px 1px 1px var(--color-bg), 0px 2px 1px var(--color-bg),
-      0px 3px 1px var(--color-bg), 1px -3px 1px var(--color-bg),
-      1px -2px 1px var(--color-bg), 1px -1px 1px var(--color-bg),
-      1px 0px 1px var(--color-bg), 1px 1px 1px var(--color-bg),
-      1px 2px 1px var(--color-bg), 1px 3px 1px var(--color-bg),
-      2px -3px 1px var(--color-bg), 2px -2px 1px var(--color-bg),
-      2px -1px 1px var(--color-bg), 2px 0px 1px var(--color-bg),
-      2px 1px 1px var(--color-bg), 2px 2px 1px var(--color-bg),
-      2px 3px 1px var(--color-bg), 3px -3px 1px var(--color-bg),
-      3px -2px 1px var(--color-bg), 3px -1px 1px var(--color-bg),
-      3px 0px 1px var(--color-bg), 3px 1px 1px var(--color-bg),
-      3px 2px 1px var(--color-bg), 3px 3px 1px var(--color-bg);
   }
 
   p.arrow {
@@ -96,7 +73,7 @@
     position: absolute;
     left: 100%;
     margin-left: 0.5rem;
-    transform: translate(var(--col), 0);
+    transform: translate(var(--col), -100%);
   }
 
   p.arrow:after {
