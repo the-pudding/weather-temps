@@ -38,7 +38,6 @@
   const extentAnnual = extent(rawData, (d) => d.day);
 
   const tweenExtentDay = tweened($activeSlide === 0 ? null : extentAnnual);
-  const tweenDaysInView = tweened();
 
   const formatTick = (d) => {
     const match = rawData.find((e) => e[x] === d);
@@ -65,8 +64,10 @@
   $: targetExtentDay =
     $activeSlide < 2
       ? [extentFake[1] - minDays, extentFake[1]]
-      : $activeSlide < 7
+      : $activeSlide < 4
       ? [extentFake[0], extentFake[1]]
+      : $activeSlide < 6
+      ? extentAnnual
       : [extentExample[1] - minDays, extentExample[1]];
   $: tweenExtentDay.set([targetExtentDay[0] - 1, targetExtentDay[1]], {
     duration,

@@ -12,7 +12,13 @@
   {@const left = `${$xGet(d) - w}px`}
   {@const top = `${$yGet(d)}px`}
   {@const flip = $xGet(d) > $xRange[1] * 0.67}
-  <div transition:fade style:left style:top class:flip>
+  <div
+    in:fade={{ delay: 2000 }}
+    out:fade={{ duration: 150 }}
+    style:left
+    style:top
+    class:flip
+  >
     <span />
     {#if d.annotation && data.length === 1}
       <p class="shadow">

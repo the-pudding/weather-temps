@@ -29,7 +29,8 @@
   {@const forceTemp = d.highlightE === "example2"}
 
   <p
-    transition:fade
+    in:fade={{ delay: 2000 }}
+    out:fade={{ duration: 150 }}
     class="shadow"
     class:forceTemp
     class:arrow

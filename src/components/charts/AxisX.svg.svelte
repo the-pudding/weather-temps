@@ -8,11 +8,6 @@
   export let showFirst = true;
   export let w = 0;
 
-  // const tx = j => {
-  // 	if ()
-  // 	{$xRange[j === 0 ? 1 : ]
-  // }
-
   $: ticks = $xDomain[1] - $xDomain[0];
   $: tickVals = $xScale
     .ticks(ticks)

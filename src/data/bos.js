@@ -9,7 +9,7 @@ const LEAP = 59;
 const debug = false;
 
 // TODO
-const now = new Date(2022, 0, 13);
+const now = new Date(2022, 3, 13);
 const nowDay = getDayOfYear(now);
 
 if (debug) console.log({ now, nowDay });

@@ -63,15 +63,12 @@
 
 <figure class:tease bind:clientWidth={width} bind:offsetHeight={height}>
   {#if $activeSlide < 4 || $activeSlide > 6}
-    <div in:fade={{ duration: dur }} out:fade={{ duration: 0 }}>
+    <div out:fade={{ duration: 0 }}>
       <FigureRecent {width} {height} />
     </div>
   {/if}
   {#if $activeSlide >= 3 && $activeSlide < 9}
-    <div
-      in:fade={{ delay: $activeSlide === 3 ? highlightDelay : 0 }}
-      out:fade={{ duration: 0 }}
-    >
+    <div out:fade={{ duration: 0 }}>
       <FigureAnnual {width} {height} />
     </div>
   {/if}

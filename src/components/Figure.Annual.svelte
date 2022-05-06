@@ -53,7 +53,7 @@
   const extentExample = extent(exampleData, (d) => d[x]);
 
   const tweenExtentDay = tweened();
-  const tweenDaysInView = tweened();
+  // const tweenOpacity = tweened();
 
   const formatTick = (d) => {
     const match = rawData.find((e) => e[x] === d);
@@ -66,6 +66,8 @@
 
   $: showAxis = $activeSlide > 3 && $activeSlide < 7;
   $: duration = $dir === "right" ? dur : 0;
+  // $: opacity = $activeSlide === 5 ? 0 : 1;
+  // $: tweenOpacity.set(opacity, { duration });
 
   $: {
     targetExtentDay =

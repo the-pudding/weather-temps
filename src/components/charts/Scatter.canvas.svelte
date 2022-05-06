@@ -12,16 +12,18 @@
   export let strokeWidth = 0;
   export let w;
   export let h;
+  // export let opacity = 1;
 
   $: if ($ctx) {
     scaleCanvas($ctx, $width, $height);
     $ctx.clearRect(0, 0, $width, $height);
 
+    // $ctx.globalAlpha = opacity;
+
     $data.forEach((d) => {
       $ctx.beginPath();
       const x = $xGet(d) - w;
       const y = $yGet(d) - h / 2;
-      // if (d.day === 103 && d.highlight) console.log(x);
       $ctx.rect(x, y, w, h);
       $ctx.lineWidth = strokeWidth;
       $ctx.strokeStyle = stroke;
