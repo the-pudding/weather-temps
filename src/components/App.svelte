@@ -18,7 +18,8 @@
   const padding = { top: pad, right: pad, bottom: pad * 3, left: pad };
   const yDomain = [0, max(rawData, (d) => d.temp) + 1];
   const highlightDelay = 2000;
-  const minDays = 5;
+  const minDays = 4;
+  const dur = 2000;
 
   let slider = undefined;
   let width = 0;
@@ -32,6 +33,7 @@
     pad,
     padding,
     yDomain,
+    dur,
     color: {
       primary: color.green,
       secondary: color.blue,
@@ -56,20 +58,24 @@
   };
 
   $: tease = $activeSlide === 0;
+  $: console.log({ $activeSlide });
 </script>
 
 <figure class:tease bind:clientWidth={width} bind:offsetHeight={height}>
   {#if $activeSlide < 4 || $activeSlide > 6}
-    <div out:fade={{ duration: 100 }}>
+    <div in:fade={{ duration: dur }} out:fade={{ duration: 0 }}>
       <FigureRecent {width} {height} />
     </div>
   {/if}
-  {#if $activeSlide >= 3 && $activeSlide < 7}
-    <div in:fade={{ delay: highlightDelay }}>
+  {#if $activeSlide >= 3 && $activeSlide < 9}
+    <div
+      in:fade={{ delay: $activeSlide === 3 ? highlightDelay : 0 }}
+      out:fade={{ duration: 0 }}
+    >
       <FigureAnnual {width} {height} />
     </div>
   {/if}
-  <p class="shadow">City, State</p>
+  <p class="shadow">Boston, MA</p>
 </figure>
 <article>
   <Slider bind:this={slider} bind:active={$activeSlide} duration="0">
@@ -125,9 +131,13 @@
   figure p {
     position: absolute;
     top: 1rem;
-    left: 0;
+    left: 1.5rem;
+    line-height: 1;
     color: var(--color-fg-alt);
     font-family: var(--sans);
+    text-transform: uppercase;
+    transform: translate(0, 50%);
+    font-size: 14px;
   }
 
   article {

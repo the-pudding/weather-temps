@@ -19,13 +19,14 @@
 
 <g class="axis x-axis">
   {#each tickVals as tick, i}
-    {@const visible = i === 0 || i === tickVals.length - 1}
-    {@const j = i === 0 ? 0 : 1}
+    {@const visible = i === 1 || i === tickVals.length - 1}
+    {@const j = i === 1 ? 0 : 1}
     {#if visible}
       <g
         class="tick tick-{i}"
-        transform="translate({j === 0 ? 0 : $width - $xPadding[1]},{$yRange[0] +
-          $padding.top})"
+        transform="translate({j === 0
+          ? $padding.left
+          : $width - $xPadding[1]},{$yRange[0] + $padding.top})"
       >
         <text
           x={0}

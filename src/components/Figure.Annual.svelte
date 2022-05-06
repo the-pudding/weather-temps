@@ -22,7 +22,8 @@
     pad,
     padding,
     position,
-    yDomain
+    yDomain,
+    dur
   } = getContext("App");
 
   const rankData = rawData
@@ -45,8 +46,11 @@
   const x = "day";
   const y = "temp";
 
-  const extentDay = extent(rawData, (d) => d[x]);
-  const extentDayRecent = getExtentOverlay(rawData);
+  const exampleData = rawData.filter((d) => d.exampleDay);
+  const extentAnnual = extent(rawData, (d) => d[x]);
+  const extentFakeMap = getExtentOverlay(rawData);
+  const extentExample = extent(exampleData, (d) => d[x]);
+
   const tweenExtentDay = tweened();
   const tweenDaysInView = tweened();
 
@@ -57,14 +61,22 @@
   };
 
   let highlight;
-  let targetExtentDay = extentDay;
+  let targetExtentDay = extentAnnual;
 
-  $: duration = $dir === "right" ? 2000 : 0;
+  $: duration = $dir === "right" ? dur : 0;
 
   $: {
-    targetExtentDay = $activeSlide < 4 ? extentDayRecent : extentDay;
+    targetExtentDay =
+      $activeSlide < 4
+        ? extentFakeMap
+        : $activeSlide < 7
+        ? extentAnnual
+        : [extentExample[1] - minDays, extentExample[1]];
   }
-  $: tweenExtentDay.set(targetExtentDay, { duration, easing: cubicInOut });
+  $: tweenExtentDay.set([targetExtentDay[0] - 1, targetExtentDay[1]], {
+    duration,
+    easing: cubicInOut
+  });
   $: xDomain = $tweenExtentDay;
 
   $: daysInView = xDomain[1] - xDomain[0];
@@ -81,41 +93,41 @@
       highlight = rawData.filter((d) => d.highlight === "alltime");
     else if ($activeSlide === 5)
       highlight = rawData.filter(
-        (d) => d.highlight === "record5" && d.annotation
+        (d) =>
+          d.highlight === "record5" &&
+          d.annotation &&
+          d.annotation.figure === "annual"
       );
     else if ($activeSlide === 6)
       highlight = rawData.filter((d) => d.highlight === "record5");
     else highlight = undefined;
   }
-
   $: data = rankData.filter((d) =>
-    $activeSlide > 3
+    $activeSlide < 7 && $activeSlide > 3
       ? true
-      : d[x] >= extentDayRecent[0] && d[x] <= extentDayRecent[1]
+      : $activeSlide === 3
+      ? d[x] >= extentFakeMap[0] && d[x] <= extentFakeMap[1]
+      : d[x] === extentExample[1]
   );
 </script>
 
 {#if width}
   <LayerCake {xDomain} {padding} {position} {x} {y} {yDomain} {data} {xPadding}>
-    {#if true}
-      <div transition:fade>
-        <Svg>
-          <AxisX {formatTick} />
-          <AxisY />
-        </Svg>
-      </div>
-    {/if}
-    {#if true}
-      <div transition:fade>
-        <Canvas>
-          <ScatterCanvas {w} {h} />
-        </Canvas>
-        {#if highlight}
-          <Html>
-            <Annotation data={highlight} {w} {m} />
-          </Html>
-        {/if}
-      </div>
-    {/if}
+    <div>
+      <Svg>
+        <AxisX {formatTick} />
+        <AxisY />
+      </Svg>
+    </div>
+    <div>
+      <Canvas>
+        <ScatterCanvas {w} {h} />
+      </Canvas>
+      {#if highlight}
+        <Html>
+          <Annotation data={highlight} {w} {m} />
+        </Html>
+      {/if}
+    </div>
   </LayerCake>
 {/if}

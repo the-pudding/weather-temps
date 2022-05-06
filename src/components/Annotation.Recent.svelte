@@ -2,35 +2,36 @@
   import { getContext } from "svelte";
   import { fade } from "svelte/transition";
   const { color } = getContext("App");
-  const { data, xGet, xRange, yRange, yGet } = getContext("LayerCake");
+  const { xGet, xRange, yRange, yGet } = getContext("LayerCake");
 
   export let w;
-  export let d;
+  export let data;
   export let m;
 
-  $: text = d.annotation.text;
-  $: temp = d.temp;
-  $: arrow = d.annotation.type === "arrow";
-
   $: mid = $xRange[1] / 2;
-  $: x = $xGet(d) - w;
-  $: left = `${x - m}px`;
-  $: top = `${$yGet(d)}px`;
-  // $: forceRight = x < mid;
-  // $: align = forceRight ? "left" : "right";
-  // $: tx = forceRight ? `${w + m * 2}px` : "-100%";
-  $: fill =
+
+  const getFill = (d) =>
     d.highlight === "latest"
       ? color.tertiary
-      : d.highlight === "hot"
+      : d.highlight === "hot" || d.highlightE === "example2"
       ? color.secondary
       : color.primary;
 </script>
 
-{#key d.highlight}
+{#each data as d (d.highlight)}
+  {@const x = $xGet(d) - w}
+  {@const left = `${x - m}px`}
+  {@const top = `${$yGet(d)}px`}
+  {@const fill = getFill(d)}
+  {@const text = d.annotation.text}
+  {@const temp = d.temp}
+  {@const arrow = d.annotation.type === "arrow"}
+  {@const forceTemp = d.highlightE === "example2"}
+
   <p
     transition:fade
     class="shadow"
+    class:forceTemp
     class:arrow
     style:left
     style:top
@@ -39,7 +40,7 @@
   >
     {text}
   </p>
-{/key}
+{/each}
 
 <style>
   p {
@@ -72,12 +73,18 @@
     content: attr(data-temp);
     position: absolute;
     left: 100%;
+    top: 0;
     margin-left: 0.5rem;
-    transform: translate(var(--col), -100%);
+    transform: translate(var(--col), 0);
   }
 
   p.arrow:after {
     display: none;
+  }
+
+  p.arrow.forceTemp:after {
+    display: block;
+    transform: translate(var(--col), -0.75rem);
   }
 
   p.arrow:before {

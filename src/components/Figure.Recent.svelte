@@ -1,6 +1,6 @@
 <script>
   import { getContext } from "svelte";
-  import { extent, timeFormat, range } from "d3";
+  import { extent, timeFormat, max } from "d3";
   import { LayerCake, Canvas, Svg, Html } from "layercake";
   import { tweened } from "svelte/motion";
   import { cubicInOut } from "svelte/easing";
@@ -22,17 +22,21 @@
     pad,
     padding,
     position,
-    yDomain
+    yDomain,
+    dur
   } = getContext("App");
+
+  let x = "fakeDay";
+  const y = "temp";
 
   const recentData = rawData.filter((d) => d.recentDay);
   const exampleData = rawData.filter((d) => d.exampleDay);
-  const x = "day";
-  const y = "temp";
-  const xReverse = true;
-  const extentDay = extent(recentData, (d) => d[x]);
-  const extentExample = extent(exampleData, (d) => d[x]);
-  const tweenExtentDay = tweened();
+
+  const extentFake = extent(recentData, (d) => d[x]);
+  const extentExample = extent(exampleData, (d) => d.day);
+  const extentAnnual = extent(rawData, (d) => d.day);
+
+  const tweenExtentDay = tweened($activeSlide === 0 ? null : extentAnnual);
   const tweenDaysInView = tweened();
 
   const formatTick = (d) => {
@@ -47,22 +51,27 @@
     if (d.highlight === "hot" && $activeSlide >= 2 && $activeSlide < 4)
       return color.secondary;
     if (d.highlight === "top" && $activeSlide >= 3) return color.primary;
+    if ($activeSlide === 3 && d.rank === 0) return color.primary;
+    if ($activeSlide === 8 && d.rank === 1) return color.secondary;
     return color.default;
   };
 
   let highlight;
 
-  $: duration = $dir === "right" ? 2000 : 0;
+  $: duration = $dir === "right" ? dur : 0;
 
+  $: x = $activeSlide < 4 ? "fakeDay" : "day";
   $: targetExtentDay =
     $activeSlide < 2
-      ? [extentDay[1] - minDays, extentDay[1]]
+      ? [extentFake[1] - minDays, extentFake[1]]
       : $activeSlide < 7
-      ? [extentDay[0], extentDay[1]]
+      ? [extentFake[0], extentFake[1]]
       : [extentExample[1] - minDays, extentExample[1]];
-  $: tweenExtentDay.set(targetExtentDay, { duration, easing: cubicInOut });
+  $: tweenExtentDay.set([targetExtentDay[0] - 1, targetExtentDay[1]], {
+    duration,
+    easing: cubicInOut
+  });
   $: xDomain = $tweenExtentDay;
-
   $: daysInView = xDomain[1] - xDomain[0];
   $: m = daysInView > threshold ? 0 : 2;
   $: margin = daysInView * m * 2;
@@ -74,21 +83,31 @@
 
   $: {
     if ($activeSlide < 2)
-      highlight = { ...rawData.find((d) => d.highlight === "latest") };
+      highlight = [{ ...rawData.find((d) => d.highlight === "latest") }];
     else if ($activeSlide === 2)
-      highlight = { ...rawData.find((d) => d.highlight === "hot") };
+      highlight = [{ ...rawData.find((d) => d.highlight === "hot") }];
     else if ($activeSlide === 3)
-      highlight = { ...rawData.find((d) => d.highlight === "top") };
+      highlight = [{ ...rawData.find((d) => d.highlight === "top") }];
+    else if ($activeSlide === 7)
+      highlight = [{ ...rawData.find((d) => d.highlightE === "example1") }];
+    else if ($activeSlide === 8)
+      highlight = [
+        {
+          ...rawData.find(
+            (d) => d.highlightE === "example1" || d.highlightE === "example2"
+          )
+        }
+      ];
     else highlight = undefined;
   }
 
   $: data = rawData
     .filter((d) =>
       $activeSlide < 2
-        ? d[x] === extentDay[1]
+        ? d[x] === extentFake[1]
         : $activeSlide < 6
-        ? d[x] > extentDay[0] && d[x] <= extentDay[1]
-        : d[x] === extentExample[1]
+        ? d[x] >= extentFake[0] && d[x] <= extentFake[1]
+        : d.day === extentExample[1]
     )
     .map((d) => ({
       ...d,
@@ -98,30 +117,27 @@
 
 {#if width}
   <LayerCake {xDomain} {padding} {position} {x} {y} {yDomain} {data} {xPadding}>
-    {#if true}
-      <div transition:fade>
-        <Svg>
-          <AxisX {formatTick} />
-          <AxisY />
-        </Svg>
-        <Html>
-          {#if highlight}
-            <Column d={highlight} {w} {m} />
-          {/if}
-        </Html>
-      </div>
-    {/if}
-    {#if true}
-      <div transition:fade>
-        <Canvas>
-          <ScatterCanvas {w} {h} />
-        </Canvas>
+    <div>
+      <Svg>
+        <AxisX {formatTick} />
+        <AxisY />
+      </Svg>
+      <Html>
         {#if highlight}
-          <Html>
-            <Annotation d={highlight} {w} {m} />
-          </Html>
+          <Column d={highlight[0]} {w} {m} />
         {/if}
-      </div>
-    {/if}
+      </Html>
+    </div>
+
+    <div>
+      <Canvas>
+        <ScatterCanvas {w} {h} />
+      </Canvas>
+      {#if highlight}
+        <Html>
+          <Annotation data={highlight} {w} {m} />
+        </Html>
+      {/if}
+    </div>
   </LayerCake>
 {/if}
