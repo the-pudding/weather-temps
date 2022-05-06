@@ -14,6 +14,7 @@
 
   export let width;
   export let height;
+
   const {
     rawData,
     threshold,
@@ -63,6 +64,7 @@
   let highlight;
   let targetExtentDay = extentAnnual;
 
+  $: showAxis = $activeSlide > 3 && $activeSlide < 7;
   $: duration = $dir === "right" ? dur : 0;
 
   $: {
@@ -115,8 +117,10 @@
   <LayerCake {xDomain} {padding} {position} {x} {y} {yDomain} {data} {xPadding}>
     <div>
       <Svg>
-        <AxisX {formatTick} />
-        <AxisY />
+        {#if showAxis}
+          <AxisX {formatTick} {w} />
+          <AxisY />
+        {/if}
       </Svg>
     </div>
     <div>

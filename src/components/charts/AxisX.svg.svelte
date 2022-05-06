@@ -5,6 +5,8 @@
 
   export let yTick = 16;
   export let formatTick = (d) => d;
+  export let showFirst = true;
+  export let w = 0;
 
   // const tx = j => {
   // 	if ()
@@ -19,21 +21,21 @@
 
 <g class="axis x-axis">
   {#each tickVals as tick, i}
-    {@const visible = i === 1 || i === tickVals.length - 1}
+    {@const visible = (i === 1 && showFirst) || i === tickVals.length - 1}
     {@const j = i === 1 ? 0 : 1}
     {#if visible}
       <g
         class="tick tick-{i}"
         transform="translate({j === 0
-          ? $padding.left
-          : $width - $xPadding[1]},{$yRange[0] + $padding.top})"
+          ? $padding.left + w / 2
+          : $width - $xPadding[1] - w / 2},{$yRange[0] + $padding.top})"
       >
         <text
           x={0}
           y={yTick}
           dx=""
           dy=""
-          text-anchor={j === 0 ? "start" : "end"}>{formatTick(tick)}</text
+          text-anchor={j === 0 ? "middle" : "middle"}>{formatTick(tick)}</text
         >
       </g>
     {/if}

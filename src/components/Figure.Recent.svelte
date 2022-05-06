@@ -26,6 +26,7 @@
     dur
   } = getContext("App");
 
+  let highlight;
   let x = "fakeDay";
   const y = "temp";
 
@@ -56,8 +57,8 @@
     return color.default;
   };
 
-  let highlight;
-
+  $: showAxis = $activeSlide < 4 || $activeSlide > 6;
+  $: showFirst = $activeSlide > 1 && $activeSlide < 6;
   $: duration = $dir === "right" ? dur : 0;
 
   $: x = $activeSlide < 4 ? "fakeDay" : "day";
@@ -119,8 +120,10 @@
   <LayerCake {xDomain} {padding} {position} {x} {y} {yDomain} {data} {xPadding}>
     <div>
       <Svg>
-        <AxisX {formatTick} />
-        <AxisY />
+        {#if showAxis}
+          <AxisX {formatTick} {showFirst} {w} />
+          <AxisY />
+        {/if}
       </Svg>
       <Html>
         {#if highlight}
