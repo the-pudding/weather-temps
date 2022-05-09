@@ -13,12 +13,13 @@
   const getFill = (d) =>
     d.highlight === "latest"
       ? color.tertiary
-      : d.highlight === "hot" || d.highlightE === "example2"
+      : d.highlight === "hot" || d.highlightAlt === "example2"
       ? color.secondary
       : color.primary;
 </script>
 
 {#each data as d (d.highlight)}
+  {@const alt = d.annotationAlt}
   {@const x = $xGet(d) - w}
   {@const left = `${x - m}px`}
   {@const top = `${$yGet(d)}px`}
@@ -26,7 +27,7 @@
   {@const text = d.annotation.text}
   {@const temp = d.temp}
   {@const arrow = d.annotation.type === "arrow"}
-  {@const forceTemp = d.highlightE === "example2"}
+  {@const forceTemp = d.highlightAlt === "example2"}
 
   <p
     in:fade={{ delay: 2000 }}

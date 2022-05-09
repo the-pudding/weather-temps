@@ -9,7 +9,7 @@ const LEAP = 59;
 const debug = false;
 
 // TODO
-const now = new Date(2022, 3, 13);
+const now = new Date(2022, 0, 13);
 const nowDay = getDayOfYear(now);
 
 if (debug) console.log({ now, nowDay });
@@ -25,8 +25,7 @@ const clean = raw.filter(d => d.temp !== "M").map((d) => ({
 	rawDate: d.date,
 	date: parseDate(d.date),
 	rank: d.rank === "" ? undefined : +d.rank,
-	temp: +d.temp,
-	tie: !!d.tie,
+	temp: +d.temp
 }))
 	.map(d => ({
 		...d,
@@ -94,6 +93,16 @@ const withFake = inverted.map(d => ({
 	fakeDay: fakeMap.get(d.day)
 }));
 
+
+
+
+
+// TODO do everything above on server
+
+
+
+
+
 if (debug) console.table(withFake.slice(0, 60));
 // annotations
 // latest
@@ -113,7 +122,7 @@ hot.annotation = {
 	type: "arrow"
 };
 // top + same day as hot not top
-const top = withFake.find(d => hot.day == d.day && d.rank === 0);
+const top = withFake.find(d => hot.day === d.day && d.rank === 0);
 top.highlight = "top";
 top.annotation = {
 	figure: "recent",
@@ -150,7 +159,7 @@ const exampleDay = record5Rank2.day;
 withFake.filter(d => d.day === exampleDay).forEach(d => d.exampleDay = true);
 
 const example1 = withFake.find(d => d.rank === 0 && d.exampleDay);
-example1.highlightE = "example1";
+example1.highlightAlt = "example1";
 example1.annotation = {
 	figure: "recent",
 	text: `DATE`,
@@ -158,7 +167,7 @@ example1.annotation = {
 };
 
 const example2 = withFake.find(d => d.rank === 1 && d.exampleDay);
-example2.highlightE = "example2";
+example2.highlightAlt = "example2";
 example2.annotation = {
 	figure: "recent",
 	text: `DATE was an historic record at the time`,

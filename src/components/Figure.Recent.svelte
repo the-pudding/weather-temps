@@ -91,12 +91,13 @@
     else if ($activeSlide === 3)
       highlight = [{ ...rawData.find((d) => d.highlight === "top") }];
     else if ($activeSlide === 7)
-      highlight = [{ ...rawData.find((d) => d.highlightE === "example1") }];
+      highlight = [{ ...rawData.find((d) => d.highlightAlt === "example1") }];
     else if ($activeSlide === 8)
       highlight = [
         {
           ...rawData.find(
-            (d) => d.highlightE === "example1" || d.highlightE === "example2"
+            (d) =>
+              d.highlightAlt === "example1" || d.highlightAlt === "example2"
           )
         }
       ];

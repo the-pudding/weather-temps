@@ -96,12 +96,9 @@
     if ($activeSlide === 4)
       highlight = rawData.filter((d) => d.highlight === "alltime");
     else if ($activeSlide === 5)
-      highlight = rawData.filter(
-        (d) =>
-          d.highlight === "record5" &&
-          d.annotation &&
-          d.annotation.figure === "annual"
-      );
+      highlight = [
+        rawData.find((d) => d.highlight === "record5" && d.annotation)
+      ];
     else if ($activeSlide === 6)
       highlight = rawData.filter((d) => d.highlight === "record5");
     else highlight = undefined;
