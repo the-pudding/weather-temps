@@ -118,7 +118,6 @@
       ...d,
       fill: getFill(d)
     }));
-  $: console.log("recent", targetExtentDay);
 </script>
 
 {#if width}
