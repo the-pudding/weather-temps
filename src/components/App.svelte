@@ -62,7 +62,7 @@
 </script>
 
 <figure class:tease bind:clientWidth={width} bind:offsetHeight={height}>
-  {#if $activeSlide < 4 || ($activeSlide > 6 && $activeSlide < 9)}
+  {#if $activeSlide < 9}
     <div out:fade={{ duration: 0 }}>
       <FigureRecent {width} {height} />
     </div>

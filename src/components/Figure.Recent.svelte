@@ -66,7 +66,7 @@
       ? [extentFake[1] - minDays, extentFake[1]]
       : $activeSlide < 4
       ? [extentFake[0], extentFake[1]]
-      : $activeSlide < 6
+      : $activeSlide < 7
       ? extentAnnual
       : [extentExample[1] - minDays, extentExample[1]];
   $: tweenExtentDay.set([targetExtentDay[0] - 1, targetExtentDay[1]], {
@@ -108,14 +108,17 @@
     .filter((d) =>
       $activeSlide < 2
         ? d[x] === extentFake[1]
-        : $activeSlide < 6
+        : $activeSlide < 4
         ? d[x] >= extentFake[0] && d[x] <= extentFake[1]
+        : $activeSlide < 7
+        ? false
         : d.day === extentExample[1]
     )
     .map((d) => ({
       ...d,
       fill: getFill(d)
     }));
+  $: console.log("recent", targetExtentDay);
 </script>
 
 {#if width}
