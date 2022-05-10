@@ -6,7 +6,7 @@
 /* colors defined in variables.css */
 :root {
 	/* font */
-	--sans: "Atlas Grotesk", Helvetica, Arial, sans-serif;
+	--sans: "Inter", Helvetica, Arial, sans-serif;
 	--serif: "Lyon Display", Georgia, Times, serif;
 	--mono: Menlo, Consolas, Monaco, "Courier New", monospace;
 	
