@@ -173,7 +173,7 @@ const example2 = withFake.find(d => d.rank === 1 && d.exampleDay);
 example2.highlightAlt = "example2";
 example2.annotation = {
 	figure: "recent",
-	text: `${format(example1.date, "M/d/y")} was an historic record at the time`,
+	text: `${format(example2.date, "M/d/y")} was an historic record at the time`,
 	type: "arrow"
 };
 
@@ -216,12 +216,13 @@ custom["count-record5"] = "Five";
 const record5 = rawData.filter(d => d.highlight === "record5");
 custom["year-record5"] = format(record5[record5.length - 1].date, "y");
 
-custom["date-record5-recent"] = format(example2.date, "MMMM do");
-custom["year-record5-recent"] = format(example2.date, "y");
+custom["date-example1"] = format(example1.date, "MMMM do");
+custom["year-example1"] = format(example1.date, "y");
 
-custom["fulldate-broken"] = format(example1.date, "MMMM d, y");
-custom["duration-broken"] = formatDistanceStrict(example1.date, example2.date);
-custom["year-broken"] = format(example1.date, "y");
+custom["fulldate-example2"] = format(example2.date, "MMMM d, y");
+custom["duration-example2"] = formatDistanceStrict(example1.date, example2.date);
+custom["year-example2"] = format(example2.date, "y");
 
+console.log(custom);
 // console.log(custom);
 export { rawData, threshold, custom };
