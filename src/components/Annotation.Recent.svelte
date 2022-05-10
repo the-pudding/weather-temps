@@ -52,7 +52,7 @@
     position: absolute;
     margin: 0;
     padding: 0 0.5em;
-    transform: translate(-100%, -0.75rem);
+    transform: translate(-100%, -0.75em);
     text-align: right;
     font-size: 14px;
     z-index: var(--z-top);
