@@ -46,5 +46,7 @@
     display: inline-block;
     vertical-align: text-bottom;
     line-height: 1;
+    margin-right: 0.25em;
+    transform: translate(0, 0.25em);
   }
 </style>
