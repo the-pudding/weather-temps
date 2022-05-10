@@ -221,7 +221,7 @@ custom["year-record5-recent"] = format(example2.date, "y");
 
 custom["fulldate-broken"] = format(example1.date, "MMMM d, y");
 custom["duration-broken"] = formatDistanceStrict(example1.date, example2.date);
-custom["year-broken"] = format(record5Rank2.date, "y");
+custom["year-broken"] = format(example1.date, "y");
 
 // console.log(custom);
 export { rawData, threshold, custom };
