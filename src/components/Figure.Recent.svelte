@@ -57,6 +57,13 @@
     return color.default;
   };
 
+  const getColumn = (highlight) => {
+    if (!highlight) return;
+    const { day } = highlight[0];
+    const match = rawData.find((d) => d.day === day && d.rank === 0);
+    return match.temp;
+  };
+
   $: showAxis = $activeSlide < 4 || $activeSlide > 6;
   $: showFirst = $activeSlide > 1 && $activeSlide < 6;
   $: duration = $dir === "right" ? dur : 0;
@@ -119,6 +126,8 @@
       ...d,
       fill: getFill(d)
     }));
+
+  $: columnTemp = getColumn(highlight);
 </script>
 
 {#if width}
@@ -132,7 +141,7 @@
       </Svg>
       <Html>
         {#if highlight}
-          <Column d={highlight[0]} {w} {m} />
+          <Column temp={columnTemp} d={highlight[0]} {w} {m} />
         {/if}
       </Html>
     </div>
