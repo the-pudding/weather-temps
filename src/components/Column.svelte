@@ -29,5 +29,6 @@
     top: 0;
     height: 100%;
     background: linear-gradient(var(--fill) 75%, rgba(255, 255, 255, 0));
+    border: 2px solid var(--color-bg);
   }
 </style>

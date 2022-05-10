@@ -1,5 +1,5 @@
 <script>
-  import { max } from "d3";
+  import { max, extent } from "d3";
   import { setContext, onMount } from "svelte";
   import { fade } from "svelte/transition";
   import Slider from "$components/helpers/Slider.svelte";
@@ -17,7 +17,8 @@
   const position = "absolute";
   const pad = 16;
   const padding = { top: pad, right: pad, bottom: pad * 3, left: pad };
-  const yDomain = [0, max(rawData, (d) => d.temp) + 1];
+  const yExtent = extent(rawData, (d) => d.temp);
+  const yDomain = [Math.min(yExtent[0] - 1, 0), yExtent[1] + 1];
   const highlightDelay = 2000;
   const minDays = 4;
   const dur = 2000;
