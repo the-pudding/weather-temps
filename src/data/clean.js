@@ -1,6 +1,7 @@
-import { differenceInDays, getDayOfYear } from "date-fns";
-import { range, ascending, descending, max } from "d3";
-import raw from "$data/bos_data.csv";
+import { format, formatDistanceStrict, sub, differenceInDays, getDayOfYear } from "date-fns";
+import { range, ascending, descending, min, max } from "d3";
+import ordinal from "ordinal";
+import raw from "$data/den_data.csv";
 
 const BUFFER = 1.33; // for padding so recent hot day not flush left
 const MIN_DAYS = 23;
@@ -8,8 +9,8 @@ const LEAP = 59;
 
 const debug = false;
 
-// TODO
-const now = new Date(2022, 0, 13);
+// TODO (should pipe this in from server?)
+const now = new Date(2022, 4, 9);
 const nowDay = getDayOfYear(now);
 
 if (debug) console.log({ now, nowDay });
@@ -24,7 +25,8 @@ const clean = raw.filter(d => d.temp !== "M").map((d) => ({
 	day: +d.day,
 	rawDate: d.date,
 	date: parseDate(d.date),
-	rank: d.rank === "" ? undefined : +d.rank,
+	// rank: d.rank === "" ? undefined : +d.rank,
+	rank: +d.rank,
 	temp: +d.temp
 }))
 	.map(d => ({
@@ -118,7 +120,7 @@ const hot = withFake.find((d, i) => i > 0 && d.rank !== undefined && d.rank > 0)
 hot.highlight = "hot";
 hot.annotation = {
 	figure: "recent",
-	text: `DATE was the Xnd hottest DATE ever`,
+	text: `${format(hot.date, "M/d/y")} was the ${ordinal(hot.rank + 1)} hottest ${format(hot.date, "MMMM do")} ever`,
 	type: "arrow"
 };
 // top + same day as hot not top
@@ -126,7 +128,7 @@ const top = withFake.find(d => hot.day === d.day && d.rank === 0);
 top.highlight = "top";
 top.annotation = {
 	figure: "recent",
-	text: `DATE was the hottest DATE ever at TEMP`,
+	text: `${format(top.date, "M/d/y")} was the hottest ${format(top.date, "MMMM do")} ever at ${top.temp}°F`,
 	type: "arrow"
 };
 
@@ -144,7 +146,7 @@ const record = withFake.find(d => d.rank === 0);
 record.highlight = "record";
 record.annotation = {
 	figure: "annual",
-	text: `This was set X weeks ago, when it was a record X°F`,
+	text: `This was set ${formatDistanceStrict(latest.date, record.date)} ago, when it was a record ${record.temp}°F`,
 };
 
 // recent 5 records
@@ -154,6 +156,7 @@ withFake.filter(d => d.rank === 0).slice(0, 5).forEach(d => {
 
 // recent 5 that also had the most recent 2nd place
 const record5Days = withFake.filter(d => d.highlight === "record5").map(d => d.day);
+// TODO potentially not possible if all recent 5 have tie at top spot
 const record5Rank2 = withFake.find(d => record5Days.includes(d.day) && d.rank === 1);
 const exampleDay = record5Rank2.day;
 withFake.filter(d => d.day === exampleDay).forEach(d => d.exampleDay = true);
@@ -162,7 +165,7 @@ const example1 = withFake.find(d => d.rank === 0 && d.exampleDay);
 example1.highlightAlt = "example1";
 example1.annotation = {
 	figure: "recent",
-	text: `DATE`,
+	text: `${format(example1.date, "M/d/y")}`,
 	type: "temp"
 };
 
@@ -170,13 +173,55 @@ const example2 = withFake.find(d => d.rank === 1 && d.exampleDay);
 example2.highlightAlt = "example2";
 example2.annotation = {
 	figure: "recent",
-	text: `DATE was an historic record at the time`,
+	text: `${format(example1.date, "M/d/y")} was an historic record at the time`,
 	type: "arrow"
 };
 
 
 withFake.sort((a, b) => ascending(a.highlight ? 1 : 0, b.highlight ? 1 : 0) || ascending(a.rank, b.rank));
 // keep only recent days or ranked ones, trash the rest
-const rawData = withFake.filter(d => d.recentDay || d.exampleDay || d.rank !== undefined);
+const rawData = withFake.filter(d => d.recentDay || d.exampleDay || d.rank < 5);
 
-export { rawData, threshold };
+// generate custom text injections
+const custom = [];
+
+custom["city"] = "Denver, CO";
+
+custom["rank-yesterday"] = ordinal(latest.rank + 1);
+
+custom["date-yesterday"] = format(latest.date, "MMMM do");
+
+const oldest = min(rawData, d => d.date);
+
+custom["years-oldest"] = formatDistanceStrict(latest.date, oldest);
+
+custom["fulldate-recent"] = format(hot.date, "MMMM d, y");
+
+custom["date-recent"] = format(hot.date, "MMMM do");
+
+custom["temp-alltime"] = `${alltime.temp}°F`;
+
+custom["year-alltime"] = format(alltime.date, "y");
+
+custom["fulldate-record"] = format(record.date, "MMMM d, y");
+
+custom["date-record"] = format(record.date, "MMMM do");
+
+custom["duration-record"] = formatDistanceStrict(latest.date, record.date);
+
+custom["temp-record"] = `${record.temp}°F`;
+
+custom["count-record5"] = "Five";
+
+const record5 = rawData.filter(d => d.highlight === "record5");
+custom["year-record5"] = format(record5[record5.length - 1].date, "y");
+
+custom["date-record5-recent"] = format(example2.date, "MMMM do");
+custom["year-record5-recent"] = format(example2.date, "y");
+
+custom["fulldate-broken"] = format(example1.date, "MMMM d, y");
+custom["duration-broken"] = formatDistanceStrict(example1.date, example2.date);
+custom["year-broken"] = format(record5Rank2.date, "y");
+
+// console.log(custom);
+export { rawData, threshold, custom };

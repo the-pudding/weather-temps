@@ -1,6 +1,6 @@
 <script>
   import { max } from "d3";
-  import { setContext } from "svelte";
+  import { setContext, onMount } from "svelte";
   import { fade } from "svelte/transition";
   import Slider from "$components/helpers/Slider.svelte";
   import Tap from "$components/helpers/Tap.svelte";
@@ -8,7 +8,7 @@
   import FigureAnnual from "$components/Figure.Annual.svelte";
   import IntroSlide from "$components/IntroSlide.svelte";
   import ArticleSlide from "$components/ArticleSlide.svelte";
-  import { rawData, threshold } from "$data/bos.js";
+  import { rawData, threshold, custom } from "$data/clean.js";
   import copy from "$data/doc.json";
   import { color } from "$data/variables.json";
   import { activeSlide, dir } from "$stores/misc.js";
@@ -57,8 +57,20 @@
     $dir = detail;
   };
 
+  const insertCustomText = () => {
+    Object.keys(custom).forEach((key) => {
+      const text = custom[key];
+      [...document.querySelectorAll(`.c-${key}`)].forEach(
+        (el) => (el.innerText = text)
+      );
+    });
+  };
+
   $: tease = $activeSlide === 0;
-  $: console.log({ $activeSlide });
+
+  onMount(() => {
+    insertCustomText();
+  });
 </script>
 
 <figure class:tease bind:clientWidth={width} bind:offsetHeight={height}>
@@ -73,7 +85,7 @@
     </div>
   {/if}
   {#if $activeSlide < 9}
-    <p class="shadow">Boston, MA</p>
+    <p class="shadow">DENVER, CO</p>
   {/if}
 </figure>
 <article>

@@ -22,6 +22,7 @@
 		"layercake": "^6.1.0",
 		"lodash.debounce": "^4.0.8",
 		"node-fetch": "^3.2.3",
+		"ordinal": "^1.0.3",
 		"postcss": "^8.4.8",
 		"prettier": "^2.5.1",
 		"prettier-plugin-svelte": "^2.6.0",

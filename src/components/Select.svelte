@@ -2,7 +2,7 @@
 </script>
 
 <select>
-  <option>Boston</option>
+  <option>Denver, CO</option>
 </select>
 
 <style>
