@@ -54,7 +54,7 @@
     padding: 0 0.5em;
     transform: translate(-100%, -0.75em);
     text-align: right;
-    font-size: 14px;
+    font-size: 16px;
     z-index: var(--z-top);
   }
 
@@ -67,6 +67,7 @@
     padding-top: calc(var(--h) - 11px);
     text-align: left;
     line-height: 1.2;
+    font-size: 14px;
     transform: translate(-100%, 0);
   }
 
