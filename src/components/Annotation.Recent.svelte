@@ -54,7 +54,7 @@
     padding: 0 0.5em;
     transform: translate(-100%, -0.75rem);
     text-align: right;
-    font-size: 12px;
+    font-size: 14px;
     z-index: var(--z-top);
   }
 

@@ -3,6 +3,7 @@
   const { width, height, xScale, yRange, xRange, xDomain, xPadding, padding } =
     getContext("LayerCake");
 
+  export let city;
   export let yTick = 16;
   export let formatTick = (d) => d;
   export let showFirst = true;
@@ -38,12 +39,14 @@
 </g>
 
 <style>
-  .tick {
-    font-size: 0.725em;
-    font-weight: 200;
+  .tick text {
+    font-size: 14px;
+    fill: var(--color-fg);
   }
 
-  .tick text {
-    fill: var(--color-fg);
+  @media only screen and (min-width: 640px) {
+    .tick text {
+      font-size: 16px;
+    }
   }
 </style>

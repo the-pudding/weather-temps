@@ -49,7 +49,7 @@
     color: var(--color-fg);
     font-family: var(--font-form);
     margin: 0;
-    font-size: 12px;
+    font-size: 14px;
     z-index: var(--z-top);
     margin-top: -12px;
     line-height: 24px;

@@ -35,6 +35,7 @@
     padding,
     yDomain,
     dur,
+    custom,
     color: {
       primary: color.green,
       secondary: color.blue,
@@ -84,9 +85,6 @@
     <div out:fade={{ duration: 0 }}>
       <FigureAnnual {width} {height} />
     </div>
-  {/if}
-  {#if $activeSlide < 9}
-    <p class="shadow">DENVER, CO</p>
   {/if}
 </figure>
 <article>
@@ -142,18 +140,6 @@
     left: 0;
     width: 100%;
     height: 100%;
-  }
-
-  figure p {
-    position: absolute;
-    top: 1rem;
-    left: 1.5rem;
-    line-height: 1;
-    color: var(--color-fg-alt);
-    font-family: var(--sans);
-    text-transform: uppercase;
-    transform: translate(0, 50%);
-    font-size: 14px;
   }
 
   article {

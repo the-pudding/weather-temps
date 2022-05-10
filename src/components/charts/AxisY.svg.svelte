@@ -3,6 +3,7 @@
 
   const { padding, xPadding, xRange, yScale } = getContext("LayerCake");
 
+  export let city;
   export let gridlines = true;
   export let tickMarks = false;
   export let xTick = 0;
@@ -44,19 +45,33 @@
         y={yTick}
         dx={dxTick}
         dy={dyTick}
-        style="text-anchor:{textAnchor};"
-        >{i === tickVals.length - 1 ? formatTick(tick) : tick}</text
+        style="text-anchor:{textAnchor};">{formatTick(tick)}</text
       >
       <text
         x={$xRange[1]}
         y={yTick}
         dx={dxTick}
         dy={dyTick}
-        style="text-anchor:{textAnchor};"
-        >{i === tickVals.length - 1 ? formatTick(tick) : tick}</text
+        style="text-anchor:{textAnchor};">{formatTick(tick)}</text
       >
     </g>
   {/each}
+  {#if city}
+    <text
+      x={$xRange[0]}
+      y={$yScale(tickVals[tickVals.length - 1])}
+      dx={0}
+      dy={dyTick * 1.5}
+      class="city-bg">{city}</text
+    >
+    <text
+      x={$xRange[0]}
+      y={$yScale(tickVals[tickVals.length - 1])}
+      dx={0}
+      dy={dyTick * 1.5}
+      class="city">{city}</text
+    >
+  {/if}
 </g>
 
 <style>
@@ -74,6 +89,10 @@
     stroke-opacity: 0.33;
   }
 
+  .tick text {
+    font-size: 14px;
+  }
+
   .tick text:first-of-type {
     stroke: var(--color-bg);
     stroke-width: 4px;
@@ -81,5 +100,16 @@
 
   .tick text:last-of-type {
     fill: var(--color-fg);
+  }
+
+  .city-bg {
+    stroke: var(--color-bg);
+    fill: none;
+    font-size: 16px;
+  }
+
+  .city {
+    fill: var(--color-fg-alt);
+    font-size: 16px;
   }
 </style>

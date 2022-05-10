@@ -15,6 +15,7 @@
   export let width;
   export let height;
   const {
+    custom,
     rawData,
     threshold,
     minDays,
@@ -126,7 +127,7 @@
       <Svg>
         {#if showAxis}
           <AxisX {formatTick} {showFirst} {w} />
-          <AxisY />
+          <AxisY city={custom.city} />
         {/if}
       </Svg>
       <Html>
