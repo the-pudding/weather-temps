@@ -8,6 +8,7 @@
   import FigureAnnual from "$components/Figure.Annual.svelte";
   import IntroSlide from "$components/IntroSlide.svelte";
   import ArticleSlide from "$components/ArticleSlide.svelte";
+  import Header from "$components/Header.svelte";
   import { rawData, threshold, custom } from "$data/clean.js";
   import copy from "$data/doc.json";
   import { color } from "$data/variables.json";
@@ -99,6 +100,9 @@
   </Slider>
 </article>
 
+{#if $activeSlide === 0}
+  <Header />
+{/if}
 <Tap
   debug={false}
   full={true}
@@ -116,6 +120,7 @@
     left: 50%;
     top: 0;
     transform: translate3d(-50%, 0, 0);
+    padding: 1rem;
   }
 
   figure {

@@ -41,7 +41,6 @@ html, body, main {
 	overflow: hidden;
 }
 
-
 figure svg {
 	font-family: var(--font-form);
 	color: var(--color-white);

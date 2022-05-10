@@ -1,5 +1,4 @@
 <script>
-  import Header from "$components/Header.svelte";
   import Slide from "$components/helpers/Slider.Slide.svelte";
   import Select from "$components/Select.svelte";
   import tapSvg from "$svg/tap.svg";
@@ -14,7 +13,6 @@
 
 <section class:active>
   <Slide>
-    <Header />
     <div>
       <p class="text">{text} <Select /></p>
       <p class="text">{text2}</p>

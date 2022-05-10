@@ -10,9 +10,9 @@
 
 <style>
   header {
-    position: absolute;
+    position: fixed;
     top: 0;
-    right: 0;
+    right: 2rem;
     z-index: var(--z-overlay);
     width: 100%;
     padding: 1rem 0;
@@ -20,6 +20,7 @@
 
   .wordmark {
     width: 100%;
+    text-align: right;
   }
 
   .wordmark a {
