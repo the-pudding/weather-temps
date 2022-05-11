@@ -55,6 +55,7 @@
     transform: translate(-100%, -0.75em);
     text-align: right;
     font-size: 16px;
+    font-weight: 600;
     z-index: var(--z-top);
   }
 

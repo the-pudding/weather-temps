@@ -25,6 +25,12 @@
 </section>
 
 <style>
+
+  .text {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
   section {
     opacity: 0;
     transition: opacity 1s 0.5s ease-in-out;
