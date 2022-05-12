@@ -12,5 +12,6 @@
     margin-left: 0.25em;
     background-color: var(--color-gray-800);
     color: var(--color-fg-alt);
+    font-size: .85em;
   }
 </style>

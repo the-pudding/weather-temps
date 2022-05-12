@@ -62,6 +62,11 @@
     transition: opacity 1s 1.5s ease-in-out;
   }
 
+  .text {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
   .active .above,
   .active .below {
     opacity: 1;
