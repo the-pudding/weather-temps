@@ -9,7 +9,7 @@
     "gray": "#BBBBBB"
   },
   "color": {
-    "black": "#000000",
+    "black": "#070708",
     "white": "#ffffff",
     "gray-50": "rgb(247, 247, 247)",
     "gray-100": "rgb(239, 239, 239)",
@@ -30,6 +30,7 @@
     "transparent": "rgba(255,255,255,0.25)",
     "green-transparent": "rgba(204, 255, 213, 0.15)",
     "blue-transparent": "rgba(155, 220, 255, 0.15)",
-    "pink-transparent": "rgba(255, 165, 224, 0.15)"
+    "pink-transparent": "rgba(255, 165, 224, 0.15)",
+    "black-transparent": "rgba(7, 7, 8, 0.21)"
   }
 }

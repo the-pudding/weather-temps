@@ -1,7 +1,7 @@
 {
 	"color": {
 		"black": {
-			"value": "#000000"
+			"value": "#070708"
 		},
 		"white": {
 			"value": "#ffffff"
@@ -61,10 +61,13 @@
 			"value": "rgba(204, 255, 213, 0.15)"
 		},
 		"blue-transparent": {
-			"value": "rgba(229, 246, 255, 0.15)"
+			"value": "rgba(155, 220, 255, 0.15)"
 		},
 		"pink-transparent": {
-			"value": "rgba(255, 229, 246, 0.15)"
+			"value": "rgba(255, 165, 224, 0.15)"
+		},
+		"black-transparent": {
+			"value": "rgba(7, 7, 8, 0.21)"
 		}
 	}
 }
