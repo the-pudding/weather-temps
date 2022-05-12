@@ -21,7 +21,7 @@
   const yExtent = extent(rawData, (d) => d.temp);
   const yDomain = [Math.min(yExtent[0] - 1, 0), yExtent[1] + 1];
 
-  console.log({ stationId, rawData });
+  console.log({ stationId });
 
   setContext("App", {
     rawData,
