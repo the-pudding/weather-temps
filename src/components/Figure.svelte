@@ -7,7 +7,7 @@
   import FigureAnnual from "$components/Figure.Annual.svelte";
   import { color } from "$data/variables.json";
 
-  export let id;
+  export let stationId;
   export let rawData;
   export let threshold;
   export let custom;
@@ -20,6 +20,8 @@
   const dur = 2000;
   const yExtent = extent(rawData, (d) => d.temp);
   const yDomain = [Math.min(yExtent[0] - 1, 0), yExtent[1] + 1];
+
+  console.log({ stationId, rawData });
 
   setContext("App", {
     rawData,

@@ -10,7 +10,7 @@
   import { activeSlide, dir } from "$stores/misc.js";
   import loadStationData from "$data/loadStationData.js";
 
-  let id;
+  let stationId;
   let custom;
   let rawData;
   let threshold;
@@ -23,19 +23,20 @@
   };
 
   const changeStation = async ({ detail }) => {
-    const data = await loadStationData(detail.id);
-    id = data.custom.location = detail.area;
+    const { id } = detail;
+    const data = await loadStationData(id);
+    stationId = id;
     custom = data.custom;
     rawData = data.rawData;
     threshold = data.threshold;
   };
 </script>
 
-{#key id}
-  {#if rawData}
-    <Figure {id} {custom} {rawData} {threshold} />
-  {/if}
-{/key}
+{#if rawData}
+  {#key stationId}
+    <Figure {stationId} {custom} {rawData} {threshold} />
+  {/key}
+{/if}
 
 <article>
   <Slider bind:this={slider} bind:active={$activeSlide} duration="0">
