@@ -1,0 +1,420 @@
+id,state_abbr,location,lat,lon
+ABRthr,SD,Aberdeen,45.46,-98.49
+ABIthr,TX,Abilene,32.45,-99.74
+AKIS1thr,SC,Aiken,33.56,-81.72
+CAKthr,OH,Akron,41.08,-81.51
+ALSthr,CO,Alamosa,37.47,-105.87
+ABYthr,GA,Albany,31.58,-84.16
+ALBthr,NY,Albany,42.65,-73.76
+ABQthr,NM,Albuquerque,35.08,-106.65
+ABEthr,PA,Allentown,40.6,-75.47
+APNthr,MI,Alpena,45.06,-83.45
+AATthr,CA,Alturas,41.49,-120.54
+AMAthr,TX,Amarillo,35.21,-101.83
+AFLI1thr,ID,American Falls,42.78,-112.85
+ANCthr,AK,Anchorage,61.22,-149.86
+NAKthr,MD,Annapolis,38.98,-76.49
+ANNthr,AK,Annette,55.06,-131.54
+AVLthr,NC,Asheville,35.6,-82.55
+ASXthr,WI,Ashland,46.59,-90.89
+ASTthr,OR,Astoria,46.19,-123.83
+AHNthr,GA,Athens,33.96,-83.37
+ATHO1thr,OH,Athens,39.33,-82.1
+ATLthr,GA,Atlanta,33.75,-84.39
+55Nthr,NJ,Atlantic City,39.36,-74.43
+AGSthr,GA,Augusta,33.48,-81.98
+ATTthr,TX,Austin,30.27,-97.74
+AVPthr,PA,Avoca,41.34,-75.74
+BKEthr,OR,Baker City,44.77,-117.83
+BFLthr,CA,Bakersfield,35.37,-119.02
+BWIthr,MD,Baltimore,39.29,-76.61
+BGRthr,ME,Bangor,44.8,-68.77
+BRWthr,AK,Barrow,71.29,-156.79
+BTRthr,LA,Baton Rouge,30.44,-91.19
+BTLthr,MI,Battle Creek,42.32,-85.18
+BPTthr,TX,Beaumont-Port Arthur,29.88,-93.94
+BKWthr,WV,Beckley,37.78,-81.19
+BELN4thr,NJ,Belvidere,40.83,-75.08
+BETthr,AK,Bethel,60.79,-161.76
+BTTthr,AK,Bettles,66.92,-151.52
+BILthr,MT,Billings,45.78,-108.51
+BGMthr,NY,Binghamton,42.1,-75.91
+BHMthr,AL,Birmingham,33.52,-86.81
+BIHthr,CA,Bishop,37.37,-118.4
+BISthr,ND,Bismarck,46.81,-100.78
+RNKthr,VA,Blacksburg,37.23,-80.41
+BLFthr,WV,Bluefield,37.27,-81.22
+BOIthr,ID,Boise,43.61,-116.19
+BVLA4thr,AR,Booneville,35.14,-93.92
+BGDthr,TX,Borger,35.67,-101.39
+BOSthr,MA,Boston,42.36,-71.06
+BRDthr,MN,Brainerd,46.35,-94.2
+BDRthr,CT,Bridgeport,41.18,-73.19
+TRIthr,TN,Bristol-Johnson City,36.29,-82.41
+BROO3thr,OR,Brookings,42.05,-124.29
+BKVthr,FL,Brooksville,28.55,-82.39
+BROthr,TX,Brownsville,25.9,-97.5
+BRCN7thr,NC,Bryson City,35.42,-83.45
+BUFthr,NY,Buffalo,42.89,-78.88
+BURthr,CA,Burbank Glendale Pasadena,34.21,-118.22
+BYIthr,ID,Burley,42.54,-113.79
+BRLthr,IA,Burlington,40.81,-91.1
+BTVthr,VT,Burlington,44.48,-73.21
+BNOthr,OR,Burns,43.59,-119.05
+CAES1thr,SC,Caesars Head,35.12,-82.65
+CMAthr,CA,Camarillo,34.22,-119.05
+HSEthr,NC,Cape Hatteras,35.22,-75.53
+MDHthr,IL,Carbondale,37.73,-89.22
+CARthr,ME,Caribou,46.86,-68.01
+CPRthr,WY,Casper,42.85,-106.33
+CIDthr,IA,Cedar Rapids,41.98,-91.67
+LLJthr,ID,Challis,44.5,-114.24
+CHSthr,SC,Charleston,32.78,-79.93
+CRWthr,WV,Charleston,38.35,-81.64
+CXMthr,SC,Charleston,32.78,-79.93
+CLTthr,NC,Charlotte,35.22,-80.84
+CHOthr,VA,Charlottesville,38.03,-78.48
+CHAthr,TN,Chattanooga,35.05,-85.31
+CYSthr,WY,Cheyenne,41.13,-104.82
+ORDthr,IL,Chicago,41.88,-87.63
+CDSthr,TX,Childress,34.43,-100.21
+TKKthr,FM,Chuuk,7.45,151.81
+CVGthr,OH,Cincinnati,39.16,-84.46
+CKBthr,WV,Clarksburg,39.28,-80.34
+CAOthr,NM,Clayton,36.45,-103.18
+CLEthr,OH,Cleveland,41.5,-81.69
+CDBthr,AK,Cold Bay,55.21,-162.72
+CLLthr,TX,College Station,30.62,-96.33
+COSthr,CO,Colorado Springs,38.83,-104.82
+CAEthr,SC,Columbia,34,-81.05
+COUthr,MO,Columbia,38.95,-92.33
+CMHthr,OH,Columbus,39.96,-83
+CSGthr,GA,Columbus,32.46,-84.99
+CUSM6thr,MS,Columbus,33.5,-88.43
+CONthr,NH,Concord,43.21,-71.54
+CNKthr,KS,Concordia,39.57,-97.66
+CRPthr,TX,Corpus Christi,27.8,-97.4
+CECthr,CA,Crescent City,41.75,-124.2
+DALthr,TX,Dallas,32.78,-96.8
+DFWthr,TX,Dallas-Fort Worth,32.86,-97.04
+DANthr,VA,Danville,36.59,-79.42
+DAYthr,OH,Dayton,39.76,-84.19
+DABthr,FL,Daytona Beach,29.2,-81.04
+DERM8thr,MT,Deer Lodge,46.4,-112.74
+DRTthr,TX,Del Rio,29.37,-100.9
+BIGthr,AK,Delta Junction,64.05,-145.74
+DENthr,CO,Denver,39.74,-104.99
+DEQthr,AR,Dequeen,34.04,-94.34
+DSMthr,IA,Des Moines,41.59,-93.62
+DTWthr,MI,Detroit,42.33,-83.05
+DDCthr,KS,Dodge City,37.75,-100.02
+DBQthr,IA,Dubuque,42.5,-90.66
+DLHthr,MN,Duluth,46.79,-92.1
+DWRI1thr,ID,Dworshak,46.49,-116.25
+EAUthr,WI,Eau Claire,44.82,-91.5
+ELJC1thr,CA,El Cajon,32.79,-116.96
+IPLthr,CA,El Centro,32.8,-115.57
+ELPthr,TX,El Paso,31.76,-106.49
+ECGthr,NC,Elizabeth City,36.3,-76.22
+EKNthr,WV,Elkins,38.92,-79.84
+EKOthr,NV,Elko,40.84,-115.77
+ELYthr,NV,Ely,39.25,-114.89
+ERIthr,PA,Erie,42.13,-80.09
+ESCC1thr,CA,Escondido,33.12,-117.08
+EUGthr,OR,Eugene,44.05,-123.09
+EKAthr,CA,Eureka,40.8,-124.16
+P68thr,NV,Eureka,39.52,-115.96
+EVVthr,IN,Evansville,37.98,-87.56
+FAIthr,AK,Fairbanks,64.85,-147.72
+FARthr,ND,Fargo,46.88,-96.78
+FAYthr,NC,Fayetteville,35.06,-78.88
+FLGthr,AZ,Flagstaff,35.2,-111.65
+FNTthr,MI,Flint,43.01,-83.69
+FLLthr,FL,Fort Lauderdale,26.12,-80.14
+FMYthr,FL,Fort Myers,26.64,-81.87
+FPRthr,FL,Fort Pierce,27.45,-80.33
+FSMthr,AR,Fort Smith,35.38,-94.42
+FWAthr,IN,Fort Wayne,41.08,-85.14
+PTDN6thr,NY,Fredonia,42.44,-79.33
+FATthr,CA,Fresno,36.74,-119.79
+GNVthr,FL,Gainesville,29.65,-82.32
+GLSthr,TX,Galveston,29.3,-94.81
+GEDthr,DE,Georgetown,38.69,-75.39
+GGWthr,MT,Glasgow,48.2,-106.64
+GFLthr,NY,Glens Falls,43.31,-73.64
+GLDthr,KS,Goodland,39.37,-101.71
+GFKthr,ND,Grand Forks,47.92,-97.03
+GRIthr,NE,Grand Island,40.92,-98.34
+GJTthr,CO,Grand Junction,39.07,-108.56
+GRRthr,MI,Grand Rapids,42.97,-85.67
+GTFthr,MT,Great Falls,47.51,-111.31
+GRBthr,WI,Green Bay,44.51,-88.01
+GSOthr,NC,Greensboro,36.07,-79.8
+GLHthr,MS,Greenville,33.4,-91.04
+GSPthr,SC,Greenville-Spartanburg,34.94,-82.03
+GWOthr,MS,Greenwood,33.52,-90.18
+GUMthr,GU,Guam,13.44,144.78
+GPTthr,MS,Gulfport,30.38,-89.09
+GKNthr,AK,Gulkana,62.27,-145.38
+HGRthr,MD,Hagerstown,39.64,-77.72
+HJOthr,CA,Hanford,36.33,-119.65
+HROthr,AR,Harrison,36.23,-93.11
+BDLthr,CT,Hartford,41.76,-72.67
+HSIthr,NE,Hastings,40.59,-98.39
+HBGthr,MS,Hattiesburg,31.33,-89.29
+HVRthr,MT,Havre,48.55,-109.67
+HYRthr,WI,Hayward,46.01,-91.48
+HLNthr,MT,Helena,46.59,-112.02
+HIBthr,MN,Hibbing,47.42,-92.94
+HIOthr,OR,Hillsboro,45.52,-122.99
+ITOthr,HI,Hilo,19.72,-155.08
+BIVthr,MI,Holland,42.77,-86.1
+HOMthr,AK,Homer,59.65,-151.54
+HNLthr,HI,Honolulu,21.3,-157.86
+HTLthr,MI,Houghton Lake,44.31,-84.76
+IAHthr,TX,Houston,29.76,-95.37
+HTSthr,WV,Huntington,38.42,-82.45
+HSVthr,AL,Huntsville,34.73,-86.59
+HONthr,SD,Huron,44.36,-98.21
+INDthr,IN,Indianapolis,39.77,-86.15
+INLthr,MN,International Falls,48.6,-93.4
+ISPthr,NY,Islip,40.73,-73.22
+JANthr,MS,Jackson,32.3,-90.18
+JKLthr,KY,Jackson,37.56,-83.38
+JAXthr,FL,Jacksonville,30.33,-81.66
+JSTN6thr,NY,Jamestown,42.1,-79.24
+JEFthr,MO,Jefferson City,38.58,-92.18
+JERthr,ID,Jerome,42.72,-114.52
+JBRthr,AR,Jonesboro,35.84,-90.71
+JNUthr,AK,Juneau,58.3,-134.41
+OGGthr,HI,Kahului,20.89,-156.47
+AZOthr,MI,Kalamazoo,42.29,-85.59
+FCAthr,MT,Kalispell,48.2,-114.31
+MCIthr,MO,Kansas City,39.1,-94.58
+EYWthr,FL,Key West,24.55,-81.8
+AKNthr,AK,King Salmon,58.7,-156.7
+IGMthr,AZ,Kingman,35.19,-114.06
+LMTthr,OR,Klamath Falls,42.22,-121.78
+TYSthr,TN,Knoxville,35.96,-83.92
+ADQthr,AK,Kodiak,57.8,-152.39
+TKRthr,PW,Koror,7.27,134.42
+OTZthr,AK,Kotzebue,66.9,-162.59
+KWAthr,MH,Kwajalein,8.72,167.73
+LSEthr,WI,La Crosse,43.81,-91.25
+LCHthr,LA,Lake Charles,30.22,-93.22
+LHUthr,AZ,Lake Havasu City,34.47,-114.35
+LALthr,FL,Lakeland,28.04,-81.95
+WJFthr,CA,Lancaster,34.7,-118.14
+LNDthr,WY,Lander,42.83,-108.73
+LANthr,MI,Lansing,42.73,-84.55
+LRDthr,TX,Laredo,27.53,-99.5
+LASthr,NV,Las Vegas,36.17,-115.14
+LAWthr,OK,Lawton,34.61,-98.39
+LEEthr,FL,Leesburg,28.81,-81.88
+LWSthr,ID,Lewiston,46.42,-117.02
+LEXthr,KY,Lexington,38.05,-84.5
+LIHthr,HI,Lihue,21.98,-159.37
+LNKthr,NE,Lincoln,40.81,-96.71
+LITthr,AR,Little Rock,34.75,-92.27
+LGBthr,CA,Long Beach,33.77,-118.19
+GGGthr,TX,Longview,32.5,-94.74
+CQTthr,CA,Los Angeles,34.05,-118.26
+SDFthr,KY,Louisville,38.25,-85.77
+LBBthr,TX,Lubbock,33.58,-101.85
+LBTthr,NC,Lumberton,34.62,-79.01
+LYHthr,VA,Lynchburg,37.41,-79.14
+MCNthr,GA,Macon,32.84,-83.63
+MAEthr,CA,Madera,36.96,-120.06
+MSNthr,WI,Madison,43.07,-89.39
+KMRthr,MH,Majuro,7.09,171.38
+MHTthr,NH,Manchester,42.99,-71.46
+MFDthr,OH,Mansfield,40.76,-82.52
+MTHthr,FL,Marathon,24.73,-81.04
+MQTthr,MI,Marquette County,46.43,-87.64
+MRBthr,WV,Martinsburg,39.46,-77.96
+MFEthr,TX,McAllen,26.21,-98.23
+MYLthr,ID,McCall,44.91,-116.1
+MCKthr,NE,McCook,40.2,-100.63
+MCGthr,AK,Mcgrath,62.94,-155.57
+MMVthr,OR,McMinnville,45.21,-123.2
+MFRthr,OR,Medford,42.32,-122.88
+MLBthr,FL,Melbourne,28.08,-80.61
+MEMthr,TN,Memphis,35.15,-90.05
+MCEthr,CA,Merced,37.3,-120.49
+MEIthr,MS,Meridian,32.37,-88.7
+MIAthr,FL,Miami,25.77,-80.2
+MDTthr,PA,Middletown-Harrisburg,40.26,-76.88
+MAFthr,TX,Midland-Odessa,31.83,-102.36
+MLTthr,ME,Millinocket,45.65,-68.71
+MQEthr,MA,Milton,42.26,-71.08
+MKEthr,WI,Milwaukee,43.04,-87.91
+MSPthr,MN,Minneapolis-St Paul,44.87,-93.2
+MSOthr,MT,Missoula,46.87,-114
+MHEthr,SD,Mitchell,43.7,-98.03
+MOBthr,AL,Mobile,30.69,-88.05
+MBGthr,SD,Mobridge,45.54,-100.44
+MLIthr,IL,Moline,41.49,-90.49
+MLUthr,LA,Monroe,32.51,-92.12
+MGMthr,AL,Montgomery,32.38,-86.3
+MGWthr,WV,Morgantown,39.63,-79.96
+MWTthr,AR,Mount Ida,34.56,-93.63
+MMTN7thr,NC,Mount Mitchell,35.76,-82.27
+MPOthr,PA,Mount Pocono,41.12,-75.36
+MHSthr,CA,Mount Shasta,41.41,-122.2
+MSLthr,AL,Muscle Shoals,34.74,-87.67
+MKGthr,MI,Muskegon,43.23,-86.24
+CREthr,SC,Myrtle Beach,33.69,-78.88
+BNAthr,TN,Nashville,36.17,-86.78
+ICHL1thr,LA,Natchitoches,31.76,-93.09
+EEDthr,CA,Needles,34.84,-114.6
+EWNthr,NC,New Bern,35.11,-77.04
+NBRN4thr,NJ,New Brunswick,40.49,-74.44
+MSYthr,LA,New Orleans,29.95,-90.08
+PHDthr,OH,New Philadelphia,40.49,-81.45
+NYCthr,NY,New York City,40.78,-73.97
+EWRthr,NJ,Newark,40.73,-74.17
+NCBN6thr,NY,Newcomb,43.97,-74.12
+OMEthr,AK,Nome,64.5,-165.41
+OFKthr,NE,Norfolk,42.03,-97.41
+ORFthr,VA,Norfolk,36.85,-76.29
+LBFthr,NE,North Platte,41.14,-100.76
+OQTthr,TN,Oak Ridge,36.01,-84.26
+OKCthr,OK,Oklahoma City,35.47,-97.52
+OLMthr,WA,Olympia,47.04,-122.89
+OMAthr,NE,Omaha,41.26,-95.94
+OMKthr,WA,Omak,48.41,-119.53
+ONOthr,OR,Ontario,44.03,-116.97
+OSPA3thr,AZ,Oracle,32.61,-110.77
+ORDN1thr,NE,Ord,41.6,-98.93
+MCOthr,FL,Orlando,28.54,-81.38
+OSWN6thr,NY,Oswego,43.46,-76.51
+LOXthr,CA,Oxnard,34.2,-119.18
+PAHthr,KY,Paducah,37.09,-88.6
+STUthr,AS,Pago Pago,-14.27,-170.7
+PSPthr,CA,Palm Springs,33.82,-116.51
+PMDthr,CA,Palmdale,34.58,-118.12
+PKBthr,WV,Parkersburg,39.26,-81.56
+PDTthr,OR,Pendleton,45.67,-118.79
+PNSthr,FL,Pensacola,30.42,-87.22
+PIAthr,IL,Peoria,40.69,-89.59
+PHLthr,PA,Philadelphia,39.95,-75.16
+PHXthr,AZ,Phoenix,33.45,-112.08
+PICS1thr,SC,Pickens,34.88,-82.71
+PBFthr,AR,Pine Bluff,34.22,-92
+PITthr,PA,Pittsburgh,40.44,-80
+PBGthr,NY,Plattsburgh,44.7,-73.45
+PIHthr,ID,Pocatello,42.87,-112.45
+TTPthr,FM,Pohnpei,6.96,158.21
+POFthr,MO,Poplar Bluff,36.76,-90.39
+PWMthr,ME,Portland,43.66,-70.26
+PGWO3thr,OR,Portland,45.52,-122.68
+POUthr,NY,Poughkeepsie,41.71,-73.93
+PVDthr,RI,Providence,41.82,-71.41
+PUBthr,CO,Pueblo,38.26,-104.61
+PUWthr,WA,Pullman,46.73,-117.18
+PGDthr,FL,Punta Gorda,26.93,-82.05
+UILthr,WA,Quillayute,47.94,-124.54
+UINthr,IL,Quincy,39.94,-91.4
+RDUthr,NC,Raleigh,35.79,-78.64
+RNMthr,CA,Ramona,33.04,-116.87
+UNRS2thr,SD,Rapid City,44.08,-103.23
+RDGthr,PA,Reading,40.34,-75.93
+RDDthr,CA,Redding,40.59,-122.39
+RNOthr,NV,Reno,39.53,-119.81
+RHIthr,WI,Rhinelander,45.64,-89.41
+RICthr,VA,Richmond,37.54,-77.43
+RALthr,CA,Riverside,33.98,-117.37
+ROAthr,VA,Roanoke,37.27,-79.94
+ROCthr,NY,Rochester,43.16,-77.62
+RSTthr,MN,Rochester,44.02,-92.46
+RFDthr,IL,Rockford,42.27,-89.08
+ROWthr,NM,Roswell,33.4,-104.52
+RUEthr,AR,Russellville,35.28,-93.13
+SMTC1thr,CA,Sacramento,38.58,-121.5
+MBSthr,MI,Saginaw,43.42,-83.95
+STCthr,MN,Saint Cloud,45.57,-94.2
+GSNthr,MP,Saipan,15.21,145.72
+SLEthr,OR,Salem,44.93,-123.04
+SLNthr,KS,Salina,38.84,-97.61
+SBYthr,MD,Salisbury,38.37,-75.6
+SLNI1thr,ID,Salmon,45.18,-113.9
+SLCthr,UT,Salt Lake City,40.76,-111.89
+SJTthr,TX,San Angelo,31.46,-100.44
+SATthr,TX,San Antonio,29.42,-98.49
+SANthr,CA,San Diego,32.72,-117.16
+SFOthr,CA,San Francisco,37.62,-122.38
+SJCthr,CA,San Jose,37.34,-121.89
+SJUthr,PR,San Juan,18.47,-66.1
+SFBthr,FL,Sanford,28.81,-81.27
+SMXthr,CA,Santa Maria,34.95,-120.43
+SLKthr,NY,Saranac Lake,44.32,-74.13
+SRQthr,FL,Sarasota-Bradenton,27.45,-82.58
+ANJthr,MI,Sault Ste Marie,46.49,-84.35
+SAVthr,GA,Savannah,32.08,-81.09
+BFFthr,NE,Scottsbluff,41.86,-103.66
+SEWthr,WA,Seattle City,47.62,-122.35
+SEAthr,WA,Seattle Tacoma,47.15,-122.51
+SHRthr,WY,Sheridan,44.8,-106.96
+SHVthr,LA,Shreveport,32.51,-93.75
+SUXthr,IA,Sioux City,42.5,-96.42
+FSDthr,SD,Sioux Falls,43.55,-96.73
+8D3thr,SD,Sisseton,45.66,-97.04
+AGYthr,AK,Skagway,59.46,-135.31
+SBNthr,IN,South Bend,41.68,-86.25
+SPWthr,IA,Spencer,43.14,-95.14
+GEGthr,WA,Spokane,47.66,-117.41
+SGFthr,MO,Springfield,37.21,-93.29
+SPIthr,IL,Springfield,39.8,-89.64
+STLthr,MO,St Louis,38.63,-90.2
+SNPthr,AK,St Paul Island,57.12,-170.27
+SNTthr,ID,Stanley,44.22,-114.94
+IADthr,VA,Sterling,39.03,-77.41
+SWOthr,OK,Stillwater,36.12,-97.06
+SCKthr,CA,Stockton,37.95,-121.29
+SYRthr,NY,Syracuse,43.05,-76.15
+TAHC1thr,CA,Tahoe City,39.17,-120.14
+TKAthr,AK,Talkeetna,62.32,-150.1
+TLHthr,FL,Tallahassee,30.44,-84.28
+TVRthr,LA,Tallulah-Vicksburg,32.35,-91.02
+TPAthr,FL,Tampa,27.95,-82.46
+TOLthr,OH,Toledo,41.65,-83.54
+TOPthr,KS,Topeka,39.05,-95.67
+TTNthr,NJ,Trenton,40.22,-74.76
+PSCthr,WA,Tri-Cities,46.25,-119.2
+TUSthr,AZ,Tucson,32.22,-110.97
+TULthr,OK,Tulsa,36.15,-95.99
+TUPthr,MS,Tupelo,34.26,-88.71
+TYRthr,TX,Tyler,32.35,-95.29
+UKIthr,CA,Ukiah,39.15,-123.21
+VTNthr,NE,Valentine,42.87,-100.55
+VUOthr,WA,Vancouver,45.63,-122.67
+VRBthr,FL,Vero Beach,27.64,-80.39
+VCTthr,TX,Victoria,28.81,-97
+ACTthr,TX,Waco,31.57,-97.15
+WAKthr,UM,Wake Island,19.31,166.6
+WALthr,VA,Wallops Island,37.84,-75.48
+WASS1thr,SC,Ware Shoals,34.4,-82.25
+DCAthr,DC,Washington,38.89,-77.03
+ALOthr,IA,Waterloo,42.49,-92.34
+AUWthr,WI,Wausau,44.96,-89.63
+PBIthr,FL,West Palm Beach,26.71,-80.05
+BAFthr,MA,Westfield,42.12,-72.75
+HLGthr,WV,Wheeling,40.06,-80.72
+ICTthr,KS,Wichita,37.69,-97.34
+SPSthr,TX,Wichita Falls,33.91,-98.5
+IPTthr,PA,Williamsport,41.24,-77
+ISNthr,ND,Williston,48.15,-103.62
+ILGthr,DE,Wilmington,39.74,-75.55
+ILMthr,NC,Wilmington,34.23,-77.95
+ILNthr,OH,Wilmington,39.45,-83.83
+WMCthr,NV,Winnemucca,40.97,-117.74
+INWthr,AZ,Winslow,35.02,-110.7
+GIFthr,FL,Winter Haven,28.02,-81.73
+WDSR1thr,SC,Woodruff,34.74,-82.04
+ORHthr,MA,Worcester,42.26,-71.8
+YKMthr,WA,Yakima,46.6,-120.51
+YAKthr,AK,Yakutat,59.55,-139.73
+TYAthr,FM,Yap,9.54,138.1
+YNGthr,OH,Youngstown,41.1,-80.65
+YUMthr,AZ,Yuma,32.69,-114.62
+ZZVthr,OH,Zanesville,39.94,-82

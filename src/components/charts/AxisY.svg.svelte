@@ -3,7 +3,7 @@
 
   const { padding, xPadding, xRange, yScale } = getContext("LayerCake");
 
-  export let city;
+  export let location;
   export let gridlines = true;
   export let tickMarks = false;
   export let xTick = 0;
@@ -56,20 +56,20 @@
       >
     </g>
   {/each}
-  {#if city}
+  {#if location}
     <text
       x={$xRange[0]}
       y={$yScale(tickVals[tickVals.length - 1])}
       dx={0}
       dy={dyTick * 1.5}
-      class="city-bg">{city}</text
+      class="location-bg">{location}</text
     >
     <text
       x={$xRange[0]}
       y={$yScale(tickVals[tickVals.length - 1])}
       dx={0}
       dy={dyTick * 1.5}
-      class="city">{city}</text
+      class="location">{location}</text
     >
   {/if}
 </g>
@@ -102,13 +102,13 @@
     fill: var(--color-fg);
   }
 
-  .city-bg {
+  .location-bg {
     stroke: var(--color-bg);
     fill: none;
     font-size: 16px;
   }
 
-  .city {
+  .location {
     fill: var(--color-fg-alt);
     font-size: 16px;
   }

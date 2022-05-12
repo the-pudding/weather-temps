@@ -13,6 +13,7 @@
   export let arrowStroke = "#000";
   export let arrowStrokeWidth = "2";
   export let arrowPosition = "center"; // start, center, end
+  export let marginTop = 0;
 
   const dispatch = createEventDispatcher();
   let innerHeight;
@@ -38,7 +39,11 @@
 
 <svelte:window on:keydown={onKeyDown} bind:innerHeight />
 
-<section class:debug style="height: {innerHeight}px;">
+<section
+  class:debug
+  style="height: {innerHeight}px;"
+  style:margin-top={`${marginTop}px`}
+>
   {#each directions as dir}
     <button
       on:click={dispatch("tap", dir)}

@@ -119,7 +119,7 @@
       <Svg>
         {#if showAxis}
           <AxisX {formatTick} {w} />
-          <AxisY city={custom.city} />
+          <AxisY location={$custom.location} />
         {/if}
       </Svg>
     </div>

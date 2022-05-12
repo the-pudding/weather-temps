@@ -14,7 +14,10 @@
 <section class:active>
   <Slide>
     <div>
-      <p class="text">{text} <Select /></p>
+      <p class="text">
+        {text}
+        <Select on:changeStation /> area
+      </p>
       <p class="text">{text2}</p>
       <p class="subtext">
         <span class="tap">{@html tapSvg}</span>
@@ -25,7 +28,6 @@
 </section>
 
 <style>
-
   .text {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
