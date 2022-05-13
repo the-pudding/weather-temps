@@ -1,4 +1,5 @@
 <script>
+  import { onMount } from "svelte";
   import { fade } from "svelte/transition";
   import Slider from "$components/helpers/Slider.svelte";
   import Tap from "$components/helpers/Tap.svelte";
@@ -9,6 +10,7 @@
   import copy from "$data/doc.json";
   import { activeSlide, dir } from "$stores/misc.js";
   import loadStationData from "$data/loadStationData.js";
+  import locate from "$utils/locate.js";
 
   let stationId;
   let custom;
@@ -31,6 +33,13 @@
     rawData = data.rawData;
     threshold = data.threshold;
   };
+
+  onMount(async () => {
+    try {
+      // const result = await locate();
+      // console.log(result);
+    } catch (err) {}
+  });
 </script>
 
 {#if rawData}

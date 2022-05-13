@@ -39,8 +39,8 @@
       tertiary: color.blue,
       default: color.transparent,
       primaryT: color["green-transparent"],
-      secondaryT: color["blue-transparent"],
-      tertiaryT: color["pink-transparent"]
+      secondaryT: color["pink-transparent"],
+      tertiaryT: color["blue-transparent"]
     }
   });
 

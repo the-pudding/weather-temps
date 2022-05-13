@@ -55,6 +55,7 @@
     z-index: var(--z-top);
     line-height: 1.2;
     padding-right: 0.5em;
+    width: 100%;
   }
 
   p.wrap {
