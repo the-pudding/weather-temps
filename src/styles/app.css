@@ -32,8 +32,8 @@
 	--color-selection: var(--color-gray-300);
   --color-highlight: var(--color-white);	
 	--color-primary: var(--color-green);
-	--color-secondary: var(--color-blue);
-	--color-tertiary: var(--color-pink);
+	--color-secondary: var(--color-pink);
+	--color-tertiary: var(--color-blue);
 }
 
 html, body, main {

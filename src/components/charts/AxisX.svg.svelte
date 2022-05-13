@@ -4,7 +4,7 @@
     getContext("LayerCake");
 
   export let city;
-  export let yTick = 16;
+  export let yTick = 8;
   export let formatTick = (d) => d;
   export let showFirst = true;
   export let w = 0;

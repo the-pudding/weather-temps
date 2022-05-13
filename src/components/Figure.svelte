@@ -35,8 +35,8 @@
     yDomain,
     color: {
       primary: color.green,
-      secondary: color.blue,
-      tertiary: color.pink,
+      secondary: color.pink,
+      tertiary: color.blue,
       default: color.transparent,
       primaryT: color["green-transparent"],
       secondaryT: color["blue-transparent"],

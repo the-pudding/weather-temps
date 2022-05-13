@@ -146,7 +146,7 @@ export default async function loadStationData(id) {
 	hot.annotation = {
 		figure: "recent",
 		text: `${formatDistanceStrict(latest.date, hot.date)} ago was the ${ordinal(hot.rank + 1)} hottest ${format(hot.date, "MMMM do")} ever`,
-		type: "arrow",
+		type: "wrap",
 		color: "secondary"
 	};
 	// top + same day as hot not top

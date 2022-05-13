@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Thu, 12 May 2022 13:40:37 GMT
+ * Generated on Fri, 13 May 2022 14:14:14 GMT
  */
 
 :root {
@@ -29,7 +29,7 @@
   --color-pink: #ff99dd;
   --color-yellow: #fff9ea;
   --color-orange: #fcdbc2;
-  --color-transparent: rgba(255, 255, 255, 0.25);
+  --color-transparent: rgba(255, 255, 255, 0.13);
   --color-green-transparent: rgba(204, 255, 213, 0.15);
   --color-blue-transparent: rgba(155, 220, 255, 0.15);
   --color-pink-transparent: rgba(255, 165, 224, 0.15);
