@@ -1,4 +1,5 @@
 <script>
+  import { dev } from "$app/env";
   import { onMount } from "svelte";
   import { fade } from "svelte/transition";
   import Slider from "$components/helpers/Slider.svelte";
@@ -37,7 +38,7 @@
 
   onMount(async () => {
     try {
-      const result = await locate();
+      const result = await locate(dev);
       loc = result.loc || false;
     } catch (err) {
       loc = false;
