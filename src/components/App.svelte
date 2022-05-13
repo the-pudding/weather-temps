@@ -8,7 +8,7 @@
   import ArticleSlide from "$components/ArticleSlide.svelte";
   import Header from "$components/Header.svelte";
   import copy from "$data/doc.json";
-  import { activeSlide, dir } from "$stores/misc.js";
+  import { activeSlide, dir, selectY } from "$stores/misc.js";
   import loadStationData from "$data/loadStationData.js";
   import locate from "$utils/locate.js";
 
@@ -71,7 +71,7 @@
   full={true}
   size="50%"
   enableKeyboard={true}
-  marginTop={$activeSlide === 0 ? 280 : 0}
+  marginTop={$activeSlide === 0 ? $selectY : 0}
   on:tap={onTap}
 />
 
