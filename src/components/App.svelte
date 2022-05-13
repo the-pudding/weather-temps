@@ -17,6 +17,7 @@
   let rawData;
   let threshold;
   let slider = undefined;
+  let loc = undefined;
 
   const onTap = ({ detail }) => {
     if (detail === "right") slider.next();
@@ -36,9 +37,11 @@
 
   onMount(async () => {
     try {
-      // const result = await locate();
-      // console.log(result);
-    } catch (err) {}
+      const result = await locate();
+      loc = result.loc || false;
+    } catch (err) {
+      loc = false;
+    }
   });
 </script>
 
@@ -53,6 +56,7 @@
     <IntroSlide
       {...copy.intro}
       active={$activeSlide === 0}
+      {loc}
       on:changeStation={changeStation}
     />
 

@@ -1,4 +1,5 @@
 <script>
+  import { fade } from "svelte/transition";
   import Slide from "$components/helpers/Slider.Slide.svelte";
   import Select from "$components/Select.svelte";
   import tapSvg from "$svg/tap.svg";
@@ -8,23 +9,28 @@
   export let text2;
   export let text_alt;
   export let text2_alt;
+  export let loc;
   export let prompt;
 </script>
 
 <section class:active>
-  <Slide>
-    <div>
-      <p class="text">
-        {text}
-        <Select on:changeStation /> area?
-      </p>
-      <p class="text">{text2}</p>
-      <p class="subtext">
-        <span class="tap">{@html tapSvg}</span>
-        {prompt} &rarr;
-      </p>
+  {#if loc !== undefined}
+    <div in:fade>
+      <Slide>
+        <div class="info">
+          <p class="text">
+            {text}
+            <Select on:changeStation {loc} /> area?
+          </p>
+          <p class="text">{text2}</p>
+          <p class="subtext">
+            <span class="tap">{@html tapSvg}</span>
+            {prompt} &rarr;
+          </p>
+        </div>
+      </Slide>
     </div>
-  </Slide>
+  {/if}
 </section>
 
 <style>
@@ -37,7 +43,7 @@
     opacity: 1;
   }
 
-  div {
+  .info {
     margin-top: 8rem;
   }
 
