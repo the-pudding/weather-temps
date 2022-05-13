@@ -22,11 +22,13 @@
   {@const text = d.annotation.text}
   {@const temp = d.temp}
   {@const forceTemp = d.highlightAlt === "example2"}
+  {@const flip = $xGet(d) < $xRange[1] * 0.5}
 
   <p
     in:fade={{ delay: 2000 }}
     out:fade={{ duration: 150 }}
     class="shadow {d.annotation.type}"
+    class:flip
     class:forceTemp
     style:left
     style:top
@@ -34,7 +36,7 @@
     style="--fill: {fill}; --w: {w}px; --offset: {offset};"
     data-temp="{temp}°F"
   >
-    {text}
+    <span>{text}</span>
   </p>
 {/each}
 
@@ -58,6 +60,10 @@
     width: 100%;
   }
 
+  span {
+    display: block;
+  }
+
   p.wrap {
     width: 10rem;
     padding-right: var(--pad);
@@ -75,5 +81,12 @@
     border: 2px solid var(--color-fg);
     transform: translate(calc(var(--diam) - (var(--pad) * 0.5)), -50%);
     outline: 2px solid var(--color-bg);
+  }
+
+  p.wrap.flip span {
+    text-align: left;
+    transform: translate(calc(100% + var(--diam)), 0);
+    padding-right: 0;
+    padding-left: 1.5em;
   }
 </style>

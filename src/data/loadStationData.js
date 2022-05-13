@@ -7,8 +7,8 @@ export default async function loadStationData(id) {
 	const response = await fetch(`stations/${id}.csv`);
 	const csv = await response.text();
 	const raw = csvParse(csv);
-	const BUFFER = 1.33; // for padding so recent hot day not flush left
-	const MIN_DAYS = 23;
+	const BUFFER = 1.1; // for padding so recent hot day not flush left
+	const MIN_DAYS = 28;
 	const LEAP = 59;
 
 	const debug = false;
