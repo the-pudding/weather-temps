@@ -28,7 +28,7 @@
 
   @media only screen and (min-width: 640px) {
     .slide {
-      font-size: 2rem;
+      font-size: 1.5rem;
     }
 
     :global(.subtext) {
@@ -38,7 +38,7 @@
 
   @media only screen and (min-width: 1024px) {
     .slide {
-      font-size: 2.5rem;
+      font-size: 2rem;
     }
     :global(.subtext) {
       font-size: 1.25rem;

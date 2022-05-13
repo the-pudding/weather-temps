@@ -54,7 +54,7 @@ export default async function loadStationData(id) {
 	}
 
 	// find recent hot (but not top and not most recent) temp
-	const recentHot = clean.find((d, i) => i > 0 && d.rank > 0);
+	const recentHot = clean.find((d, i) => i > 0 && d.rank > 0 && d.rank < 5);
 	const recentHotDaysSinceNow = recentHot.daysSinceNow;
 
 	if (debug) console.log({ recentHotDaysSinceNow });
@@ -117,25 +117,47 @@ export default async function loadStationData(id) {
 	latest.highlight = "latest";
 	latest.annotation = {
 		figure: "recent",
-		text: "Yesterday",
-		type: "temp"
+		text: `Yesterday, ${format(latest.date, "y")}`,
+		type: "side",
+		color: "tertiary"
 	};
+
+	// latest top
+	const latestTop = withFake.find(d => d.day === latest.day && d.rank === 0);
+	latestTop.highlight = "latest";
+	latestTop.annotation = {
+		figure: "recent",
+		text: `Hottest ${format(latestTop.date, "MMMM d")}: ${format(latestTop.date, "y")}`,
+		type: "side"
+	};
+
+	const latestMin = min(withFake.filter(d => d.day === latest.day), d => d.temp);
+	const latestBottom = withFake.find(d => d.day === latestTop.day && d.temp === latestMin);
+	latestBottom.highlight = "latest";
+	latestBottom.annotation = {
+		figure: "recent",
+		text: format(latestBottom.date, "y"),
+		type: "side"
+	};
+
 	// hot not latest not top
-	const hot = withFake.find((d, i) => i > 0 && d.rank !== undefined && d.rank > 0);
+	const hot = withFake.find((d, i) => i > 0 && d.rank !== undefined && d.rank > 0 && d.rank < 5);
 	hot.highlight = "hot";
 	hot.annotation = {
 		figure: "recent",
-		text: `${format(hot.date, "M/d/y")} was the ${ordinal(hot.rank + 1)} hottest ${format(hot.date, "MMMM do")} ever`,
-		type: "arrow"
+		text: `${formatDistanceStrict(latest.date, hot.date)} ago was the ${ordinal(hot.rank + 1)} hottest ${format(hot.date, "MMMM do")} ever`,
+		type: "arrow",
+		color: "secondary"
 	};
 	// top + same day as hot not top
-	const top = withFake.find(d => hot.day === d.day && d.rank === 0);
-	top.highlight = "top";
-	top.annotation = {
-		figure: "recent",
-		text: `${format(top.date, "M/d/y")} was the hottest ${format(top.date, "MMMM do")} ever at ${top.temp}°F`,
-		type: "arrow"
-	};
+	// const top = withFake.find(d => hot.day === d.day && d.rank === 0);
+	// top.highlight = "top";
+	// top.annotation = {
+	// 	figure: "recent",
+	// 	text: `${format(top.date, "M/d/y")} was the hottest ${format(top.date, "MMMM do")} ever at ${top.temp}°F`,
+	// 	type: "arrow",
+	// 	color: "primary"
+	// };
 
 	// alltime
 	const maxTemp = max(withFake, d => d.temp);
@@ -183,12 +205,18 @@ export default async function loadStationData(id) {
 	};
 
 
-	withFake.sort((a, b) => ascending(a.highlight ? 1 : 0, b.highlight ? 1 : 0) || ascending(a.rank, b.rank));
+	withFake.sort((a, b) => ascending(a.highlight ? 1 : 0, b.highlight ? 1 : 0) || ascending(a.recent ? 1 : 0, b.recent ? 1 : 0) || ascending(a.rank, b.rank));
 	// keep only recent days or ranked ones, trash the rest
 	const rawData = withFake.filter(d => d.recentDay || d.exampleDay || d.rank < 5);
 
 	// generate custom text injections
 	const custom = [];
+
+	custom["year-yesterday-top"] = format(latestTop.date, "y");
+
+	custom["temp-yesterday-top"] = `${latestTop.temp}°F`;
+
+	custom["temp-yesterday"] = `${latest.temp}°F`;
 
 	custom["rank-yesterday"] = ordinal(latest.rank + 1);
 
@@ -196,9 +224,17 @@ export default async function loadStationData(id) {
 
 	const oldest = min(rawData, d => d.date);
 
-	custom["years-oldest"] = formatDistanceStrict(latest.date, oldest);
+	custom["count-oldest"] = formatDistanceStrict(latest.date, oldest);
+
+	custom["year-oldest"] = format(oldest, "y");
+
+	const months = Math.round(threshold / 30);
+
+	custom["timespan-recent"] = threshold < 40 ? "few weeks" : months < 3 ? "couple months" : "few months";
 
 	custom["fulldate-recent"] = format(hot.date, "MMMM d, y");
+
+	custom["rank-recent"] = ordinal(hot.rank + 1);
 
 	custom["date-recent"] = format(hot.date, "MMMM do");
 

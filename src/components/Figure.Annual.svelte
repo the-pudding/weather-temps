@@ -90,7 +90,7 @@
   $: sidePad = pad * 4;
   $: realW = width - padding.left - padding.right - sidePad;
   $: w = Math.max(3, realW / daysInView);
-  $: h = $activeSlide === 3 ? Math.max(2, Math.floor(height * 0.0075)) : 3;
+  $: h = $activeSlide === 3 ? Math.max(2, Math.floor(height * 0.00625)) : 3;
   $: xPadding = [pad, pad * 3];
 
   $: {

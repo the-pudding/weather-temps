@@ -16,7 +16,7 @@
     <div>
       <p class="text">
         {text}
-        <Select on:changeStation /> area
+        <Select on:changeStation /> area?
       </p>
       <p class="text">{text2}</p>
       <p class="subtext">
@@ -28,11 +28,6 @@
 </section>
 
 <style>
-  .text {
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
-
   section {
     opacity: 0;
     transition: opacity 1s 0.5s ease-in-out;

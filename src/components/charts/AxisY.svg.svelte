@@ -10,7 +10,7 @@
   export let yTick = 0;
   export let dxTick = 0;
   export let dyTick = 4;
-  export let textAnchor = "end";
+  export let textAnchor = "start";
   export let formatTick = (d) => `${d}°F`;
   export let ticks = 4;
   /** If this is a number, it passes that along to the [d3Scale.ticks](https://github.com/d3/d3-scale) function. If this is an array, hardcodes the ticks to those values. If it's a function, passes along the default tick values and expects an array of tick values in return. */
@@ -31,8 +31,8 @@
       {#if gridlines !== false}
         <line
           class="gridline"
-          x1={$xPadding[0] / 2}
-          x2={$xRange[1] - $xPadding[1] / 2}
+          x1={i === 0 ? $xRange[0] : $xRange[1] - $xPadding[1] / 1.25}
+          x2={$xRange[1] - $xPadding[1] / 1.5}
           y1={yTick}
           y2={yTick}
         />
@@ -41,14 +41,14 @@
         <line class="tick-mark" x1="0" x2={6} y1={yTick} y2={yTick} />
       {/if}
       <text
-        x={$xRange[1]}
+        x={$xRange[1] - $xPadding[1] / 1.75}
         y={yTick}
         dx={dxTick}
         dy={dyTick}
         style="text-anchor:{textAnchor};">{formatTick(tick)}</text
       >
       <text
-        x={$xRange[1]}
+        x={$xRange[1] - $xPadding[1] / 1.75}
         y={yTick}
         dx={dxTick}
         dy={dyTick}
@@ -56,7 +56,7 @@
       >
     </g>
   {/each}
-  {#if location}
+  <!-- {#if location}
     <text
       x={$xRange[0]}
       y={$yScale(tickVals[tickVals.length - 1])}
@@ -71,7 +71,7 @@
       dy={dyTick * 1.5}
       class="location">{location}</text
     >
-  {/if}
+  {/if} -->
 </g>
 
 <style>

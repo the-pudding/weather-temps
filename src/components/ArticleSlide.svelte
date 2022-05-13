@@ -11,12 +11,10 @@
 
 <section class={c} class:active>
   <Slide>
-    <div class="above">
+    <div>
       <p class="text">
         {@html text}
       </p>
-    </div>
-    <div class="below">
       {#if subtext}
         <p class="subtext">
           {@html subtext}
@@ -35,40 +33,28 @@
     opacity: 1;
   }
 
-  .above,
-  .below {
+  div {
     position: absolute;
     left: 50%;
     width: 100%;
     max-width: 65rem;
-    height: 15%;
+    height: 25%;
     transform: translate(-50%, 0);
     opacity: 0;
+    padding-top: 1rem;
   }
 
-  .above p,
-  .below p {
+  p {
     margin: 0 auto;
-    padding: 2rem 1rem;
+    padding: 1rem 0;
   }
 
-  .above {
-    top: 0;
+  div {
+    top: 75%;
     transition: opacity 1s 0.25s ease-in-out;
   }
 
-  .below {
-    top: 85%;
-    transition: opacity 1s 1.5s ease-in-out;
-  }
-
-  .text {
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
-
-  .active .above,
-  .active .below {
+  .active div {
     opacity: 1;
   }
 </style>

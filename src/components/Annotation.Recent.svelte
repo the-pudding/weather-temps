@@ -9,34 +9,27 @@
   export let m;
 
   $: mid = $xRange[1] / 2;
-
-  const getFill = (d) =>
-    d.highlight === "latest"
-      ? color.tertiary
-      : d.highlight === "hot" || d.highlightAlt === "example2"
-      ? color.secondary
-      : color.primary;
 </script>
 
-{#each data as d (d.highlight)}
+{#each data as d (d.daysSinceNow)}
   {@const alt = d.annotationAlt}
   {@const x = $xGet(d) - w}
   {@const left = `${x - m}px`}
   {@const top = `${$yGet(d)}px`}
-  {@const fill = getFill(d)}
+  {@const fill = color[d.annotation.color] || "#fff"}
+  {@const opacity = d.annotation.color ? 1 : 0.7}
   {@const text = d.annotation.text}
   {@const temp = d.temp}
-  {@const arrow = d.annotation.type === "arrow"}
   {@const forceTemp = d.highlightAlt === "example2"}
 
   <p
     in:fade={{ delay: 2000 }}
     out:fade={{ duration: 150 }}
-    class="shadow"
+    class="shadow {d.annotation.type}"
     class:forceTemp
-    class:arrow
     style:left
     style:top
+    style:opacity
     style="--fill: {fill}; --col: {w}px;"
     data-temp="{temp}°F"
   >
@@ -73,7 +66,7 @@
   }
 
   p:after {
-    display: block;
+    display: none;
     content: attr(data-temp);
     position: absolute;
     left: 100%;
@@ -82,8 +75,8 @@
     transform: translate(var(--col), 0);
   }
 
-  p.arrow:after {
-    display: none;
+  p.temp:after {
+    display: block;
   }
 
   p.arrow.forceTemp:after {

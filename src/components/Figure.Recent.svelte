@@ -48,10 +48,13 @@
 
   const getFill = (d) => {
     // if (d.rank === 0 && d[x] === 0) return "yellow";
-    if (d.highlight === "latest" && $activeSlide < 3) return color.tertiary;
-    if (d.highlight === "hot" && $activeSlide >= 2 && $activeSlide < 4)
-      return color.secondary;
-    if (d.highlight === "top" && $activeSlide >= 3) return color.primary;
+    if (d.highlight && $activeSlide < 2) {
+      if (d.annotation.color) return color.tertiary;
+      return color.default;
+    }
+    if (d.recent && $activeSlide === 2) return color.secondary;
+    if (d.highlight === "hot" && $activeSlide === 3) return color.secondary;
+    // if (d.highlight === "top" && $activeSlide >= 3) return color.primary;
     if ($activeSlide === 3 && d.rank === 0) return color.primary;
     if ($activeSlide === 8 && d.rank === 1) return color.secondary;
     return color.default;
@@ -88,16 +91,16 @@
   $: sidePad = pad * 4;
   $: realW = width - padding.left - padding.right - sidePad;
   $: w = realW / daysInView;
-  $: h = Math.max(2, Math.floor(height * 0.0075));
+  $: h = Math.max(2, Math.floor(height * 0.00625));
   $: xPadding = [pad, pad * 3];
 
   $: {
     if ($activeSlide < 2)
-      highlight = [{ ...rawData.find((d) => d.highlight === "latest") }];
+      highlight = rawData.filter((d) => d.highlight === "latest");
     else if ($activeSlide === 2)
       highlight = [{ ...rawData.find((d) => d.highlight === "hot") }];
-    else if ($activeSlide === 3)
-      highlight = [{ ...rawData.find((d) => d.highlight === "top") }];
+    // else if ($activeSlide === 3)
+    //   highlight = [{ ...rawData.find((d) => d.highlight === "top") }];
     else if ($activeSlide === 7)
       highlight = [{ ...rawData.find((d) => d.highlightAlt === "example1") }];
     else if ($activeSlide === 8)

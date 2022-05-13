@@ -39,6 +39,8 @@
 html, body, main {
 	height: 100%;
 	overflow: hidden;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
 }
 
 figure svg {
@@ -46,32 +48,21 @@ figure svg {
 	color: var(--color-white);
 }
 
-.color-primary .text {
-	color: var(--color-primary);
-}
-
-.color-secondary .text {
-	color: var(--color-secondary);
-}
-
-.color-tertiary .text {
-	color: var(--color-tertiary);
-}
-
-.subtext mark {
+.subtext mark, .text mark {
 	padding: 0;
 	background: none;
+	font-weight: 600;
 }
 
-.color-primary .subtext mark {
+mark.primary {
 	color: var(--color-primary);
 }
 
-.color-seocndary .subtext mark {
+mark.secondary {
 	color: var(--color-secondary);
 }
 
-.color-tertiary .subtext mark {
+mark.tertiary {
 	color: var(--color-tertiary);
 }
 

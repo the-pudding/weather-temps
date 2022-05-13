@@ -14,7 +14,7 @@
 
   const position = "absolute";
   const pad = 16;
-  const padding = { top: pad, right: pad, bottom: pad * 3, left: pad };
+  const padding = { top: pad * 2, right: pad, bottom: pad * 3, left: pad };
   const highlightDelay = 2000;
   const minDays = 4;
   const dur = 2000;
@@ -72,6 +72,10 @@
 
 {#if mounted}
   <figure class:tease bind:clientWidth={width} bind:offsetHeight={height}>
+    <div class="title">
+      <p class="location">{custom.location}</p>
+      <p class="dek">Daily High Temps</p>
+    </div>
     {#if $activeSlide < 9}
       <div out:fade={{ duration: 0 }}>
         <FigureRecent {width} {height} />
@@ -87,9 +91,9 @@
 
 <style>
   figure {
-    width: 1000px;
-    height: 70%;
-    top: 15%;
+    max-width: 960px;
+    height: 75%;
+    top: 0;
     overflow: hidden;
     transition: transform 1s ease-in-out, filter 0.5s 1s;
   }
@@ -105,5 +109,20 @@
     left: 0;
     width: 100%;
     height: 100%;
+  }
+
+  .title {
+    margin-top: 2rem;
+    padding-left: 1rem;
+    font-family: var(--sans);
+    text-transform: uppercase;
+  }
+
+  .title p {
+    margin: 0;
+  }
+
+  .location {
+    color: var(--color-fg-alt);
   }
 </style>

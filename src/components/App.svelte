@@ -23,9 +23,10 @@
   };
 
   const changeStation = async ({ detail }) => {
-    const { id } = detail;
+    const { id, location, state_abbr } = detail;
     const data = await loadStationData(id);
     stationId = id;
+    data.custom.location = `${location}, ${state_abbr} area`;
     custom = data.custom;
     rawData = data.rawData;
     threshold = data.threshold;
