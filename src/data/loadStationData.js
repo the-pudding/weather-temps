@@ -15,7 +15,7 @@ export default async function loadStationData(id) {
 
 
 	// TODO (should pipe this in from server?)
-	const now = new Date(2022, 4, 9);
+	const now = new Date(2022, 4, 12);
 	const nowDay = getDayOfYear(now);
 
 	if (debug) console.log({ now, nowDay });
@@ -119,7 +119,8 @@ export default async function loadStationData(id) {
 		figure: "recent",
 		text: `Yesterday, ${format(latest.date, "y")}`,
 		type: "side",
-		color: "tertiary"
+		color: "tertiary",
+		offset: 0
 	};
 
 	// latest top
@@ -140,6 +141,11 @@ export default async function loadStationData(id) {
 		type: "side"
 	};
 
+	// offset latest
+	if (Math.abs(latest.temp - latestTop.temp) <= 5) latest.annotation.offset = 1;
+	else if (Math.abs(latest.temp - latestBottom.temp) <= 5) latest.annotation.offset = -1;
+
+
 	// hot not latest not top
 	const hot = withFake.find((d, i) => i > 0 && d.rank !== undefined && d.rank > 0 && d.rank < 5);
 	hot.highlight = "hot";
@@ -149,6 +155,7 @@ export default async function loadStationData(id) {
 		type: "wrap",
 		color: "secondary"
 	};
+
 	// top + same day as hot not top
 	// const top = withFake.find(d => hot.day === d.day && d.rank === 0);
 	// top.highlight = "top";
