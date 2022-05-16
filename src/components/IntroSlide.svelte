@@ -22,7 +22,7 @@
         <div class="info">
           <p class="text">
             {text}
-            <Select on:changeStation {loc} /> area?
+            <Select on:changeStation {loc} />?
           </p>
           <p class="text">{response}</p>
           <p class="subtext">

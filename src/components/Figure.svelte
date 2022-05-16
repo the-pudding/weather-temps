@@ -17,10 +17,16 @@
 
   const position = "absolute";
   const pad = 16;
-  const padding = { top: pad * 2, right: pad, bottom: pad * 3, left: pad };
+  const padding = {
+    top: pad * 2,
+    right: pad * 1.5,
+    bottom: pad * 3,
+    left: pad * 1
+  };
   const minDays = 4;
   const yExtent = extent(rawData, (d) => d.temp);
-  const yDomain = [Math.min(yExtent[0] - 1, 0), yExtent[1] + 1];
+  // const yDomain = [Math.min(yExtent[0] - 1, 0), yExtent[1] + 1];
+  const yDomain = [yExtent[0] - 5, yExtent[1] + 5];
   const dur = writable(2000);
 
   console.log({ stationId });
@@ -92,8 +98,8 @@
 <style>
   figure {
     max-width: 960px;
-    height: 75%;
-    top: 0;
+    height: 60%;
+    top: 5%;
     overflow: hidden;
     transition: transform 1s ease-in-out, filter 0.5s 1s;
   }
@@ -109,5 +115,11 @@
     left: 0;
     width: 100%;
     height: 100%;
+  }
+
+  @media only screen and (min-width: 640px) {
+    figure {
+      height: 65%;
+    }
   }
 </style>
