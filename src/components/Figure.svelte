@@ -1,11 +1,13 @@
 <script>
   import { setContext, onMount, onDestroy, tick } from "svelte";
+  import { writable } from "svelte/store";
   import { max, extent } from "d3";
   import { fade } from "svelte/transition";
   import { activeSlide } from "$stores/misc";
   import FigureRecent from "$components/Figure.Recent.svelte";
   import FigureAnnual from "$components/Figure.Annual.svelte";
   import { color } from "$data/variables.json";
+  import mq from "$stores/mq.js";
 
   export let stationId;
   export let rawData;
@@ -15,11 +17,10 @@
   const position = "absolute";
   const pad = 16;
   const padding = { top: pad * 2, right: pad, bottom: pad * 3, left: pad };
-  const highlightDelay = 2000;
   const minDays = 4;
-  const dur = 2000;
   const yExtent = extent(rawData, (d) => d.temp);
   const yDomain = [Math.min(yExtent[0] - 1, 0), yExtent[1] + 1];
+  const dur = writable(2000);
 
   console.log({ stationId });
 
@@ -31,7 +32,6 @@
     position,
     pad,
     padding,
-    dur,
     yDomain,
     color: {
       primary: color.green,
@@ -58,6 +58,7 @@
   };
 
   $: tease = $activeSlide === 0;
+  $: $dur = $mq.reducedMotion ? 0 : 2000;
 
   onMount(async () => {
     await tick();

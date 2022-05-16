@@ -69,7 +69,7 @@
 
   $: showAxis = $activeSlide < 4 || $activeSlide > 6;
   $: showFirst = $activeSlide > 1 && $activeSlide < 6;
-  $: duration = $dir === "right" ? dur : 0;
+  $: duration = $dir === "right" ? $dur : 0;
 
   $: x = $activeSlide < 4 ? "fakeDay" : "day";
   $: targetExtentDay =

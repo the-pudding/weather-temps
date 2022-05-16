@@ -66,7 +66,7 @@
   let targetExtentDay = extentAnnual;
 
   $: showAxis = $activeSlide > 3 && $activeSlide < 7;
-  $: duration = $dir === "right" ? dur : 0;
+  $: duration = $dir === "right" ? $dur : 0;
   // $: opacity = $activeSlide === 5 ? 0 : 1;
   // $: tweenOpacity.set(opacity, { duration });
 
