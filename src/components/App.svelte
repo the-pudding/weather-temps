@@ -8,6 +8,7 @@
   import IntroSlide from "$components/IntroSlide.svelte";
   import ArticleSlide from "$components/ArticleSlide.svelte";
   import Header from "$components/Header.svelte";
+  import Toggle from "$components/Toggle.svelte";
   import copy from "$data/doc.json";
   import { activeSlide, dir, selectY } from "$stores/misc.js";
   import loadStationData from "$data/loadStationData.js";
@@ -36,8 +37,17 @@
     threshold = data.threshold;
   };
 
-  $: yesterdayWasRecord =
-    rawData.find((d) => d.highlight === "latest").rank === 0;
+  $: yesterdayWasRecord = rawData
+    ? rawData.find((d) => d.daysSinceNow === 1).rank === 0
+    : false;
+
+  $: showHeader = $activeSlide === 0;
+
+  $: showToggle = $activeSlide === 6;
+
+  $: toggleData = rawData
+    ? rawData.filter((d) => d.highlight === "record5")
+    : [];
 
   onMount(async () => {
     try {
@@ -72,9 +82,6 @@
   </Slider>
 </article>
 
-{#if $activeSlide === 0}
-  <Header />
-{/if}
 <Tap
   debug={false}
   full={true}
@@ -83,6 +90,14 @@
   marginTop={$activeSlide === 0 ? $selectY : 0}
   on:tap={onTap}
 />
+
+{#if showHeader}
+  <Header />
+{/if}
+
+{#if showToggle}
+  <Toggle data={toggleData} location={custom.location} />
+{/if}
 
 <style>
   article,

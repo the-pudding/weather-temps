@@ -6,6 +6,7 @@
   import { activeSlide } from "$stores/misc";
   import FigureRecent from "$components/Figure.Recent.svelte";
   import FigureAnnual from "$components/Figure.Annual.svelte";
+  import Title from "$components/Title.svelte";
   import { color } from "$data/variables.json";
   import mq from "$stores/mq.js";
 
@@ -33,6 +34,7 @@
     pad,
     padding,
     yDomain,
+    dur,
     color: {
       primary: color.green,
       secondary: color.pink,
@@ -73,10 +75,7 @@
 
 {#if mounted}
   <figure class:tease bind:clientWidth={width} bind:offsetHeight={height}>
-    <div class="title">
-      <p class="location">{custom.location}</p>
-      <p class="dek">Daily High Temps</p>
-    </div>
+    <Title hed={custom.location} dek="Daily High Temps." />
     {#if $activeSlide < 9}
       <div out:fade={{ duration: 0 }}>
         <FigureRecent {width} {height} />
@@ -110,20 +109,5 @@
     left: 0;
     width: 100%;
     height: 100%;
-  }
-
-  .title {
-    margin-top: 2rem;
-    padding-left: 1rem;
-    font-family: var(--sans);
-    text-transform: uppercase;
-  }
-
-  .title p {
-    margin: 0;
-  }
-
-  .location {
-    color: var(--color-fg-alt);
   }
 </style>

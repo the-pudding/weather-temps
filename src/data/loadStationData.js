@@ -35,6 +35,7 @@ export default async function loadStationData(id) {
 	}))
 		.map(d => ({
 			...d,
+			formattedDate: format(d.date, "MMMM d"),
 			daysSinceNow: differenceInDays(now, d.date),
 		})).filter(d => d.daysSinceNow >= 1);
 

@@ -1,0 +1,26 @@
+<script>
+  export let hed;
+  export let dek;
+</script>
+
+<div>
+  <p class="hed">{hed}</p>
+  <p class="dek">{dek}</p>
+</div>
+
+<style>
+  div {
+    margin-top: 2rem;
+    padding: 0 1rem;
+    font-family: var(--sans);
+    text-transform: uppercase;
+  }
+
+  p {
+    margin: 0;
+  }
+
+  .hed {
+    color: var(--color-fg-alt);
+  }
+</style>

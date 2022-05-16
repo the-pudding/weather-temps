@@ -13,13 +13,13 @@
   {@const top = `${$yGet(d)}px`}
   {@const flip = $xGet(d) > $xRange[1] * 0.67}
   <div
-    in:fade={{ delay: 2000 }}
+    in:fade={{ delay: 1000 }}
     out:fade={{ duration: 150 }}
     style:left
     style:top
     class:flip
   >
-    <span />
+    <span style="--w: {w}px;" />
     {#if d.annotation && data.length === 1}
       <p class="shadow">
         {d.annotation.text}
@@ -37,12 +37,11 @@
     display: block;
     width: 1rem;
     height: 1rem;
+    margin-left: calc(var(--w) * 0.5);
     transform: translate(-50%, -50%);
-    border: 1px solid var(--color-bg);
+    border: 2px solid var(--color-bg);
+    outline: 2px solid var(--color-fg);
     border-radius: 50%;
-    background: var(--color-white);
-    box-shadow: 0 0 6px 6px var(--color-transparent),
-      0 0 12px 12px var(--color-transparent);
   }
 
   p {
