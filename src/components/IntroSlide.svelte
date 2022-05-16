@@ -5,12 +5,14 @@
   import tapSvg from "$svg/tap.svg";
 
   export let active;
+  export let alt;
   export let text;
   export let text2;
-  export let text_alt;
   export let text2_alt;
   export let loc;
   export let prompt;
+
+  $: response = alt ? text2_alt : text2;
 </script>
 
 <section class:active>
@@ -22,7 +24,7 @@
             {text}
             <Select on:changeStation {loc} /> area?
           </p>
-          <p class="text">{text2}</p>
+          <p class="text">{response}</p>
           <p class="subtext">
             <span class="tap">{@html tapSvg}</span>
             {prompt} &rarr;

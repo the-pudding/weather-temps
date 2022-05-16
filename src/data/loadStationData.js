@@ -14,7 +14,6 @@ export default async function loadStationData(id) {
 	const debug = false;
 
 
-	// TODO (should pipe this in from server?)
 	const now = new Date(2022, 4, 12);
 	const nowDay = getDayOfYear(now);
 
@@ -99,16 +98,6 @@ export default async function loadStationData(id) {
 		recentDay: recentDayValues.includes(d.day),
 		fakeDay: fakeMap.get(d.day)
 	}));
-
-
-
-
-
-	// TODO do everything above on server
-
-
-
-
 
 	if (debug) console.table(withFake.slice(0, 60));
 	// annotations
@@ -223,7 +212,7 @@ export default async function loadStationData(id) {
 
 	custom["temp-yesterday-top"] = `${latestTop.temp}°F`;
 
-	custom["temp-yesterday"] = `${latest.temp}°F`;
+	custom["temp-yesterday"] = latest.rank === 0 ? "" : ` at ${latest.temp}°F`;
 
 	custom["rank-yesterday"] = ordinal(latest.rank + 1);
 

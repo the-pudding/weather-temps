@@ -36,6 +36,9 @@
     threshold = data.threshold;
   };
 
+  $: yesterdayWasRecord =
+    rawData.find((d) => d.highlight === "latest").rank === 0;
+
   onMount(async () => {
     try {
       const result = await locate(dev);
@@ -57,6 +60,7 @@
     <IntroSlide
       {...copy.intro}
       active={$activeSlide === 0}
+      alt={yesterdayWasRecord}
       {loc}
       on:changeStation={changeStation}
     />
