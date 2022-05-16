@@ -56,7 +56,7 @@ BKVthr,FL,Brooksville,28.55,-82.39
 BROthr,TX,Brownsville,25.9,-97.5
 BRCN7thr,NC,Bryson City,35.42,-83.45
 BUFthr,NY,Buffalo,42.89,-78.88
-BURthr,CA,Burbank Glendale Pasadena,34.21,-118.22
+BURthr,CA,Burbank-Glendale-Pasadena,34.21,-118.22
 BYIthr,ID,Burley,42.54,-113.79
 BRLthr,IA,Burlington,40.81,-91.1
 BTVthr,VT,Burlington,44.48,-73.21
@@ -151,7 +151,7 @@ GTFthr,MT,Great Falls,47.51,-111.31
 GRBthr,WI,Green Bay,44.51,-88.01
 GSOthr,NC,Greensboro,36.07,-79.8
 GLHthr,MS,Greenville,33.4,-91.04
-GSPthr,SC,Greenville-Spartanburg,34.94,-82.03
+GSPthr,SC,Greenville,34.94,-82.03
 GWOthr,MS,Greenwood,33.52,-90.18
 GUMthr,GU,Guam,13.44,144.78
 GPTthr,MS,Gulfport,30.38,-89.09
@@ -243,7 +243,7 @@ MEMthr,TN,Memphis,35.15,-90.05
 MCEthr,CA,Merced,37.3,-120.49
 MEIthr,MS,Meridian,32.37,-88.7
 MIAthr,FL,Miami,25.77,-80.2
-MDTthr,PA,Middletown-Harrisburg,40.26,-76.88
+MDTthr,PA,Harrisburg-Middletown,40.26,-76.88
 MAFthr,TX,Midland-Odessa,31.83,-102.36
 MLTthr,ME,Millinocket,45.65,-68.71
 MQEthr,MA,Milton,42.26,-71.08
@@ -348,7 +348,7 @@ SJUthr,PR,San Juan,18.47,-66.1
 SFBthr,FL,Sanford,28.81,-81.27
 SMXthr,CA,Santa Maria,34.95,-120.43
 SLKthr,NY,Saranac Lake,44.32,-74.13
-SRQthr,FL,Sarasota-Bradenton,27.45,-82.58
+SRQthr,FL,Sarasota,27.45,-82.58
 ANJthr,MI,Sault Ste Marie,46.49,-84.35
 SAVthr,GA,Savannah,32.08,-81.09
 BFFthr,NE,Scottsbluff,41.86,-103.66
@@ -375,7 +375,7 @@ SYRthr,NY,Syracuse,43.05,-76.15
 TAHC1thr,CA,Tahoe City,39.17,-120.14
 TKAthr,AK,Talkeetna,62.32,-150.1
 TLHthr,FL,Tallahassee,30.44,-84.28
-TVRthr,LA,Tallulah-Vicksburg,32.35,-91.02
+TVRthr,MS,Tallulah-Vicksburg,32.35,-91.02
 TPAthr,FL,Tampa,27.95,-82.46
 TOLthr,OH,Toledo,41.65,-83.54
 TOPthr,KS,Topeka,39.05,-95.67
