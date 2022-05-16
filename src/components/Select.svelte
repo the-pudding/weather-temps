@@ -80,6 +80,7 @@
   @media only screen and (max-width: 475px) {
     select {
       margin-left: 0;
+      font-size: 0.8em;
     }
   }
 </style>

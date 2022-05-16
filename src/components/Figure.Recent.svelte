@@ -31,6 +31,9 @@
   let x = "fakeDay";
   const y = "temp";
 
+  const widthAdustment = 1;
+  const heightAdjustment = 0.5;
+
   const recentData = rawData.filter((d) => d.recentDay);
   const exampleData = rawData.filter((d) => d.exampleDay);
 
@@ -90,8 +93,8 @@
   $: margin = daysInView * m * 2;
   $: sidePad = pad * 4;
   $: realW = width - padding.left - padding.right - sidePad;
-  $: w = realW / daysInView;
-  $: h = Math.max(2, Math.floor(height * 0.00625));
+  $: w = (realW / daysInView) - widthAdustment;
+  $: h = Math.max(2, Math.floor(height * 0.00625)) - heightAdjustment;
   $: xPadding = [pad, pad * 3];
 
   $: {

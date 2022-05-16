@@ -55,7 +55,7 @@
     font-size: 16px;
     font-weight: 600;
     z-index: var(--z-top);
-    line-height: 1.2;
+    line-height: 1.1;
     padding-right: 0.5em;
     width: 100%;
   }
@@ -88,5 +88,21 @@
     transform: translate(calc(100% + var(--diam)), 0);
     padding-right: 0;
     padding-left: 1em;
+  }
+
+  @media only screen and (max-width: 475px) {
+
+    p {
+      max-width: 10rem;
+      font-size: 14px;
+    }
+
+    p:nth-of-type(n + 2) {
+      max-width: 260px;
+    }
+
+    .subtext {
+      font-size: 18px;
+    }
   }
 </style>

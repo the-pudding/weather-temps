@@ -25,9 +25,15 @@
       const x = $xGet(d) - w;
       const y = $yGet(d) - h / 2;
       $ctx.rect(x, y, w, h);
-      $ctx.lineWidth = strokeWidth;
-      $ctx.strokeStyle = stroke;
-      $ctx.stroke();
+      
+      if(d.fill != "rgba(200,200,200,0.3)") {
+        $ctx.lineWidth = 0;
+        $ctx.strokeStyle = d.fill;
+        $ctx.stroke();
+      }
+      
+      
+      
       $ctx.fillStyle = d.fill ?? fill;
       $ctx.fill();
     });
