@@ -37,6 +37,8 @@
     threshold = data.threshold;
   };
 
+  $: console.log({ stationId });
+
   $: yesterdayWasRecord = rawData
     ? rawData.find((d) => d.daysSinceNow === 1).rank === 0
     : false;

@@ -100,7 +100,7 @@ export default async function loadStationData(id) {
 		fakeDay: fakeMap.get(d.day)
 	}));
 
-	if (debug) console.table(withFake.slice(0, 60));
+	if (debug) console.log({ latest: withFake[0] });
 	// annotations
 	// latest
 	const latest = withFake[0];
@@ -178,14 +178,24 @@ export default async function loadStationData(id) {
 		d.highlight = "record5";
 	});
 
-	// recent 5 that also had the most recent 2nd place
-	const record5Days = withFake.filter(d => d.highlight === "record5").map(d => d.day);
-	// TODO potentially not possible if all recent 5 have tie at top spot
-	const record5Rank2 = withFake.find(d => record5Days.includes(d.day) && d.rank === 1);
-	const exampleDay = record5Rank2.day;
+	// recent 5 that also had the most recent 2nd place that isn't a tie at top
+	const getExampleDay = (attempt) => {
+		if (attempt >= 5) return undefined;
+		const record5Days = withFake.filter(d => d.highlight === "record5").map(d => d.day);
+		const pick = record5Days[attempt];
+		console.log(pick);
+		const record5Rank2 = withFake.find(d => d.day === pick && d.rank === 1);
+		console.log({ attempt, record5Rank2 })
+		console.table(withFake.filter(d => d.day === pick));
+		if (record5Rank2) return record5Rank2.day;
+		else return getExampleDay(attempt + 1);
+	};
+
+	const exampleDay = getExampleDay(0);
 	withFake.filter(d => d.day === exampleDay).forEach(d => d.exampleDay = true);
 
 	const example1 = withFake.find(d => d.rank === 0 && d.exampleDay);
+	console.log(example1);
 	example1.highlightAlt = "example1";
 	example1.annotation = {
 		figure: "recent",
@@ -258,8 +268,6 @@ export default async function loadStationData(id) {
 	custom["fulldate-example2"] = format(example2.date, "MMMM d, y");
 	custom["duration-example2"] = formatDistanceStrict(example1.date, example2.date);
 	custom["year-example2"] = format(example2.date, "y");
-
-	// console.log(custom);
 
 	return { rawData, threshold, custom };
 }

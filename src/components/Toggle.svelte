@@ -41,7 +41,7 @@
 <style>
   button.view {
     position: absolute;
-    top: 65%;
+    top: 60%;
     left: 50%;
     transform: translate(-50%, -100%);
     z-index: var(--z-overlay);
@@ -60,11 +60,12 @@
     line-height: 1;
     font-size: 2rem;
     border-radius: 0;
+    transform: translate(0, -5vh);
   }
 
   .outer {
     position: absolute;
-    top: 0;
+    top: 5%;
     left: 0;
     width: 100%;
     height: 100%;
@@ -76,6 +77,7 @@
 
   .inner {
     max-width: 960px;
+    padding: 0 1rem;
     margin: 0 auto;
   }
 
@@ -97,5 +99,11 @@
   th:last-of-type {
     padding-right: 1rem;
     text-align: right;
+  }
+
+  @media only screen and (min-width: 640px) {
+    button.view {
+      top: 65%;
+    }
   }
 </style>
