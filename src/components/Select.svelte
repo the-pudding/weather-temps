@@ -40,18 +40,22 @@
   let el;
 
   $: station = data.find((d) => d.id === value);
+  $: city = station.location;
 
   $: dispatch("changeStation", station);
 
   $: if (el && $viewport.width && $viewport.height)
     $selectY = el.getBoundingClientRect().top + el.offsetHeight + 16;
 
+  $: width = `${city.length + 3}ch`;
+  $: console.log(city, width);
+
   onMount(() => {
     dispatch("changeStation", station);
   });
 </script>
 
-<select bind:value bind:this={el}>
+<select bind:value bind:this={el} style:width>
   {#each grouped as [abbr, cities]}
     <optgroup label={getName(abbr)}>
       {#each cities as { id, state_abbr, location, lat, lon }}
