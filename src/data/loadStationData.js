@@ -196,7 +196,8 @@ export default async function loadStationData(id) {
 	example1.annotation = {
 		figure: "recent",
 		text: `${format(example1.date, "M/d/y")}`,
-		type: "temp"
+		type: "temp",
+		color: "primary"
 	};
 
 	const example2 = withFake.find(d => d.rank === 1 && d.exampleDay);
@@ -204,7 +205,8 @@ export default async function loadStationData(id) {
 	example2.annotation = {
 		figure: "recent",
 		text: `${format(example2.date, "M/d/y")} was an historic record at the time`,
-		type: "arrow"
+		type: "arrow",
+		color: "secondary"
 	};
 
 
