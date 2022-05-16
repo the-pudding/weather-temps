@@ -8,7 +8,7 @@
 </script>
 
 <button class="view" on:click={() => (visible = true)}
-  >View Record Details</button
+  >View Last Five Records</button
 >
 
 <div class="outer" on:click={() => (visible = false)} class:visible>
