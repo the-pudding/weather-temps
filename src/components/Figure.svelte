@@ -98,8 +98,8 @@
 <style>
   figure {
     max-width: 960px;
-    height: 75%;
-    top: 0;
+    height: 60%;
+    top: 5%;
     overflow: hidden;
     transition: transform 1s ease-in-out, filter 0.5s 1s;
   }
@@ -115,5 +115,11 @@
     left: 0;
     width: 100%;
     height: 100%;
+  }
+
+  @media only screen and (min-width: 640px) {
+    figure {
+      height: 65%;
+    }
   }
 </style>

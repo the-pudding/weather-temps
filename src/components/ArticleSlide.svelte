@@ -38,23 +38,27 @@
     left: 50%;
     width: 100%;
     max-width: 65rem;
-    height: 25%;
+    top: 67.5%;
+    height: 32.5%;
     transform: translate(-50%, 0);
     opacity: 0;
-    padding-top: 1rem;
+    transition: opacity 1s 0.25s ease-in-out;
   }
 
   p {
     margin: 0 auto;
     padding: 1rem 0;
-  }
-
-  div {
-    top: 75%;
-    transition: opacity 1s 0.25s ease-in-out;
+    padding-bottom: 0.5rem;
   }
 
   .active div {
     opacity: 1;
+  }
+
+  @media only screen and (min-width: 640px) {
+    div {
+      height: 25%;
+      top: 75%;
+    }
   }
 </style>

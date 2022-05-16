@@ -51,7 +51,6 @@ figure svg {
 .subtext mark, .text mark {
 	padding: 0;
 	background: none;
-	font-weight: 600;
 }
 
 mark.primary {

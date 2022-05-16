@@ -14,6 +14,7 @@
     padding: 0 1rem;
     font-family: var(--sans);
     text-transform: uppercase;
+    transform: translate(0, -100%);
   }
 
   p {
