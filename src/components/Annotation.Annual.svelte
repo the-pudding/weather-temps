@@ -8,12 +8,12 @@
   export let data;
 </script>
 
-{#each data as d (d.day)}
+{#each data as d, i (i)}
   {@const left = `${$xGet(d) - w}px`}
   {@const top = `${$yGet(d)}px`}
   {@const flip = $xGet(d) > $xRange[1] * 0.67}
   <div
-    in:fade={{ delay: 1000 }}
+    in:fade={{ delay: 0 }}
     out:fade={{ duration: 150 }}
     style:left
     style:top
@@ -31,6 +31,7 @@
 <style>
   div {
     position: absolute;
+    transition: all 1s ease-in-out;
   }
 
   span {
