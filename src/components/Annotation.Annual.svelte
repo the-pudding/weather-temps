@@ -12,12 +12,14 @@
   {@const left = `${$xGet(d) - w}px`}
   {@const top = `${$yGet(d)}px`}
   {@const flip = $xGet(d) > $xRange[1] * 0.67}
+  {@const alltime = d.highlight === "alltime"}
   <div
-    in:fade={{ delay: 0 }}
+    in:fade={{ delay: 1000 }}
     out:fade={{ duration: 150 }}
     style:left
     style:top
     class:flip
+    class:alltime
   >
     <span style="--w: {w}px;" />
     {#if d.annotation && data.length === 1}
@@ -31,7 +33,13 @@
 <style>
   div {
     position: absolute;
+    top: 0;
+    left: 50%;
     transition: all 1s ease-in-out;
+  }
+
+  div.alltime {
+    transition: none;
   }
 
   span {
