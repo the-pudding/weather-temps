@@ -31,7 +31,7 @@
     const { id, location, state_abbr } = detail;
     const data = await loadStationData(id);
     stationId = id;
-    data.custom.location = `${location}, ${state_abbr} area`;
+    data.custom.location = `${location}, ${state_abbr}`;
     custom = data.custom;
     rawData = data.rawData;
     threshold = data.threshold;
