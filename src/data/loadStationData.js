@@ -183,10 +183,7 @@ export default async function loadStationData(id) {
 		if (attempt >= 5) return undefined;
 		const record5Days = withFake.filter(d => d.highlight === "record5").map(d => d.day);
 		const pick = record5Days[attempt];
-		console.log(pick);
 		const record5Rank2 = withFake.find(d => d.day === pick && d.rank === 1);
-		console.log({ attempt, record5Rank2 })
-		console.table(withFake.filter(d => d.day === pick));
 		if (record5Rank2) return record5Rank2.day;
 		else return getExampleDay(attempt + 1);
 	};
@@ -195,7 +192,6 @@ export default async function loadStationData(id) {
 	withFake.filter(d => d.day === exampleDay).forEach(d => d.exampleDay = true);
 
 	const example1 = withFake.find(d => d.rank === 0 && d.exampleDay);
-	console.log(example1);
 	example1.highlightAlt = "example1";
 	example1.annotation = {
 		figure: "recent",
