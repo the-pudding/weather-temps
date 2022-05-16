@@ -87,6 +87,6 @@
     text-align: left;
     transform: translate(calc(100% + var(--diam)), 0);
     padding-right: 0;
-    padding-left: 1.5em;
+    padding-left: 1em;
   }
 </style>

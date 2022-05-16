@@ -17,10 +17,16 @@
 
   const position = "absolute";
   const pad = 16;
-  const padding = { top: pad * 2, right: pad, bottom: pad * 3, left: pad };
+  const padding = {
+    top: pad * 2,
+    right: pad * 1.5,
+    bottom: pad * 3,
+    left: pad * 1
+  };
   const minDays = 4;
   const yExtent = extent(rawData, (d) => d.temp);
-  const yDomain = [Math.min(yExtent[0] - 1, 0), yExtent[1] + 1];
+  // const yDomain = [Math.min(yExtent[0] - 1, 0), yExtent[1] + 1];
+  const yDomain = [yExtent[0] - 5, yExtent[1] + 5];
   const dur = writable(2000);
 
   console.log({ stationId });
