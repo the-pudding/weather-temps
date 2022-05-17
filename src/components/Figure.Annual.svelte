@@ -66,12 +66,23 @@
 
   let highlight;
   let targetExtentDay = extentAnnual;
+  let tempHide;
+  let tempHideTimer;
 
   $: showAxis = $activeSlide > 3 && $activeSlide < 7;
   $: duration = $dir === "right" ? $dur : 0;
-  // $: opacity = $activeSlide === 5 ? 0 : 1;
-  // $: tweenOpacity.set(opacity, { duration });
-
+  $: delay = $dir === "right" && $activeSlide === 4 ? 1000 : 0;
+  $: {
+    if (delay) {
+      tempHide = true;
+      tempHideTimer = setTimeout(() => {
+        tempHide = false;
+      }, delay);
+    } else {
+      clearTimeout(tempHideTimer);
+      tempHide = false;
+    }
+  }
   $: {
     targetExtentDay =
       $activeSlide < 4
@@ -82,6 +93,7 @@
   }
   $: tweenExtentDay.set([targetExtentDay[0] - 1, targetExtentDay[1]], {
     duration,
+    delay,
     easing: cubicInOut
   });
   $: xDomain = $tweenExtentDay;
@@ -110,10 +122,10 @@
     else highlight = undefined;
   }
   $: data = rankData.filter((d) =>
-    $activeSlide < 7 && $activeSlide > 3
-      ? true
-      : $activeSlide === 3
+    $activeSlide === 3 || tempHide
       ? d[x] >= extentFakeMap[0] && d[x] <= extentFakeMap[1]
+      : $activeSlide < 7 && $activeSlide > 3
+      ? true
       : d[x] === extentExample[1]
   );
 </script>

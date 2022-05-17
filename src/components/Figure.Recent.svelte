@@ -72,22 +72,25 @@
 
   $: showAxis = $activeSlide < 4 || $activeSlide > 6;
   $: showFirst = $activeSlide > 1 && $activeSlide < 6;
-  $: duration = $dir === "right" ? $dur : 0;
+  $: duration = $dir === "right" && showAxis ? $dur : 0;
+  $: delay = $dir === "right" && $activeSlide === 4 ? 1000 : 0;
 
-  $: x = $activeSlide < 4 ? "fakeDay" : "day";
+  $: x = $activeSlide < 5 ? "fakeDay" : "day";
   $: targetExtentDay =
     $activeSlide < 2
       ? [extentFake[1] - minDays, extentFake[1]]
-      : $activeSlide < 4
+      : $activeSlide < 5
       ? [extentFake[0], extentFake[1]]
       : $activeSlide < 7
       ? extentAnnual
       : [extentExample[1] - minDays, extentExample[1]];
   $: tweenExtentDay.set([targetExtentDay[0] - 1, targetExtentDay[1]], {
     duration,
+    delay,
     easing: cubicInOut
   });
   $: xDomain = $tweenExtentDay;
+  $: console.log(xDomain);
   $: daysInView = xDomain[1] - xDomain[0];
   $: m = daysInView > threshold ? 0 : 2;
   $: margin = daysInView * m * 2;
@@ -96,14 +99,13 @@
   $: w = realW / daysInView - widthAdustment;
   $: h = Math.max(2, Math.floor(height * 0.00625)) - heightAdjustment;
   $: xPadding = [pad, pad * 3];
+  $: hideCanvas = $activeSlide > 3 && $activeSlide < 7;
 
   $: {
     if ($activeSlide < 2)
       highlight = rawData.filter((d) => d.highlight === "latest");
     else if ($activeSlide === 2)
       highlight = [{ ...rawData.find((d) => d.highlight === "hot") }];
-    // else if ($activeSlide === 3)
-    //   highlight = [{ ...rawData.find((d) => d.highlight === "top") }];
     else if ($activeSlide === 7)
       highlight = [{ ...rawData.find((d) => d.highlightAlt === "example1") }];
     else if ($activeSlide === 8)
@@ -122,10 +124,8 @@
     .filter((d) =>
       $activeSlide < 2
         ? d[x] === extentFake[1]
-        : $activeSlide < 4
-        ? d[x] >= extentFake[0] && d[x] <= extentFake[1]
         : $activeSlide < 7
-        ? false
+        ? d[x] >= extentFake[0] && d[x] <= extentFake[1]
         : d.day === extentExample[1]
     )
     .map((d) => ({
@@ -152,7 +152,7 @@
       </Html>
     </div>
 
-    <div>
+    <div class="scatter" class:hideCanvas>
       <Canvas>
         <ScatterCanvas {w} {h} />
       </Canvas>
@@ -164,3 +164,14 @@
     </div>
   </LayerCake>
 {/if}
+
+<style>
+  .scatter {
+    opacity: 1;
+    transition: opacity 1s ease-in-out;
+  }
+
+  .hideCanvas {
+    opacity: 0;
+  }
+</style>
