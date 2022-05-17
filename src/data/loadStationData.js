@@ -1,4 +1,4 @@
-import { format, formatDistanceStrict, differenceInDays, getDayOfYear } from "date-fns";
+import { format, formatDistanceStrict, differenceInDays, getDayOfYear, addDays } from "date-fns";
 import { csvParse, range, ascending, descending, min, max } from "d3";
 import ordinal from "ordinal";
 // import raw from "$data/stations/AUSthr.csv";
@@ -14,15 +14,18 @@ export default async function loadStationData(id) {
 	const debug = false;
 
 
-	const now = new Date(2022, 4, 12);
+	const parseDate = (str) => {
+		const [y, m, d] = str.split("-");
+		return new Date(+y, +m - 1, +d);
+	};
+
+	raw.sort((a, b) => descending(a.date, b.date));
+
+	const now = addDays(parseDate(raw[0].date), 1);
 	const nowDay = getDayOfYear(now);
 
 	if (debug) console.log({ now, nowDay });
 
-	const parseDate = str => {
-		const [y, m, d] = str.split("-");
-		return new Date(+y, +m - 1, +d);
-	};
 
 	const clean = raw.filter(d => d.temp !== "M").map((d) => ({
 		...d,
