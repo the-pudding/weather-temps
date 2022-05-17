@@ -2,7 +2,6 @@
   import { setContext, onMount, onDestroy, tick } from "svelte";
   import { writable } from "svelte/store";
   import { max, extent } from "d3";
-  import { fade } from "svelte/transition";
   import { activeSlide } from "$stores/misc";
   import FigureRecent from "$components/Figure.Recent.svelte";
   import FigureAnnual from "$components/Figure.Annual.svelte";
@@ -80,12 +79,12 @@
   <figure class:tease bind:clientWidth={width} bind:offsetHeight={height}>
     <Title hed={custom.location} dek="Daily High Temps." />
     {#if $activeSlide < 9}
-      <div out:fade={{ duration: 0 }}>
+      <div>
         <FigureRecent {width} {height} />
       </div>
     {/if}
     {#if $activeSlide >= 3 && $activeSlide < 9}
-      <div out:fade={{ duration: 0 }}>
+      <div>
         <FigureAnnual {width} {height} />
       </div>
     {/if}

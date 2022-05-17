@@ -115,15 +115,17 @@ export default async function loadStationData(id) {
 
 	// latest top
 	const latestTop = withFake.find(d => d.day === latest.day && d.rank === 0);
-	latestTop.highlight = "latest";
-	latestTop.annotation = {
-		figure: "recent",
-		text: `Hottest ${format(latestTop.date, "MMMM d")}: ${format(latestTop.date, "y")}`,
-		type: "side"
-	};
+	if (latestTop.daysSinceNow !== latest.daysSinceNow) {
+		latestTop.highlight = "latest";
+		latestTop.annotation = {
+			figure: "recent",
+			text: `Hottest ${format(latestTop.date, "MMMM d")}: ${format(latestTop.date, "y")}`,
+			type: "side"
+		};
+	}
 
 	const latestMin = min(withFake.filter(d => d.day === latest.day), d => d.temp);
-	const latestBottom = withFake.find(d => d.day === latestTop.day && d.temp === latestMin);
+	const latestBottom = withFake.find(d => d.day === latest.day && d.temp === latestMin);
 	latestBottom.highlight = "latest";
 	latestBottom.annotation = {
 		figure: "recent",
@@ -132,7 +134,7 @@ export default async function loadStationData(id) {
 	};
 
 	// offset latest
-	if (Math.abs(latest.temp - latestTop.temp) <= 5) latest.annotation.offset = 1;
+	if (latestTop.daysSinceNow !== latest.daysSinceNow && Math.abs(latest.temp - latestTop.temp) <= 5) latest.annotation.offset = 1;
 	else if (Math.abs(latest.temp - latestBottom.temp) <= 5) latest.annotation.offset = -1;
 
 
@@ -167,14 +169,14 @@ export default async function loadStationData(id) {
 
 	// most recent record
 	const record = withFake.find(d => d.rank === 0);
-	record.highlight = "record";
-	record.annotation = {
-		figure: "annual",
-		text: `${format(record.date, "M/d/y")}, ${record.temp}°F`,
-	};
+	// record.highlight = "record";
+	// record.annotation = {
+	// 	figure: "annual",
+	// 	text: `${format(record.date, "M/d/y")}, ${record.temp}°F`,
+	// };
 
-	// recent 5 records
-	withFake.filter(d => d.rank === 0).slice(0, 5).forEach(d => {
+	// recent 5 records NOT latest
+	withFake.filter(d => d.rank === 0 && d.highlight !== "latest").slice(0, 5).forEach(d => {
 		d.highlight = "record5";
 	});
 
@@ -251,7 +253,7 @@ export default async function loadStationData(id) {
 
 	custom["date-record"] = format(record.date, "MMMM do");
 
-	custom["duration-record"] = formatDistanceStrict(latest.date, record.date);
+	custom["duration-record"] = latest.daysSinceNow === record.daysSinceNow ? "yesterday" : formatDistanceStrict(latest.date, record.date);
 
 	custom["temp-record"] = `${record.temp}°F`;
 

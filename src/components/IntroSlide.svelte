@@ -10,6 +10,7 @@
   export let text2;
   export let text2_alt;
   export let loc;
+  export let ready;
   export let prompt;
 
   $: response = alt ? text2_alt : text2;
@@ -25,7 +26,7 @@
             <Select on:changeStation {loc} /> ?
           </p>
           <p class="text">{response}</p>
-          <p class="subtext">
+          <p class="subtext" class:ready>
             <span class="tap">{@html tapSvg}</span>
             {prompt} &rarr;
           </p>
@@ -55,6 +56,15 @@
 
   .text {
     font-size: 36px;
+  }
+
+  .subtext {
+    opacity: 0;
+    transition: all 250ms;
+  }
+
+  .subtext.ready {
+    opacity: 1;
   }
 
   :global(.tap svg) {

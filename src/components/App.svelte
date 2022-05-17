@@ -29,8 +29,8 @@
 
   const changeStation = async ({ detail }) => {
     const { id, location, state_abbr } = detail;
-    const data = await loadStationData(id);
     stationId = id;
+    const data = await loadStationData(stationId);
     data.custom.location = `${location}, ${state_abbr}`;
     custom = data.custom;
     rawData = data.rawData;
@@ -71,9 +71,10 @@
   <Slider bind:this={slider} bind:active={$activeSlide} duration="0">
     <IntroSlide
       {...copy.intro}
+      {loc}
       active={$activeSlide === 0}
       alt={yesterdayWasRecord}
-      {loc}
+      ready={!!stationId}
       on:changeStation={changeStation}
     />
 

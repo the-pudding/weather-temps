@@ -1,10 +1,13 @@
 <script>
+  import { ascending } from "d3";
   import Title from "$components/Title.svelte";
   import Icon from "$components/Helpers/Icon.svelte";
 
   export let location;
   export let data;
   let visible;
+
+  data.sort((a, b) => ascending(a.daysSinceNow, b.daysSinceNow));
 </script>
 
 <button class="view" on:click={() => (visible = true)}
