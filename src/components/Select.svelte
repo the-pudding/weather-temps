@@ -84,4 +84,23 @@
       margin-left: 0.25em;
     }
   }
+
+  @media only screen and (max-width: 475px) {
+    select {
+      font-size: 22px;
+      margin-left: 0;
+    }
+  }
+
+  @media only screen and (max-width: 424px) {
+    select {
+      font-size: 18px;
+    }
+  }
+
+  @media only screen and (max-width: 374px) {
+    select {
+      font-size: 16px;
+    }
+  }
 </style>

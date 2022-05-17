@@ -28,14 +28,26 @@
       const y = $yGet(d) - h / 2;
       $ctx.rect(x, y, w, h);
 
-      if (d.fill !== color.default) {
-        $ctx.lineWidth = 0;
-        $ctx.strokeStyle = d.fill;
-        $ctx.stroke();
-      }
+      
 
       $ctx.fillStyle = d.fill ?? fill;
       $ctx.fill();
+
+      if (d.fill !== color.default) {
+        $ctx.beginPath();
+        $ctx.lineWidth = 1;
+        $ctx.strokeStyle = d.fill;
+        $ctx.moveTo(x, y - .25);
+        $ctx.lineTo(x + w, y - .25);
+        $ctx.stroke()
+
+        $ctx.beginPath();
+        $ctx.lineWidth = 1;
+        $ctx.strokeStyle = d.fill;
+        $ctx.moveTo(x, y + h + .25);
+        $ctx.lineTo(x + w, y + h + .25);
+        $ctx.stroke();
+      }
     });
   }
 </script>
