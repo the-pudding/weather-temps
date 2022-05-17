@@ -53,13 +53,13 @@
     margin-top: calc(var(--offset) * 16px);
     transform: translate(-100%, -8px);
     text-align: right;
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 600;
     z-index: var(--z-top);
     line-height: 1.1;
     padding-right: 0.5em;
     width: 100%;
-    max-width: 10rem;
+    max-width: 13rem;
   }
 
   span {
