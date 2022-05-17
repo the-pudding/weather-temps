@@ -187,7 +187,9 @@ export default async function loadStationData(id) {
 
 	// recent 5 that also had the most recent 2nd place that isn't a tie at top
 	const getExampleDay = (attempt) => {
-		if (attempt >= 5) return undefined;
+		if (attempt >= 5) {
+			return withFake.find(d => d.highlight === "record5").day;
+		}
 		const record5Days = withFake.filter(d => d.highlight === "record5").map(d => d.day);
 		const pick = record5Days[attempt];
 		const record5Rank2 = withFake.find(d => d.day === pick && d.rank === 1);
@@ -196,6 +198,7 @@ export default async function loadStationData(id) {
 	};
 
 	const exampleDay = getExampleDay(0);
+
 	withFake.filter(d => d.day === exampleDay).forEach(d => d.exampleDay = true);
 
 	const example1 = withFake.find(d => d.rank === 0 && d.exampleDay);
@@ -207,15 +210,21 @@ export default async function loadStationData(id) {
 		color: "primary"
 	};
 
-	const example2 = withFake.find(d => d.rank === 1 && d.exampleDay);
+	const sameDay = !withFake.find(d => d.exampleDay && d.rank === 1);
+
+	const example2 = withFake.find(d => {
+		if (sameDay) return d.rank === 0 && d.exampleDay && !d.highlightAlt;
+		else return d.rank === 1 && d.exampleDay;
+	});
 	example2.highlightAlt = "example2";
 	example2.annotation = {
 		figure: "recent",
-		text: `${format(example2.date, "M/d/y")} was an historic record at the time`,
+		text: `${format(example2.date, "M/d/y")} ${sameDay ? "also held the record" : ""}`,
 		type: "arrow",
 		color: "secondary"
 	};
 
+	example1.annotation.same = sameDay;
 
 	withFake.sort((a, b) => ascending(a.highlight ? 1 : 0, b.highlight ? 1 : 0) || ascending(a.recent ? 1 : 0, b.recent ? 1 : 0) || ascending(a.rank, b.rank));
 	// keep only recent days or ranked ones, trash the rest

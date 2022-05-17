@@ -112,7 +112,8 @@
         {
           ...rawData.find(
             (d) =>
-              d.highlightAlt === "example1" || d.highlightAlt === "example2"
+              (d.highlightAlt === "example1" && !d.annotation.same) ||
+              d.highlightAlt === "example2"
           )
         }
       ];

@@ -1,6 +1,6 @@
 <script>
   import { dev } from "$app/env";
-  import { onMount } from "svelte";
+  import { onMount, tick } from "svelte";
   import { fade } from "svelte/transition";
   import Slider from "$components/helpers/Slider.svelte";
   import Tap from "$components/helpers/Tap.svelte";
@@ -29,14 +29,16 @@
   };
 
   const changeStation = async ({ detail }) => {
+    rawData = undefined;
     const { id, location, state_abbr } = detail;
-    stationId = id;
-    const data = await loadStationData(stationId);
+    const data = await loadStationData(id);
     data.custom.location = `${location}, ${state_abbr}`;
     custom = data.custom;
     rawData = data.rawData;
     threshold = data.threshold;
     heatmapData = data.heatmapData;
+    await tick();
+    stationId = id;
   };
 
   $: console.log({ stationId });
