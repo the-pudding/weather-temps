@@ -22,7 +22,8 @@
     .map((d) => ({
       ...d,
       lat: +d.lat,
-      lon: +d.lon
+      lon: +d.lon,
+      location: d.name || d.location
     }))
     .map((d) => ({
       ...d,
