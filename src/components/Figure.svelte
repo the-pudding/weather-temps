@@ -103,8 +103,8 @@
 <style>
   figure {
     max-width: 960px;
-    height: 60%;
-    top: 5%;
+    top: 1rem;
+    height: calc(60% - 1rem);
     overflow: hidden;
     transition: transform 1s ease-in-out, filter 0.5s 1s;
   }
@@ -124,7 +124,7 @@
 
   @media only screen and (min-width: 640px) {
     figure {
-      height: 65%;
+      height: calc(65% - 1rem);
     }
   }
 </style>

@@ -42,9 +42,9 @@
 <div>
   <table>
     <thead>
-      <th>Year</th>
-      {#each names as name}
-        <th>{name}</th>
+      <th />
+      {#each names as name, i}
+        <th data-name={name} />
       {/each}
     </thead>
     {#each data as { year, months }}
@@ -72,7 +72,10 @@
 
   table {
     font-family: var(--sans);
-    margin-top: 4rem;
+    table-layout: auto;
+    font-size: 14px;
+    max-width: 600px;
+    margin: 4rem auto 0 auto;
   }
 
   th {
@@ -90,7 +93,12 @@
   td {
     border: 1px dashed white;
     text-align: center;
-    padding: 0.25rem 0;
+    padding: 0;
+  }
+
+  th,
+  td {
+    width: 1em;
     position: relative;
   }
 
@@ -112,32 +120,40 @@
     color: var(--color-bg);
   }
 
-  th {
-    visibility: hidden;
-  }
-
   th:first-of-type {
-    visibility: hidden;
+    visibility: visible;
     border: none;
   }
 
   td:first-of-type {
-    width: 4rem;
+    min-width: 2.5em;
+    max-width: 2.5em;
+    width: 2.5em;
     padding-right: 0.5rem;
     border: none;
     text-align: right;
   }
 
-  th:nth-of-type(3n + 2) {
-    visibility: visible;
+  th:before {
+    content: attr(data-name);
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, -75%);
+    display: none;
+  }
+
+  th:nth-of-type(3n - 1):before {
+    display: block;
   }
 
   @media only screen and (min-width: 640px) {
     td {
       padding: 0.25rem;
     }
-    th {
-      visibility: visible;
+
+    th:before {
+      display: block;
     }
   }
 </style>

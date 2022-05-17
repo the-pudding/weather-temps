@@ -1,4 +1,34 @@
 id,state_abbr,location,name,lat,lon,remove
+ANNthr,AK,Annette,,55.06,-131.54,TRUE
+ATHO1thr,OH,Athens,,39.33,-82.1,TRUE
+ACYthr,NJ,Atlantic City,,39.36,-74.43,TRUE
+AUSthr,TX,Austin-Bergstrom Airport,,30.2,-97.67,TRUE
+DMHthr,MD,Baltimore Downtown,,39.29,-76.62,TRUE
+BROO3thr,OR,Brookings,,42.05,-124.29,TRUE
+BRCN7thr,NC,Bryson City,,35.42,-83.45,TRUE
+TKKthr,FM,Chuuk,,7.45,151.81,TRUE
+GUMthr,GU,Guam,,13.44,144.78,TRUE
+JKLthr,KY,Jackson,,37.56,-83.38,TRUE
+TKRthr,PW,Koror,,7.27,134.42,TRUE
+KWAthr,MH,Kwajalein,,8.72,167.73,TRUE
+LAXthr,CA,Los Angeles Airport,,33.94,-118.41,TRUE
+KMRthr,MH,Majuro,,7.09,171.38,TRUE
+JFKthr,NY,New York-Kennedy Airport,,40.67,-73.77,TRUE
+LGAthr,NY,New York-LGA,,40.71,-74.01,TRUE
+ORDN1thr,NE,Ord,,41.6,-98.93,TRUE
+STUthr,AS,Pago Pago,,-14.27,-170.7,TRUE
+PFIP1thr,PA,Philadelphia Center City,,39.95,-75.17,TRUE
+TTPthr,FM,Pohnpei,,6.96,158.21,TRUE
+PDXthr,OR,Portland,,45.51,-122.68,TRUE
+RNMthr,CA,Ramona,,33.04,-116.87,TRUE
+RAPthr,SD,Rapid City,,44.08,-103.23,TRUE
+SACthr,CA,Sacramento,,38.58,-121.49,TRUE
+GSNthr,MP,Saipan,,15.21,145.72,TRUE
+WAKthr,UM,Wake Island,,19.31,166.6,TRUE
+WASS1thr,SC,Ware Shoals,,34.4,-82.25,TRUE
+WDSR1thr,SC,Woodruff,,34.74,-82.04,TRUE
+TYAthr,FM,Yap,,9.54,138.1,TRUE
+ZZVthr,OH,Zanesville,,39.94,-82,TRUE
 ABRthr,SD,Aberdeen,,45.46,-98.49,
 ABIthr,TX,Abilene,,32.45,-99.74,
 AKIS1thr,SC,Aiken,,33.56,-81.72,
@@ -14,23 +44,18 @@ AMAthr,TX,Amarillo,,35.21,-101.83,
 AFLI1thr,ID,American Falls,,42.78,-112.85,
 ANCthr,AK,Anchorage,,61.22,-149.86,
 NAKthr,MD,Annapolis,,38.98,-76.49,
-ANNthr,AK,Annette,,55.06,-131.54,TRUE
 AVLthr,NC,Asheville,,35.6,-82.55,
 ASXthr,WI,Ashland,,46.59,-90.89,
 ASTthr,OR,Astoria,,46.19,-123.83,
 AHNthr,GA,Athens,,33.96,-83.37,
-ATHO1thr,OH,Athens,,39.33,-82.1,TRUE
 ATLthr,GA,Atlanta,,33.75,-84.39,
-ACYthr,NJ,Atlantic City,,39.36,-74.43,TRUE
 55Nthr,NJ,Atlantic City Marina,Atlantic City,39.36,-74.43,
 AGSthr,GA,Augusta,,33.48,-81.98,
 ATTthr,TX,Austin,,30.27,-97.74,
-AUSthr,TX,Austin-Bergstrom Airport,,30.2,-97.67,TRUE
 AVPthr,PA,Avoca,,41.34,-75.74,
 BKEthr,OR,Baker City,,44.77,-117.83,
 BFLthr,CA,Bakersfield,,35.37,-119.02,
 BWIthr,MD,Baltimore,,39.29,-76.61,
-DMHthr,MD,Baltimore Downtown,,39.29,-76.62,TRUE
 BGRthr,ME,Bangor,,44.8,-68.77,
 BRWthr,AK,Barrow,,71.29,-156.79,
 BTRthr,LA,Baton Rouge,,30.44,-91.19,
@@ -54,10 +79,8 @@ BOSthr,MA,Boston,,42.36,-71.06,
 BRDthr,MN,Brainerd,,46.35,-94.2,
 BDRthr,CT,Bridgeport,,41.18,-73.19,
 TRIthr,TN,Bristol-Johnson City,,36.29,-82.41,
-BROO3thr,OR,Brookings,,42.05,-124.29,TRUE
 BKVthr,FL,Brooksville,,28.55,-82.39,
 BROthr,TX,Brownsville,,25.9,-97.5,
-BRCN7thr,NC,Bryson City,,35.42,-83.45,TRUE
 BUFthr,NY,Buffalo,,42.89,-78.88,
 BURthr,CA,Burbank-Glendale-Pasadena,,34.21,-118.22,
 BYIthr,ID,Burley,,42.54,-113.79,
@@ -81,7 +104,6 @@ CHAthr,TN,Chattanooga,,35.05,-85.31,
 CYSthr,WY,Cheyenne,,41.13,-104.82,
 ORDthr,IL,Chicago,,41.88,-87.63,
 CDSthr,TX,Childress,,34.43,-100.21,
-TKKthr,FM,Chuuk,,7.45,151.81,TRUE
 CVGthr,OH,Cincinnati,,39.16,-84.46,
 CKBthr,WV,Clarksburg,,39.28,-80.34,
 CAOthr,NM,Clayton,,36.45,-103.18,
@@ -156,7 +178,6 @@ GSOthr,NC,Greensboro,,36.07,-79.8,
 GLHthr,MS,Greenville,,33.4,-91.04,
 GSPthr,SC,Greenville,,34.94,-82.03,
 GWOthr,MS,Greenwood,,33.52,-90.18,
-GUMthr,GU,Guam,,13.44,144.78,TRUE
 GPTthr,MS,Gulfport,,30.38,-89.09,
 GKNthr,AK,Gulkana,,62.27,-145.38,
 HGRthr,MD,Hagerstown,,39.64,-77.72,
@@ -183,7 +204,6 @@ INDthr,IN,Indianapolis,,39.77,-86.15,
 INLthr,MN,International Falls,,48.6,-93.4,
 ISPthr,NY,Islip,,40.73,-73.22,
 JANthr,MS,Jackson,,32.3,-90.18,
-JKLthr,KY,Jackson,,37.56,-83.38,TRUE
 JAXthr,FL,Jacksonville,,30.33,-81.66,
 JSTN6thr,NY,Jamestown,,42.1,-79.24,
 JEFthr,MO,Jefferson City,,38.58,-92.18,
@@ -200,9 +220,7 @@ IGMthr,AZ,Kingman,,35.19,-114.06,
 LMTthr,OR,Klamath Falls,,42.22,-121.78,
 TYSthr,TN,Knoxville,,35.96,-83.92,
 ADQthr,AK,Kodiak,,57.8,-152.39,
-TKRthr,PW,Koror,,7.27,134.42,TRUE
 OTZthr,AK,Kotzebue,,66.9,-162.59,
-KWAthr,MH,Kwajalein,,8.72,167.73,TRUE
 LSEthr,WI,La Crosse,,43.81,-91.25,
 LCHthr,LA,Lake Charles,,30.22,-93.22,
 LHUthr,AZ,Lake Havasu City,,34.47,-114.35,
@@ -221,7 +239,6 @@ LNKthr,NE,Lincoln,,40.81,-96.71,
 LITthr,AR,Little Rock,,34.75,-92.27,
 LGBthr,CA,Long Beach,,33.77,-118.19,
 GGGthr,TX,Longview,,32.5,-94.74,
-LAXthr,CA,Los Angeles Airport,,33.94,-118.41,TRUE
 CQTthr,CA,Los Angeles Downtown,Los Angeles,34.05,-118.26,
 SDFthr,KY,Louisville,,38.25,-85.77,
 LBBthr,TX,Lubbock,,33.58,-101.85,
@@ -230,7 +247,6 @@ LYHthr,VA,Lynchburg,,37.41,-79.14,
 MCNthr,GA,Macon,,32.84,-83.63,
 MAEthr,CA,Madera,,36.96,-120.06,
 MSNthr,WI,Madison,,43.07,-89.39,
-KMRthr,MH,Majuro,,7.09,171.38,TRUE
 MHTthr,NH,Manchester,,42.99,-71.46,
 MFDthr,OH,Mansfield,,40.76,-82.52,
 MTHthr,FL,Marathon,,24.73,-81.04,
@@ -276,8 +292,6 @@ NBRN4thr,NJ,New Brunswick,,40.49,-74.44,
 MSYthr,LA,New Orleans,,29.95,-90.08,
 PHDthr,OH,New Philadelphia,,40.49,-81.45,
 NYCthr,NY,New York-Central Park,New York City,40.78,-73.97,
-JFKthr,NY,New York-Kennedy Airport,,40.67,-73.77,TRUE
-LGAthr,NY,New York-LGA,,40.71,-74.01,TRUE
 EWRthr,NJ,Newark,,40.73,-74.17,
 NCBN6thr,NY,Newcomb,,43.97,-74.12,
 OMEthr,AK,Nome,,64.5,-165.41,
@@ -291,12 +305,10 @@ OMAthr,NE,Omaha,,41.26,-95.94,
 OMKthr,WA,Omak,,48.41,-119.53,
 ONOthr,OR,Ontario,,44.03,-116.97,
 OSPA3thr,AZ,Oracle,,32.61,-110.77,
-ORDN1thr,NE,Ord,,41.6,-98.93,TRUE
 MCOthr,FL,Orlando,,28.54,-81.38,
 OSWN6thr,NY,Oswego,,43.46,-76.51,
 LOXthr,CA,Oxnard,,34.2,-119.18,
 PAHthr,KY,Paducah,,37.09,-88.6,
-STUthr,AS,Pago Pago,,-14.27,-170.7,TRUE
 PSPthr,CA,Palm Springs,,33.82,-116.51,
 PMDthr,CA,Palmdale,,34.58,-118.12,
 PKBthr,WV,Parkersburg,,39.26,-81.56,
@@ -304,16 +316,13 @@ PDTthr,OR,Pendleton,,45.67,-118.79,
 PNSthr,FL,Pensacola,,30.42,-87.22,
 PIAthr,IL,Peoria,,40.69,-89.59,
 PHLthr,PA,Philadelphia,,39.95,-75.16,
-PFIP1thr,PA,Philadelphia Center City,,39.95,-75.17,TRUE
 PHXthr,AZ,Phoenix,,33.45,-112.08,
 PICS1thr,SC,Pickens,,34.88,-82.71,
 PBFthr,AR,Pine Bluff,,34.22,-92,
 PITthr,PA,Pittsburgh,,40.44,-80,
 PBGthr,NY,Plattsburgh,,44.7,-73.45,
 PIHthr,ID,Pocatello,,42.87,-112.45,
-TTPthr,FM,Pohnpei,,6.96,158.21,TRUE
 POFthr,MO,Poplar Bluff,,36.76,-90.39,
-PDXthr,OR,Portland,,45.51,-122.68,TRUE
 PWMthr,ME,Portland,,43.66,-70.26,
 PGWO3thr,OR,Portland Downtown,Portland,45.52,-122.68,
 POUthr,NY,Poughkeepsie,,41.71,-73.93,
@@ -324,8 +333,6 @@ PGDthr,FL,Punta Gorda,,26.93,-82.05,
 UILthr,WA,Quillayute,,47.94,-124.54,
 UINthr,IL,Quincy,,39.94,-91.4,
 RDUthr,NC,Raleigh,,35.79,-78.64,
-RNMthr,CA,Ramona,,33.04,-116.87,TRUE
-RAPthr,SD,Rapid City,,44.08,-103.23,TRUE
 UNRS2thr,SD,Rapid City Downtown,Rapid City,44.08,-103.23,
 RDGthr,PA,Reading,,40.34,-75.93,
 RDDthr,CA,Redding,,40.59,-122.39,
@@ -339,11 +346,9 @@ RSTthr,MN,Rochester,,44.02,-92.46,
 RFDthr,IL,Rockford,,42.27,-89.08,
 ROWthr,NM,Roswell,,33.4,-104.52,
 RUEthr,AR,Russellville,,35.28,-93.13,
-SACthr,CA,Sacramento,,38.58,-121.49,TRUE
 SMTC1thr,CA,Sacramento Downtown,Sacramento,38.58,-121.5,
 MBSthr,MI,Saginaw,,43.42,-83.95,
 STCthr,MN,Saint Cloud,,45.57,-94.2,
-GSNthr,MP,Saipan,,15.21,145.72,TRUE
 SLEthr,OR,Salem,,44.93,-123.04,
 SLNthr,KS,Salina,,38.84,-97.61,
 SBYthr,MD,Salisbury,,38.37,-75.6,
@@ -401,9 +406,7 @@ VUOthr,WA,Vancouver,,45.63,-122.67,
 VRBthr,FL,Vero Beach,,27.64,-80.39,
 VCTthr,TX,Victoria,,28.81,-97,
 ACTthr,TX,Waco,,31.57,-97.15,
-WAKthr,UM,Wake Island,,19.31,166.6,TRUE
 WALthr,VA,Wallops Island,,37.84,-75.48,
-WASS1thr,SC,Ware Shoals,,34.4,-82.25,TRUE
 DCAthr,DC,Washington,,38.89,-77.03,
 ALOthr,IA,Waterloo,,42.49,-92.34,
 AUWthr,WI,Wausau,,44.96,-89.63,
@@ -420,11 +423,8 @@ ILNthr,OH,Wilmington,,39.45,-83.83,
 WMCthr,NV,Winnemucca,,40.97,-117.74,
 INWthr,AZ,Winslow,,35.02,-110.7,
 GIFthr,FL,Winter Haven,,28.02,-81.73,
-WDSR1thr,SC,Woodruff,,34.74,-82.04,TRUE
 ORHthr,MA,Worcester,,42.26,-71.8,
 YKMthr,WA,Yakima,,46.6,-120.51,
 YAKthr,AK,Yakutat,,59.55,-139.73,
-TYAthr,FM,Yap,,9.54,138.1,TRUE
 YNGthr,OH,Youngstown,,41.1,-80.65,
 YUMthr,AZ,Yuma,,32.69,-114.62,
-ZZVthr,OH,Zanesville,,39.94,-82,TRUE
