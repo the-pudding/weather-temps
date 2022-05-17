@@ -4,7 +4,8 @@ import ordinal from "ordinal";
 // import raw from "$data/stations/AUSthr.csv";
 
 export default async function loadStationData(id) {
-	const response = await fetch(`stations/${id}.csv`);
+	const url = `https://pudding.cool/2022/03/weather-map-data/${id}.csv`
+	const response = await fetch(url);
 	const csv = await response.text();
 	const raw = csvParse(csv);
 	const BUFFER = 1.1; // for padding so recent hot day not flush left

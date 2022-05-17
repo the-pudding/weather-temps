@@ -90,7 +90,6 @@
     easing: cubicInOut
   });
   $: xDomain = $tweenExtentDay;
-  $: console.log(xDomain);
   $: daysInView = xDomain[1] - xDomain[0];
   $: m = daysInView > threshold ? 0 : 2;
   $: margin = daysInView * m * 2;
