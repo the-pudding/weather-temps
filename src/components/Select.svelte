@@ -27,7 +27,8 @@
     .map((d) => ({
       ...d,
       dist: distance(coords[0], coords[1], d.lat, d.lon)
-    }));
+    }))
+    .filter((d) => d.remove !== "TRUE");
 
   data.sort((a, b) => ascending(a.dist, b.dist));
   const nearest = data[0].id;
@@ -69,17 +70,17 @@
     position: relative;
     padding-top: 0.25em;
     padding-bottom: 0.25em;
-    margin-left: 0.25em;
     background-color: var(--color-gray-800);
     color: var(--color-fg-alt);
-    font-size: 0.85em;
     z-index: calc(var(--z-overlay) + 1);
+    margin-left: 0;
+    font-size: 0.8em;
   }
 
-  @media only screen and (max-width: 475px) {
+  @media only screen and (min-width: 640px) {
     select {
-      margin-left: 0;
-      font-size: 0.8em;
+      font-size: 0.85em;
+      margin-left: 0.25em;
     }
   }
 </style>

@@ -65,7 +65,7 @@
     transform: translate(0, 0.25em);
   }
 
-  @media only screen and (max-width: 475px) {
+  @media only screen and (max-width: 640px) {
     p:nth-of-type(n + 2) {
       max-width: 260px;
     }
@@ -74,5 +74,4 @@
       font-size: 18px;
     }
   }
-
 </style>

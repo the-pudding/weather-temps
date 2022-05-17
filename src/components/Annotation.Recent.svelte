@@ -59,6 +59,7 @@
     line-height: 1.1;
     padding-right: 0.5em;
     width: 100%;
+    max-width: 10rem;
   }
 
   span {
@@ -91,19 +92,15 @@
     padding-left: 1.5em;
   }
 
-  @media only screen and (max-width: 475px) {
+  p:nth-of-type(n + 2) {
+    max-width: 260px;
+  }
 
-    p {
-      max-width: 10rem;
-      font-size: 14px;
-    }
-
+  @media only screen and (min-width: 640px) {
+    p,
     p:nth-of-type(n + 2) {
-      max-width: 260px;
-    }
-
-    .subtext {
-      font-size: 18px;
+      max-width: 100%;
+      font-size: 16px;
     }
   }
 </style>

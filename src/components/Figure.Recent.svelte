@@ -93,7 +93,7 @@
   $: margin = daysInView * m * 2;
   $: sidePad = pad * 4;
   $: realW = width - padding.left - padding.right - sidePad;
-  $: w = (realW / daysInView) - widthAdustment;
+  $: w = realW / daysInView - widthAdustment;
   $: h = Math.max(2, Math.floor(height * 0.00625)) - heightAdjustment;
   $: xPadding = [pad, pad * 3];
 

@@ -22,10 +22,10 @@
   }
 
   .hed {
-    color: var(--color-fg-alt);    
+    color: var(--color-fg-alt);
   }
 
-  @media only screen and (max-width: 475px) {
+  @media only screen and (max-width: 640px) {
     p {
       font-size: 0.9em;
     }

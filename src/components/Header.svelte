@@ -25,7 +25,7 @@
 
   .wordmark a {
     display: inline-block;
-    max-width: 10rem;
+    max-width: 8rem;
     width: 100%;
     border: none;
     color: var(--color-fg);
@@ -44,9 +44,9 @@
     fill: currentColor;
   }
 
-  @media only screen and (max-width: 475px) {
+  @media only screen and (min-width: 640px) {
     .wordmark a {
-      max-width: 8rem;
+      max-width: 10rem;
     }
   }
 </style>

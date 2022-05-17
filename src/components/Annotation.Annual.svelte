@@ -57,7 +57,7 @@
     color: var(--color-fg);
     font-family: var(--font-form);
     margin: 0;
-    font-size: 16px;
+    font-size: 14px;
     z-index: var(--z-top);
     margin-top: -12px;
     line-height: 24px;
@@ -71,19 +71,9 @@
     text-align: right;
   }
 
-  @media only screen and (max-width: 475px) {
-    p:nth-of-type(n + 2) {
-      max-width: 260px;
-    }
-
-    .subtext {
-      font-size: 18px;
-    }
-    
+  @media only screen and (min-width: 640px) {
     p {
-      font-size: 14px
+      font-size: 16px;
     }
   }
-
-
 </style>
