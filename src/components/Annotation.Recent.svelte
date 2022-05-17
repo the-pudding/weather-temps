@@ -21,7 +21,8 @@
   {@const offset = d.annotation.offset || 0}
   {@const text = d.annotation.text}
   {@const temp = d.temp}
-  {@const forceTemp = d.highlightAlt === "example2"}
+  {@const forceTemp =
+    d.highlightAlt === "example1" || d.highlightAlt === "example2"}
   {@const flip = $xGet(d) < $xRange[1] * 0.5}
 
   <p
@@ -87,7 +88,7 @@
     text-align: left;
     transform: translate(calc(100% + var(--diam)), 0);
     padding-right: 0;
-    padding-left: 1em;
+    padding-left: 1.5em;
   }
 
   @media only screen and (max-width: 475px) {

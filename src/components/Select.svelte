@@ -48,7 +48,6 @@
     $selectY = el.getBoundingClientRect().top + el.offsetHeight + 16;
 
   $: width = `${city.length + 3}ch`;
-  $: console.log(city, width);
 
   onMount(() => {
     dispatch("changeStation", station);

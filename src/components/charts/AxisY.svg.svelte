@@ -31,11 +31,18 @@
       {#if gridlines !== false}
         <line
           class="gridline"
-          x1={i === 0 ? $xRange[0] : $xRange[1] - $xPadding[1] / 1.25}
+          x1={$xRange[1] - $xPadding[1] / 1.25}
           x2={$xRange[1] - $xPadding[1] / 1.5}
           y1={yTick}
           y2={yTick}
         />
+        <!-- <line
+          class="gridline"
+          x1={i === 0 ? $xRange[0] : $xRange[1] - $xPadding[1] / 1.25}
+          x2={$xRange[1] - $xPadding[1] / 1.5}
+          y1={yTick}
+          y2={yTick}
+        /> -->
       {/if}
       {#if tickMarks === true}
         <line class="tick-mark" x1="0" x2={6} y1={yTick} y2={yTick} />

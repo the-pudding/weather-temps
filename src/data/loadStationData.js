@@ -100,7 +100,7 @@ export default async function loadStationData(id) {
 		fakeDay: fakeMap.get(d.day)
 	}));
 
-	if (debug) console.table(withFake.slice(0, 60));
+	if (debug) console.log({ latest: withFake[0] });
 	// annotations
 	// latest
 	const latest = withFake[0];
@@ -178,11 +178,17 @@ export default async function loadStationData(id) {
 		d.highlight = "record5";
 	});
 
-	// recent 5 that also had the most recent 2nd place
-	const record5Days = withFake.filter(d => d.highlight === "record5").map(d => d.day);
-	// TODO potentially not possible if all recent 5 have tie at top spot
-	const record5Rank2 = withFake.find(d => record5Days.includes(d.day) && d.rank === 1);
-	const exampleDay = record5Rank2.day;
+	// recent 5 that also had the most recent 2nd place that isn't a tie at top
+	const getExampleDay = (attempt) => {
+		if (attempt >= 5) return undefined;
+		const record5Days = withFake.filter(d => d.highlight === "record5").map(d => d.day);
+		const pick = record5Days[attempt];
+		const record5Rank2 = withFake.find(d => d.day === pick && d.rank === 1);
+		if (record5Rank2) return record5Rank2.day;
+		else return getExampleDay(attempt + 1);
+	};
+
+	const exampleDay = getExampleDay(0);
 	withFake.filter(d => d.day === exampleDay).forEach(d => d.exampleDay = true);
 
 	const example1 = withFake.find(d => d.rank === 0 && d.exampleDay);
@@ -190,7 +196,8 @@ export default async function loadStationData(id) {
 	example1.annotation = {
 		figure: "recent",
 		text: `${format(example1.date, "M/d/y")}`,
-		type: "temp"
+		type: "temp",
+		color: "primary"
 	};
 
 	const example2 = withFake.find(d => d.rank === 1 && d.exampleDay);
@@ -198,7 +205,8 @@ export default async function loadStationData(id) {
 	example2.annotation = {
 		figure: "recent",
 		text: `${format(example2.date, "M/d/y")} was an historic record at the time`,
-		type: "arrow"
+		type: "arrow",
+		color: "secondary"
 	};
 
 
@@ -258,8 +266,6 @@ export default async function loadStationData(id) {
 	custom["fulldate-example2"] = format(example2.date, "MMMM d, y");
 	custom["duration-example2"] = formatDistanceStrict(example1.date, example2.date);
 	custom["year-example2"] = format(example2.date, "y");
-
-	// console.log(custom);
 
 	return { rawData, threshold, custom };
 }

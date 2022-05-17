@@ -10,7 +10,6 @@
   import { color } from "$data/variables.json";
   import mq from "$stores/mq.js";
 
-  export let stationId;
   export let rawData;
   export let threshold;
   export let custom;
@@ -28,8 +27,6 @@
   // const yDomain = [Math.min(yExtent[0] - 1, 0), yExtent[1] + 1];
   const yDomain = [yExtent[0] - 5, yExtent[1] + 5];
   const dur = writable(2000);
-
-  console.log({ stationId });
 
   setContext("App", {
     rawData,
