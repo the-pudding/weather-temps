@@ -7,6 +7,8 @@
 
   const { ctx } = getContext("canvas");
 
+  const { color } = getContext("App");
+
   export let fill = "#ccc";
   export let stroke = "#000";
   export let strokeWidth = 0;
@@ -25,15 +27,13 @@
       const x = $xGet(d) - w;
       const y = $yGet(d) - h / 2;
       $ctx.rect(x, y, w, h);
-      
-      if(d.fill != "rgba(200,200,200,0.3)") {
+
+      if (d.fill !== color.default) {
         $ctx.lineWidth = 0;
         $ctx.strokeStyle = d.fill;
         $ctx.stroke();
       }
-      
-      
-      
+
       $ctx.fillStyle = d.fill ?? fill;
       $ctx.fill();
     });
