@@ -5,10 +5,12 @@
   import { activeSlide } from "$stores/misc";
   import FigureRecent from "$components/Figure.Recent.svelte";
   import FigureAnnual from "$components/Figure.Annual.svelte";
+  import FigureHeatmap from "$components/Figure.Heatmap.svelte";
   import Title from "$components/Title.svelte";
   import { color } from "$data/variables.json";
   import mq from "$stores/mq.js";
 
+  export let heatmapData;
   export let rawData;
   export let threshold;
   export let custom;
@@ -29,6 +31,7 @@
 
   setContext("App", {
     rawData,
+    heatmapData,
     threshold,
     custom,
     minDays,
@@ -86,6 +89,12 @@
     {#if $activeSlide >= 3 && $activeSlide < 9}
       <div>
         <FigureAnnual {width} {height} />
+      </div>
+    {/if}
+
+    {#if $activeSlide >= 9}
+      <div>
+        <FigureHeatmap />
       </div>
     {/if}
   </figure>

@@ -17,6 +17,7 @@
   let stationId;
   let custom;
   let rawData;
+  let heatmapData;
   let threshold;
   let slider = undefined;
   let loc = undefined;
@@ -35,6 +36,7 @@
     custom = data.custom;
     rawData = data.rawData;
     threshold = data.threshold;
+    heatmapData = data.heatmapData;
   };
 
   $: console.log({ stationId });
@@ -63,7 +65,7 @@
 
 {#if rawData}
   {#key stationId}
-    <Figure {stationId} {custom} {rawData} {threshold} />
+    <Figure {stationId} {custom} {rawData} {threshold} {heatmapData} />
   {/key}
 {/if}
 

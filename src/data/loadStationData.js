@@ -1,7 +1,7 @@
 import { format, formatDistanceStrict, differenceInDays, getDayOfYear, addDays } from "date-fns";
 import { csvParse, range, ascending, descending, min, max } from "d3";
 import ordinal from "ordinal";
-// import raw from "$data/stations/AUSthr.csv";
+import tempHeatmapData from "$data/heatmap.csv";
 
 export default async function loadStationData(id) {
 	const stamp = Date.now();
@@ -274,5 +274,11 @@ export default async function loadStationData(id) {
 	custom["duration-example2"] = formatDistanceStrict(example1.date, example2.date);
 	custom["year-example2"] = format(example2.date, "y");
 
-	return { rawData, threshold, custom };
+	const heatmapData = tempHeatmapData.map(d => ({
+		month: +d.date.split("-")[1] - 1,
+		year: +d.date.split("-")[0],
+		records: +d.records,
+	}));
+
+	return { heatmapData, rawData, threshold, custom };
 }
