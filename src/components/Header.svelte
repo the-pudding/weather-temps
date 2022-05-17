@@ -43,4 +43,10 @@
   :global(.wordmark svg path) {
     fill: currentColor;
   }
+
+  @media only screen and (max-width: 475px) {
+    .wordmark a {
+      max-width: 8rem;
+    }
+  }
 </style>

@@ -47,6 +47,8 @@
 
   const x = "day";
   const y = "temp";
+  const heightAdjustment = .5;
+  const widthAdustment = 1;
 
   const exampleData = rawData.filter((d) => d.exampleDay);
   const extentAnnual = extent(rawData, (d) => d[x]);
@@ -89,8 +91,8 @@
   $: margin = daysInView * m * 2;
   $: sidePad = pad * 4;
   $: realW = width - padding.left - padding.right - sidePad;
-  $: w = Math.max(3, realW / daysInView);
-  $: h = $activeSlide === 3 ? Math.max(2, Math.floor(height * 0.00625)) : 3;
+  $: w = Math.max((realW / daysInView) - widthAdustment, 2);
+  $: h = $activeSlide === 3 ? Math.max(2, Math.floor(height * 0.00625)) - heightAdjustment : (3 - heightAdjustment);
   $: xPadding = [pad, pad * 3];
 
   $: {

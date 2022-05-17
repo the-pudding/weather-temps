@@ -22,7 +22,7 @@
         <div class="info">
           <p class="text">
             {text}
-            <Select on:changeStation {loc} />?
+            <Select on:changeStation {loc} /> ?
           </p>
           <p class="text">{response}</p>
           <p class="subtext">
@@ -53,6 +53,10 @@
     color: var(--color-fg-alt);
   }
 
+  .text {
+    font-size: 36px;
+  }
+
   :global(.tap svg) {
     display: inline-block;
     vertical-align: text-bottom;
@@ -60,4 +64,15 @@
     margin-right: 0.25em;
     transform: translate(0, 0.25em);
   }
+
+  @media only screen and (max-width: 475px) {
+    p:nth-of-type(n + 2) {
+      max-width: 260px;
+    }
+
+    .subtext {
+      font-size: 18px;
+    }
+  }
+
 </style>

@@ -170,7 +170,7 @@ export default async function loadStationData(id) {
 	record.highlight = "record";
 	record.annotation = {
 		figure: "annual",
-		text: `This was set ${formatDistanceStrict(latest.date, record.date)} ago, when it was a record ${record.temp}°F`,
+		text: `${format(record.date, "M/d/y")}, ${record.temp}°F`,
 	};
 
 	// recent 5 records

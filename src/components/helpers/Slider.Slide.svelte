@@ -18,12 +18,14 @@
     height: 100%;
     display: flex;
     flex-direction: column;
-    font-size: 1.25rem;
+    font-size: 1.5rem;
+    line-height: 1.2;
   }
 
   :global(.subtext) {
     font-family: var(--sans);
     font-size: 1rem;
+    line-height: 1.4;
   }
 
   @media only screen and (min-width: 640px) {
