@@ -116,7 +116,9 @@
   on:tap={onTap}
 />
 
-<Progress current={$activeSlide} total={11} />
+{#if !showHeader}
+  <Progress current={$activeSlide} total={11} />
+{/if}
 
 {#if showHeader}
   <Header />
