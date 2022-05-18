@@ -306,5 +306,5 @@ export default async function loadStationData(id) {
 	const heatmapData = await getHeatmapData(id);
 
 	// add in heatmap custom text
-	return { ...rawData, heatmapData, threshold, custom };
+	return { rawData, heatmapData, threshold, custom };
 };
