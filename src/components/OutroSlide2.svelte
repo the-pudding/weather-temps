@@ -42,6 +42,10 @@
     opacity: 0;
   }
 
+  .subtext {
+    text-align: center;
+  }
+
   section.active {
     opacity: 1;
   }
@@ -51,9 +55,21 @@
     pointer-events: all;
   }
 
+  a {
+    line-height: 1.4;
+    text-align: center;
+    margin: 0 auto;
+  }
+
   .story a {
     display: flex;
+    text-align: left;
+    justify-content: flex-start;
     margin-bottom: 2rem;
+  }
+
+  .story a span {
+    align-self: center;
   }
 
   .story img {
@@ -66,8 +82,14 @@
       display: none;
     }
 
-    p:nth-of-type(n + 2) {
-      max-width: 260px;
+    .story a span {
+      align-self: center;
+      text-align: center;
+    }
+
+    .story a {
+      display: flex;
+      justify-content: center;
     }
 
     .subtext {
