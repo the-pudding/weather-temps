@@ -44,28 +44,6 @@
       </div>
     {/each}
   </section>
-
-  <section class="about">
-    <div class="wordmark">
-      {@html wordmark}
-    </div>
-    <p>
-      <a href="https://pudding.cool">The Pudding</a>
-      is a digital publication that explains ideas debated in culture with visual essays.
-    </p>
-  </section>
-
-  <section class="links">
-    <ul>
-      {#each links as link}
-        <li>
-          <a href={link.url}>
-            <span>{link.name.toUpperCase()}</span>
-          </a>
-        </li>
-      {/each}
-    </ul>
-  </section>
 </footer>
 
 <style>
@@ -75,6 +53,11 @@
     font-family: var(--sans);
     padding: 3em 1em;
     margin-top: 3em;
+    opacity: 0;
+  }
+
+  footer.active {
+    opacity: 1;
   }
 
   a,

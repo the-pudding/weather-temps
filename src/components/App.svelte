@@ -97,6 +97,8 @@
       active={$activeSlide === 10}
       on:changeStation={changeStation}
     />
+
+    <OutroSlide2 active={$activeSlide === 11} />
   </Slider>
 </article>
 
