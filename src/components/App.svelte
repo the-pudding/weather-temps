@@ -6,6 +6,8 @@
   import Tap from "$components/helpers/Tap.svelte";
   import Figure from "$components/Figure.svelte";
   import IntroSlide from "$components/IntroSlide.svelte";
+  import OutroSlide1 from "$components/OutroSlide1.svelte";
+  import OutroSlide2 from "$components/OutroSlide2.svelte";
   import ArticleSlide from "$components/ArticleSlide.svelte";
   import Header from "$components/Header.svelte";
   import Toggle from "$components/Toggle.svelte";
@@ -30,7 +32,8 @@
 
   const changeStation = async ({ detail }) => {
     rawData = undefined;
-    const { id, location, state_abbr } = detail;
+    const { station, jump } = detail;
+    const { id, location, state_abbr } = station;
     const data = await loadStationData(id);
     data.custom.location = `${location}, ${state_abbr}`;
     custom = data.custom;
@@ -39,6 +42,7 @@
     heatmapData = data.heatmapData;
     await tick();
     stationId = id;
+    if (jump) slider.jump(0);
   };
 
   $: console.log({ stationId });
@@ -86,6 +90,13 @@
       {@const active = $activeSlide === +slide}
       <ArticleSlide {active} {text} {subtext} {color} />
     {/each}
+
+    <OutroSlide1
+      {...copy.outro}
+      method={copy.method}
+      active={$activeSlide === 10}
+      on:changeStation={changeStation}
+    />
   </Slider>
 </article>
 

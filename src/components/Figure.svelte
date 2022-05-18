@@ -87,7 +87,9 @@
 
 {#if mounted}
   <figure class:tease bind:clientWidth={width} bind:offsetHeight={height}>
-    <Title hed={titleHed} dek={titleDek} />
+    {#if $activeSlide < 10}
+      <Title hed={titleHed} dek={titleDek} />
+    {/if}
     {#if $activeSlide < 9}
       <div out:fade={{ duration: 0 }}>
         <FigureRecent {width} {height} />
@@ -99,7 +101,7 @@
       </div>
     {/if}
 
-    {#if $activeSlide >= 9}
+    {#if $activeSlide === 9}
       <div>
         <FigureHeatmap />
       </div>

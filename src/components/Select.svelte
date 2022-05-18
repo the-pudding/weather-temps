@@ -7,6 +7,7 @@
   import stateData from "$data/us-states.json";
 
   export let loc;
+  export let jump;
 
   const dispatch = createEventDispatcher();
 
@@ -37,13 +38,13 @@
   const grouped = groups(data, (d) => d.state_abbr);
   grouped.sort((a, b) => ascending(a[0], b[0]));
 
-  let value = data.find((d) => d.id === nearest).id;
+  let value = jump ? "" : data.find((d) => d.id === nearest).id;
   let el;
 
   $: station = data.find((d) => d.id === value);
-  $: city = station.location;
+  $: city = station ? station.location : "choose a city";
 
-  $: dispatch("changeStation", station);
+  $: if (station) dispatch("changeStation", { station, jump });
 
   // $: if (el && $viewport.width && $viewport.height)
   //   $selectY = el.getBoundingClientRect().top + el.offsetHeight + 16;
@@ -51,11 +52,14 @@
   $: width = `${city.length + 3}ch`;
 
   onMount(() => {
-    dispatch("changeStation", station);
+    if (!jump) dispatch("changeStation", { station, jump });
   });
 </script>
 
 <select bind:value bind:this={el} style:width>
+  {#if jump}
+    <option value="">Choose a city</option>
+  {/if}
   {#each grouped as [abbr, cities]}
     <optgroup label={getName(abbr)}>
       {#each cities as { id, state_abbr, location, lat, lon }}
@@ -75,7 +79,7 @@
     z-index: calc(var(--z-overlay) + 1);
     margin-left: 0;
     font-size: 0.8em;
-    pointer-events: auto;
+    pointer-events: all;
   }
 
   @media only screen and (min-width: 640px) {

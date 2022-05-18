@@ -148,7 +148,7 @@
       </Canvas>
       {#if highlight}
         <Html>
-          <Annotation data={highlight} {w} {m} />
+          <Annotation data={highlight} {w} />
         </Html>
       {/if}
     </div>

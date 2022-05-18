@@ -59,7 +59,7 @@
     if (d.highlight === "hot" && $activeSlide === 3) return color.secondary;
     if (d.highlight === "top" && $activeSlide >= 3) return color.primary;
     // if ($activeSlide === 3 && d.rank === 0) return color.primary;
-    if (($activeSlide === 8 && d.rank === 1) || d.rank === 0)
+    if ($activeSlide === 8 && (d.rank === 1 || d.rank === 0))
       return color.secondary;
     return color.default;
   };

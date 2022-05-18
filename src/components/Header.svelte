@@ -30,7 +30,7 @@
     width: 100%;
     border: none;
     color: var(--color-fg);
-    pointer-events: auto;
+    pointer-events: all;
   }
 
   .wordmark a:hover {

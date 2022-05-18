@@ -3,7 +3,6 @@
   const { width, height, xScale, yRange, xRange, xDomain, xPadding, padding } =
     getContext("LayerCake");
 
-  export let city;
   export let yTick = 8;
   export let formatTick = (d) => d;
   export let showFirst = true;
