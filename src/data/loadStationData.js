@@ -281,6 +281,7 @@ const getTempData = async (id) => {
 	custom["fulldate-example2"] = format(example2.date, "MMMM d, y");
 	custom["duration-example2"] = formatDistanceStrict(example1.date, example2.date);
 	custom["year-example2"] = format(example2.date, "y");
+	custom["change-example2"] = sameDay ? "tied" : "broken";
 
 	return { rawData, threshold, custom };
 };
