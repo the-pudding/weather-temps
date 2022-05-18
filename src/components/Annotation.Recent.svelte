@@ -50,7 +50,7 @@
     font-family: var(--font-form);
     position: absolute;
     margin: 0;
-    margin-top: calc(var(--offset) * 16px);
+    margin-top: calc(var(--offset) * 8px);
     transform: translate(-100%, -8px);
     text-align: right;
     font-size: 14px;

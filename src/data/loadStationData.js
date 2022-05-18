@@ -1,20 +1,18 @@
 import { format, formatDistanceStrict, differenceInDays, getDayOfYear, addDays } from "date-fns";
 import { csvParse, range, ascending, descending, min, max } from "d3";
 import ordinal from "ordinal";
-import tempHeatmapData from "$data/heatmap.csv";
 
-export default async function loadStationData(id) {
+const getTempData = async (id) => {
+	const DEBUG = false;
+	const BUFFER = 1.1; // for padding so recent hot day not flush left
+	const MIN_DAYS = 28; // how many to show at mininum even if recent hot day is closer
+	const LEAP = 59; // leap year day of year
+
 	const stamp = Date.now();
 	const url = `https://pudding.cool/2022/03/weather-map-data/${id}.csv?v=${stamp}`;
 	const response = await fetch(url);
 	const csv = await response.text();
 	const raw = csvParse(csv);
-	const BUFFER = 1.1; // for padding so recent hot day not flush left
-	const MIN_DAYS = 28;
-	const LEAP = 59;
-
-	const debug = false;
-
 
 	const parseDate = (str) => {
 		const [y, m, d] = str.split("-");
@@ -26,8 +24,7 @@ export default async function loadStationData(id) {
 	const now = addDays(parseDate(raw[0].date), 1);
 	const nowDay = getDayOfYear(now);
 
-	if (debug) console.log({ now, nowDay });
-
+	if (DEBUG) console.log({ now, nowDay });
 
 	const clean = raw.filter(d => d.temp !== "M").map((d) => ({
 		...d,
@@ -49,7 +46,7 @@ export default async function loadStationData(id) {
 	const currentYear = clean[0].rawDate.split("-")[0];
 	const hasLeap = !!clean.find(d => d.rawDate.includes(currentYear) && d.day === LEAP);
 
-	if (debug) console.log({ hasLeap });
+	if (DEBUG) console.log({ hasLeap });
 
 	// modify daysSince to account for leap
 	if (!hasLeap && clean[0].day > LEAP) {
@@ -62,7 +59,7 @@ export default async function loadStationData(id) {
 	const recentHot = clean.find((d, i) => i > 0 && d.rank > 0 && d.rank < 5);
 	const recentHotDaysSinceNow = recentHot.daysSinceNow;
 
-	if (debug) console.log({ recentHotDaysSinceNow });
+	if (DEBUG) console.log({ recentHotDaysSinceNow });
 
 	// add a buffer to the day so we have space on left for annotation
 	let threshold = Math.ceil(Math.max(recentHotDaysSinceNow, MIN_DAYS) * BUFFER);
@@ -89,7 +86,7 @@ export default async function loadStationData(id) {
 	recentDayValues.sort(descending);
 	threshold = recentDayValues.length;
 
-	if (debug) console.log({ threshold });
+	if (DEBUG) console.log({ threshold });
 
 	const fakeMap = new Map();
 	recentDayValues.forEach(day => {
@@ -105,7 +102,7 @@ export default async function loadStationData(id) {
 		fakeDay: fakeMap.get(d.day)
 	}));
 
-	if (debug) console.log({ latest: withFake[0] });
+	if (DEBUG) console.log({ latest: withFake[0] });
 	// annotations
 	// latest
 	const latest = withFake[0];
@@ -139,8 +136,10 @@ export default async function loadStationData(id) {
 	};
 
 	// offset latest
-	if (latestTop.daysSinceNow !== latest.daysSinceNow && Math.abs(latest.temp - latestTop.temp) <= 5) latest.annotation.offset = 1;
-	else if (Math.abs(latest.temp - latestBottom.temp) <= 5) latest.annotation.offset = -1;
+	if (latestTop.daysSinceNow !== latest.daysSinceNow && Math.abs(latest.temp - latestTop.temp) <= 5) latestTop.annotation.offset = -1;
+	if (latestTop.daysSinceNow !== latest.daysSinceNow && Math.abs(latest.temp - latestTop.temp) <= 2) latest.annotation.offset = 1;
+	if (Math.abs(latest.temp - latestBottom.temp) <= 5) latestBottom.annotation.offset = 1;
+	if (Math.abs(latest.temp - latestBottom.temp) <= 2) latest.annotation.offset = -1;
 
 
 	// hot not latest not top
@@ -283,11 +282,27 @@ export default async function loadStationData(id) {
 	custom["duration-example2"] = formatDistanceStrict(example1.date, example2.date);
 	custom["year-example2"] = format(example2.date, "y");
 
-	const heatmapData = tempHeatmapData.map(d => ({
+	return { rawData, threshold, custom };
+};
+
+const getHeatmapData = async (id) => {
+	const stamp = Date.now();
+	const url = `https://pudding.cool/2022/03/weather-map-data/${id}-heat.csv?v=${stamp}`;
+	const response = await fetch(url);
+	const csv = await response.text();
+	const raw = csvParse(csv);
+
+	const data = raw.map(d => ({
 		month: +d.date.split("-")[1] - 1,
 		year: +d.date.split("-")[0],
 		records: +d.records,
 	}));
 
-	return { heatmapData, rawData, threshold, custom };
-}
+	return data;
+};
+
+export default async function loadStationData(id) {
+	const tempData = await getTempData(id);
+	const heatmapData = await getHeatmapData(id);
+	return { ...tempData, heatmapData };
+};

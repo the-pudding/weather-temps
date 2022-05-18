@@ -44,7 +44,7 @@
 <style>
   button.view {
     position: absolute;
-    top: 60%;
+    top: 55%;
     left: 50%;
     transform: translate(-50%, -100%);
     z-index: var(--z-overlay);
@@ -63,12 +63,12 @@
     line-height: 1;
     font-size: 2rem;
     border-radius: 0;
-    transform: translate(0, -5vh);
+    transform: translate(0, -1rem);
   }
 
   .outer {
     position: absolute;
-    top: 5%;
+    top: 1rem;
     left: 0;
     width: 100%;
     height: 100%;
@@ -91,6 +91,8 @@
   table {
     font-family: var(--sans);
     margin-top: 2rem;
+    max-width: 480px;
+    margin: 2rem auto;
   }
 
   td:first-of-type,
@@ -106,7 +108,7 @@
 
   @media only screen and (min-width: 640px) {
     button.view {
-      top: 65%;
+      top: 60%;
     }
   }
 </style>
