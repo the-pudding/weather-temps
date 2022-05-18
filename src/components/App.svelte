@@ -10,7 +10,7 @@
   import Header from "$components/Header.svelte";
   import Toggle from "$components/Toggle.svelte";
   import copy from "$data/doc.json";
-  import { activeSlide, dir, selectY } from "$stores/misc.js";
+  import { activeSlide, dir } from "$stores/misc.js";
   import loadStationData from "$data/loadStationData.js";
   import locate from "$utils/locate.js";
 
@@ -94,7 +94,7 @@
   full={true}
   size="50%"
   enableKeyboard={true}
-  marginTop={$activeSlide === 0 ? $selectY : 0}
+  marginTop={0}
   on:tap={onTap}
 />
 
@@ -120,5 +120,7 @@
 
   article {
     max-width: 60rem;
+    z-index: calc(var(--z-overlay) + 1);
+    pointer-events: none;
   }
 </style>

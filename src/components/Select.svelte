@@ -2,7 +2,6 @@
   import { groups, ascending } from "d3";
   import { onMount, createEventDispatcher } from "svelte";
   import viewport from "$stores/viewport.js";
-  import { selectY } from "$stores/misc.js";
   import distance from "$utils/distance.js";
   import stations from "$data/stations.csv";
   import stateData from "$data/us-states.json";
@@ -46,8 +45,8 @@
 
   $: dispatch("changeStation", station);
 
-  $: if (el && $viewport.width && $viewport.height)
-    $selectY = el.getBoundingClientRect().top + el.offsetHeight + 16;
+  // $: if (el && $viewport.width && $viewport.height)
+  //   $selectY = el.getBoundingClientRect().top + el.offsetHeight + 16;
 
   $: width = `${city.length + 3}ch`;
 
@@ -76,6 +75,7 @@
     z-index: calc(var(--z-overlay) + 1);
     margin-left: 0;
     font-size: 0.8em;
+    pointer-events: auto;
   }
 
   @media only screen and (min-width: 640px) {

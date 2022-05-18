@@ -16,6 +16,7 @@
     z-index: var(--z-overlay);
     width: 100%;
     padding: 1rem 0;
+    pointer-events: none;
   }
 
   .wordmark {
@@ -29,6 +30,7 @@
     width: 100%;
     border: none;
     color: var(--color-fg);
+    pointer-events: auto;
   }
 
   .wordmark a:hover {
