@@ -168,10 +168,10 @@
 <style>
   .scatter {
     opacity: 1;
-    transition: opacity 1s ease-in-out;
   }
 
   .hideCanvas {
+    transition: opacity 1s ease-in-out;
     opacity: 0;
   }
 </style>

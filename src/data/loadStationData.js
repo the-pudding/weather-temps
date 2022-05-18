@@ -1,5 +1,5 @@
 import { format, formatDistanceStrict, differenceInDays, getDayOfYear, addDays } from "date-fns";
-import { csvParse, range, ascending, descending, min, max } from "d3";
+import { csvParse, range, ascending, descending, min, max, extent, sum } from "d3";
 import ordinal from "ordinal";
 
 const getTempData = async (id) => {
@@ -306,5 +306,12 @@ export default async function loadStationData(id) {
 	const heatmapData = await getHeatmapData(id);
 
 	// add in heatmap custom text
+	const count = sum(heatmapData, d => d.records);
+	const [minH, maxH] = extent(heatmapData, d => d.year);
+	const total = (maxH - minH) * 52;
+	const weeks = Math.ceil(total / count);
+	custom["year-heatmap"] = minH;
+	custom["count-heatmap"] = count;
+	custom["weeks-heatmap"] = weeks === 1 ? "every week" : `${weeks} weeks`;
 	return { rawData, heatmapData, threshold, custom };
 };
