@@ -302,7 +302,9 @@ const getHeatmapData = async (id) => {
 };
 
 export default async function loadStationData(id) {
-	const tempData = await getTempData(id);
+	const { rawData, threshold, custom } = await getTempData(id);
 	const heatmapData = await getHeatmapData(id);
-	return { ...tempData, heatmapData };
+
+	// add in heatmap custom text
+	return { ...rawData, heatmapData, threshold, custom };
 };
