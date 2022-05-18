@@ -4,6 +4,7 @@
   import { fade } from "svelte/transition";
   import Slider from "$components/helpers/Slider.svelte";
   import Tap from "$components/helpers/Tap.svelte";
+  import Progress from "$components/Progress.svelte";
   import Figure from "$components/Figure.svelte";
   import IntroSlide from "$components/IntroSlide.svelte";
   import OutroSlide1 from "$components/OutroSlide1.svelte";
@@ -114,6 +115,8 @@
   {disabled}
   on:tap={onTap}
 />
+
+<Progress current={$activeSlide} total={11} />
 
 {#if showHeader}
   <Header />
