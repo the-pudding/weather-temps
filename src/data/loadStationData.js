@@ -43,6 +43,16 @@ const getTempData = async (id) => {
 
 	clean.sort((a, b) => ascending(a.daysSinceNow, b.daysSinceNow));
 
+	const recentRecords = new Map();
+
+	clean.forEach(d => {
+		if (d.rank !== 0) return;
+		if (d.rank === 0 && !recentRecords.get(d.day)) {
+			recentRecords.set(d.day, true);
+			d.mostRecentRecord = true;
+		}
+	});
+
 	const currentYear = clean[0].rawDate.split("-")[0];
 	const hasLeap = !!clean.find(d => d.rawDate.includes(currentYear) && d.day === LEAP);
 

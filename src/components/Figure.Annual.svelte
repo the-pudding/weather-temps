@@ -29,7 +29,7 @@
   } = getContext("App");
 
   const rankData = rawData
-    .filter((d) => d.rank === 0)
+    .filter((d) => d.mostRecentRecord)
     .map((d) => ({
       ...d,
       fill: color.primary
@@ -121,13 +121,15 @@
       highlight = rawData.filter((d) => d.highlight === "record5");
     else highlight = undefined;
   }
-  $: data = rankData.filter((d) =>
-    $activeSlide === 3 || tempHide
-      ? d[x] >= extentFakeMap[0] && d[x] <= extentFakeMap[1]
-      : $activeSlide < 7 && $activeSlide > 3
-      ? true
-      : d[x] === extentExample[1]
-  );
+  $: data = rankData.filter((d) => {
+    if ($activeSlide === 3 || tempHide)
+      return d[x] >= extentFakeMap[0] && d[x] <= extentFakeMap[1];
+    else if ($activeSlide < 7 && $activeSlide > 3) return true;
+    else if ($activeSlide === 7) return d[x] === extentExample[1];
+    else if ($activeSlide === 8 && d.annotation && !d.annotation.same)
+      return d[x] === extentExample[1];
+    return false;
+  });
 </script>
 
 {#if width}

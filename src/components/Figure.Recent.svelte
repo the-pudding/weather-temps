@@ -59,7 +59,8 @@
     if (d.highlight === "hot" && $activeSlide === 3) return color.secondary;
     if (d.highlight === "top" && $activeSlide >= 3) return color.primary;
     // if ($activeSlide === 3 && d.rank === 0) return color.primary;
-    if ($activeSlide === 8 && d.rank === 1) return color.secondary;
+    if (($activeSlide === 8 && d.rank === 1) || d.rank === 0)
+      return color.secondary;
     return color.default;
   };
 
@@ -121,13 +122,13 @@
   }
 
   $: data = rawData
-    .filter((d) =>
-      $activeSlide < 2
-        ? d[x] === extentFake[1]
-        : $activeSlide < 7
-        ? d[x] >= extentFake[0] && d[x] <= extentFake[1]
-        : d.day === extentExample[1]
-    )
+    .filter((d) => {
+      if ($activeSlide < 2) return d[x] === extentFake[1];
+      else if ($activeSlide < 7)
+        return d[x] >= extentFake[0] && d[x] <= extentFake[1];
+      else if ($activeSlide < 9) return d.day === extentExample[1];
+      return false;
+    })
     .map((d) => ({
       ...d,
       fill: getFill(d)

@@ -1,6 +1,5 @@
 <script>
   import { getContext } from "svelte";
-  import { descending } from "d3";
   import { fade } from "svelte/transition";
   const { color } = getContext("App");
   const { xGet, xRange, yRange, yGet } = getContext("LayerCake");
@@ -9,7 +8,6 @@
   export let data;
   export let m;
 
-  $: data.sort((a, b) => descending(a.daysSinceNow, b.daysSinceNow));
   $: mid = $xRange[1] / 2;
 </script>
 
