@@ -66,6 +66,12 @@
 
   $: tease = $activeSlide === 0;
   $: $dur = $mq.reducedMotion ? 0 : 2000;
+  $: titleHed =
+    $activeSlide === 9
+      ? `Number of times ${custom.location} set (or tied) a record`
+      : custom.location;
+  $: titleDek =
+    $activeSlide === 9 ? "Using daily high temps." : "Daily high temps.";
 
   onMount(async () => {
     await tick();
@@ -80,7 +86,7 @@
 
 {#if mounted}
   <figure class:tease bind:clientWidth={width} bind:offsetHeight={height}>
-    <Title hed={custom.location} dek="Daily High Temps." />
+    <Title hed={titleHed} dek={titleDek} />
     {#if $activeSlide < 9}
       <div>
         <FigureRecent {width} {height} />

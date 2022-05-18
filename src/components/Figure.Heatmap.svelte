@@ -74,7 +74,7 @@
     font-family: var(--sans);
     table-layout: auto;
     font-size: 14px;
-    max-width: 600px;
+    max-width: 640px;
     margin: 4rem auto 0 auto;
   }
 
@@ -149,7 +149,8 @@
 
   @media only screen and (min-width: 640px) {
     td {
-      padding: 0.25rem;
+      padding: 0.25rem 0;
+      width: 2.25rem;
     }
 
     th:before {
