@@ -23,6 +23,7 @@
   let threshold;
   let slider = undefined;
   let loc = undefined;
+  let disabled = [];
 
   const onTap = ({ detail }) => {
     if (detail === "right") slider.next();
@@ -31,6 +32,7 @@
   };
 
   const changeStation = async ({ detail }) => {
+    disabled = ["left", "right"];
     rawData = undefined;
     const { station, jump } = detail;
     const { id, location, state_abbr } = station;
@@ -43,9 +45,10 @@
     await tick();
     stationId = id;
     if (jump) slider.jump(0);
+    disabled = [];
   };
 
-  $: console.log({ stationId });
+  // $: console.log({ stationId });
 
   $: yesterdayWasRecord = rawData
     ? rawData.find((d) => d.daysSinceNow === 1).rank === 0
@@ -108,6 +111,7 @@
   size="50%"
   enableKeyboard={true}
   marginTop={0}
+  {disabled}
   on:tap={onTap}
 />
 
