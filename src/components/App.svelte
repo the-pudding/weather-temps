@@ -25,6 +25,7 @@
   let slider = undefined;
   let loc = undefined;
   let disabled = [];
+  let selectComponent;
 
   const onTap = ({ detail }) => {
     if (detail === "right") slider.next();
@@ -36,13 +37,16 @@
     disabled = ["left", "right"];
     rawData = undefined;
     const { station, jump } = detail;
-    const { id, location, state_abbr } = station;
+    const { id, location, state_abbr, lat, lon } = station;
     const data = await loadStationData(id);
     data.custom.location = `${location}, ${state_abbr}`;
     custom = data.custom;
     rawData = data.rawData;
     threshold = data.threshold;
     heatmapData = data.heatmapData;
+
+    if (selectComponent) selectComponent.setValue(id);
+
     await tick();
     stationId = id;
     if (jump) slider.jump(0);
@@ -87,6 +91,7 @@
       active={$activeSlide === 0}
       alt={yesterdayWasRecord}
       ready={!!stationId}
+      bind:selectComponent
       on:changeStation={changeStation}
     />
 

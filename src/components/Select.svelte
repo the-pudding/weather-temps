@@ -8,6 +8,9 @@
 
   export let loc;
   export let jump;
+  export const setValue = (id) => {
+    value = id;
+  };
 
   const dispatch = createEventDispatcher();
 

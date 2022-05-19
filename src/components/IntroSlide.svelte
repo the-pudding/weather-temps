@@ -11,7 +11,8 @@
   export let text2_alt;
   export let loc;
   export let ready;
-  export let prompt;
+
+  export let selectComponent;
 
   $: response = alt ? text2_alt : text2;
 </script>
@@ -23,7 +24,7 @@
         <div class="info">
           <p class="text">
             {text}
-            <Select on:changeStation {loc} /> ?
+            <Select bind:this={selectComponent} on:changeStation {loc} /> ?
           </p>
           <p class="text">{response}</p>
           <p class="subtext prompt shadow" class:ready>
