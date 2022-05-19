@@ -39,67 +39,61 @@
   });
 </script>
 
-<div>
-  <table>
-    <thead>
-      <th />
+<div class="table">
+  <div class="thead">
+    <div class="tr">
+      <span class="th year" />
       {#each names as name, i}
-        <th data-name={name} />
+        <span class="th"><span class="name">{name}</span></span>
       {/each}
-    </thead>
+    </div>
+  </div>
+  <div class="tbody">
     {#each data as { year, months }}
-      <tbody>
-        <tr>
-          <td class="year">{year}</td>
-          {#each months as record, i}
-            {@const opacity = scale(record)}
-            {@const dark = opacity > 0.65}
-            <td class="month">
-              <span class="bg" style:opacity />
-              <span class="fg" class:dark>{record || ""}</span>
-            </td>
-          {/each}
-        </tr>
-      </tbody>
+      <div class="tr">
+        <span class="td year">{year}</span>
+        {#each months as record, i}
+          {@const opacity = scale(record)}
+          {@const dark = opacity > 0.65}
+          <span class="td">
+            <span class="bg" style:opacity />
+            <span class="fg" class:dark>{record || ""}</span>
+          </span>
+        {/each}
+      </div>
     {/each}
-  </table>
+  </div>
 </div>
 
 <style>
-  div {
+  .table {
     padding: 1rem;
-  }
-
-  table {
     font-family: var(--sans);
-    table-layout: auto;
     font-size: 14px;
     max-width: 640px;
-    margin: 4rem auto 0 auto;
+    margin: 6rem auto 0 auto;
   }
 
-  th {
+  .tr {
+    display: flex;
+    width: 100%;
+  }
+
+  .td,
+  .th {
+    display: block;
     text-align: center;
-  }
-
-  thead {
-    border: none;
-  }
-
-  th {
-    border-bottom: 1px solid currentColor;
-  }
-
-  td {
-    border: 1px dashed white;
-    text-align: center;
-    padding: 0;
-  }
-
-  th,
-  td {
-    width: 1em;
+    flex: 1;
     position: relative;
+    padding: 0.25rem 0;
+  }
+
+  .th {
+    border: 0.5px solid transparent;
+  }
+
+  .td {
+    border: 0.5px dashed white;
   }
 
   .bg {
@@ -120,41 +114,34 @@
     color: var(--color-bg);
   }
 
-  th:first-of-type {
-    visibility: visible;
-    border: none;
-  }
-
-  td:first-of-type {
-    min-width: 2.5em;
-    max-width: 2.5em;
-    width: 2.5em;
+  .td.year,
+  .th.year {
     padding-right: 0.5rem;
     border: none;
     text-align: right;
   }
 
-  th:before {
-    content: attr(data-name);
+  .th .name {
+    visibility: hidden;
     position: absolute;
     top: 0;
     left: 50%;
-    transform: translate(-50%, -75%);
-    display: none;
+    transform: translate(-50%, -100%);
   }
 
-  th:nth-of-type(3n - 1):before {
-    display: block;
+  .th:nth-of-type(3n - 1) .name {
+    visibility: visible;
   }
 
   @media only screen and (min-width: 640px) {
-    td {
-      padding: 0.25rem 0;
-      width: 2.25rem;
+    .th .name {
+      visibility: visible;
+      transform: translate(-50%, -50%);
     }
 
-    th:before {
-      display: block;
+    .td,
+    .th {
+      padding: 0.5rem 0;
     }
   }
 </style>

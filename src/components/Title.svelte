@@ -5,7 +5,7 @@
 
 <div>
   <p class="hed">{hed}</p>
-  <p class="dek">{dek}</p>
+  {#if dek}<p class="dek">{dek}</p>{/if}
 </div>
 
 <style>

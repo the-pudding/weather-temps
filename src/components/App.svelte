@@ -117,7 +117,7 @@
 />
 
 {#if !showHeader}
-  <Progress current={$activeSlide} total={11} />
+  <Progress current={$activeSlide - 1} total={11} />
 {/if}
 
 {#if showHeader}

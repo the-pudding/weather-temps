@@ -287,6 +287,7 @@ const getTempData = async (id) => {
 
 	custom["date-example1"] = format(example1.date, "MMMM do");
 	custom["year-example1"] = format(example1.date, "y");
+	custom["temp-example1"] = `${example1.temp}°F`;
 
 	custom["fulldate-example2"] = format(example2.date, "MMMM d, y");
 	custom["duration-example2"] = formatDistanceStrict(example1.date, example2.date);
@@ -303,12 +304,16 @@ const getHeatmapData = async (id) => {
 	const csv = await response.text();
 	const raw = csvParse(csv);
 
-	const data = raw.map(d => ({
+	const clean = raw.map(d => ({
 		month: +d.date.split("-")[1] - 1,
 		year: +d.date.split("-")[0],
 		records: +d.records,
 	}));
 
+	const maxYear = max(clean, d => d.year);
+	const minYear = maxYear - 10;
+
+	const data = clean.filter(d => d.year >= minYear);
 	return data;
 };
 
