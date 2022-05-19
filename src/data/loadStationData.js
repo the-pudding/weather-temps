@@ -157,7 +157,7 @@ const getTempData = async (id) => {
 	hot.highlight = "hot";
 	hot.annotation = {
 		figure: "recent",
-		text: `${formatDistanceStrict(latest.date, hot.date)} ago was the ${ordinal(hot.rank + 1)} hottest ${format(hot.date, "MMMM do")} ever`,
+		text: `${formatDistanceStrict(now, hot.date)} ago was the ${ordinal(hot.rank + 1)} hottest ${format(hot.date, "MMMM do")} ever`,
 		type: "wrap",
 		color: "secondary"
 	};
@@ -183,7 +183,7 @@ const getTempData = async (id) => {
 
 	// most recent record
 	const record = withFake.find(d => d.rank === 0);
-	record.highlight = "record";
+	record.highlight = `${record.highlight ?? ""} record`;
 	record.annotation = {
 		figure: "annual",
 		text: `${format(record.date, "M/d/y")}`,
@@ -191,12 +191,12 @@ const getTempData = async (id) => {
 
 	// recent 5 records NOT latest
 	withFake.filter(d => d.rank === 0 && d.highlight !== "latest").slice(0, 5).forEach(d => {
-		d.highlight = "record5";
+		d.highlight = `${d.highlight ?? ""} record5`;
 	});
 
 	// recent 5 that also had the most recent 2nd place that isn't a tie at top
 	const getExampleDay = () => {
-		const record5Days = withFake.filter(d => d.highlight === "record5").map(d => d.day);
+		const record5Days = withFake.filter(d => d.highlight && d.highlight.includes("record5")).map(d => d.day);
 		const options = withFake.filter(d => record5Days.includes(d.day) && (d.rank === 1 || d.rank === 2));
 		const withRank2 = options.filter(d => d.rank === 1);
 		const withRank3 = options.filter(d => d.rank === 2);
@@ -282,7 +282,7 @@ const getTempData = async (id) => {
 
 	custom["count-record5"] = "Five";
 
-	const record5 = rawData.filter(d => d.highlight === "record5");
+	const record5 = rawData.filter(d => d.highlight && d.highlight.includes("record5"));
 	custom["year-record5"] = format(record5[record5.length - 1].date, "y");
 
 	custom["date-example1"] = format(example1.date, "MMMM do");

@@ -12,7 +12,7 @@ const TEST_DATA = {
 	country: "US",
 	hostname: "cpe-74-76-154-164.nycap.res.rr.com",
 	ip: "74.76.154.164",
-	loc: "42.3043,-73.2482",
+	loc: "31.44,-100.45",
 	org: "AS11351 Charter Communications Inc",
 	postal: "01238",
 	region: "Massachusetts",

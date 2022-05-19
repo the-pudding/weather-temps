@@ -52,7 +52,8 @@
   const getFill = (d) => {
     // if (d.rank === 0 && d[x] === 0) return "yellow";
     if (d.highlight && $activeSlide < 2) {
-      if (d.annotation.color) return color.tertiary;
+      if (d.highlight.includes("latest") && d.daysSinceNow === 1)
+        return color.tertiary;
       return color.default;
     }
     if (d.recent && $activeSlide === 2) return color.secondary;
@@ -104,9 +105,13 @@
 
   $: {
     if ($activeSlide < 2)
-      highlight = rawData.filter((d) => d.highlight === "latest");
+      highlight = rawData.filter(
+        (d) => d.highlight && d.highlight.includes("latest")
+      );
     else if ($activeSlide === 2)
-      highlight = [{ ...rawData.find((d) => d.highlight === "hot") }];
+      highlight = [
+        { ...rawData.find((d) => d.highlight && d.highlight.includes("hot")) }
+      ];
     else if ($activeSlide === 7)
       highlight = [{ ...rawData.find((d) => d.highlightAlt === "example1") }];
     else if ($activeSlide === 8)

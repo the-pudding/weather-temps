@@ -111,13 +111,17 @@
 
   $: {
     if ($activeSlide === 4)
-      highlight = rawData.filter((d) => d.highlight === "alltime");
+      highlight = rawData.filter(
+        (d) => d.highlight && d.highlight.includes("alltime")
+      );
     else if ($activeSlide === 5)
       highlight = [
-        rawData.find((d) => d.highlight === "record5" && d.annotation)
+        rawData.find((d) => d.highlight && d.highlight.includes("record "))
       ];
     else if ($activeSlide === 6)
-      highlight = rawData.filter((d) => d.highlight === "record5");
+      highlight = rawData.filter(
+        (d) => d.highlight && d.highlight.includes("record5")
+      );
     else highlight = undefined;
   }
   $: data = rankData.filter((d) => {
