@@ -18,7 +18,7 @@
 
 <section class:active>
   {#if loc !== undefined}
-    <div in:fade>
+    <div class="wrapper" in:fade>
       <Slide>
         <div class="info">
           <p class="text">
@@ -26,9 +26,11 @@
             <Select on:changeStation {loc} /> ?
           </p>
           <p class="text">{response}</p>
-          <p class="subtext" class:ready>
-            <span class="tap">{@html tapSvg}</span>
-            {prompt} &rarr;
+          <p class="subtext prompt shadow" class:ready>
+            <span class="line">
+              Tap to advance <span class="tap">{@html tapSvg}</span>
+            </span>
+            <span class="line">Or use arrow keys &rarr;</span>
           </p>
         </div>
       </Slide>
@@ -44,6 +46,10 @@
 
   section.active {
     opacity: 1;
+  }
+
+  .wrapper {
+    height: 100%;
   }
 
   .info {
@@ -65,6 +71,22 @@
 
   .subtext.ready {
     opacity: 1;
+  }
+
+  .prompt {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    font-size: 24px;
+  }
+
+  .line {
+    display: block;
+    margin-bottom: 1rem;
+  }
+
+  .tap {
+    /* margin-left: 0.75em; */
   }
 
   :global(.tap svg) {

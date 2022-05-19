@@ -20,7 +20,7 @@
   const pad = 16;
   const padding = {
     top: pad * 2,
-    right: pad * 1.5,
+    right: pad * 1,
     bottom: pad * 3,
     left: pad * 1
   };
