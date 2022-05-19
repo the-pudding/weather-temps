@@ -16,11 +16,11 @@
 <style>
   div {
     position: fixed;
-    top: 0.4rem;
+    top: 0.5rem;
     left: 0;
     right: 0;
     margin: 0 auto;
-    width: calc(100% - 10px);
+    width: calc(100% - 0.5rem);
     height: 100%;
     z-index: var(--z-overlay);
     pointer-events: none;

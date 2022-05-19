@@ -38,8 +38,8 @@
     left: 50%;
     width: 100%;
     max-width: 65rem;
-    top: calc(60%);
-    height: calc(40%);
+    top: 60%;
+    height: 40%;
     transform: translate(-50%, 0);
     opacity: 0;
     transition: opacity 1s 0.25s ease-in-out;
@@ -57,8 +57,8 @@
 
   @media only screen and (min-width: 640px) {
     div {
-      height: calc(30%);
-      top: calc(70%);
+      height: 30%;
+      top: 70%;
     }
   }
 </style>

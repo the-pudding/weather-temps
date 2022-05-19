@@ -110,9 +110,10 @@
 
 <style>
   figure {
+    --offset: 2rem;
     max-width: 960px;
-    top: 1rem;
-    height: calc(60% - 1rem);
+    top: var(--offset);
+    height: calc(60% - var(--offset));
     overflow: hidden;
     transition: transform 1s ease-in-out, filter 0.5s 1s;
   }
@@ -132,7 +133,7 @@
 
   @media only screen and (min-width: 640px) {
     figure {
-      height: calc(65% - 1rem);
+      height: calc(65% - var(--offset));
     }
   }
 </style>

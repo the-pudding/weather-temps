@@ -195,18 +195,18 @@ const getTempData = async (id) => {
 	});
 
 	// recent 5 that also had the most recent 2nd place that isn't a tie at top
-	const getExampleDay = (attempt) => {
-		if (attempt >= 5) {
-			return withFake.find(d => d.highlight === "record5").day;
-		}
+	const getExampleDay = () => {
 		const record5Days = withFake.filter(d => d.highlight === "record5").map(d => d.day);
-		const pick = record5Days[attempt];
-		const record5Rank2 = withFake.find(d => d.day === pick && d.rank === 1);
-		if (record5Rank2) return record5Rank2.day;
-		else return getExampleDay(attempt + 1);
+		const options = withFake.filter(d => record5Days.includes(d.day) && (d.rank === 1 || d.rank === 2));
+		const withRank2 = options.filter(d => d.rank === 1);
+		const withRank3 = options.filter(d => d.rank === 2);
+		const withBoth = [withRank2, withRank3];
+		const i = withRank2.length ? 0 : 1;
+		withBoth[i].sort((a, b) => ascending(a.daysSinceNow, b.daysSinceNow));
+		return { exampleDay: withBoth[i][0].day, sameDay: i === 1 };
 	};
 
-	const exampleDay = getExampleDay(0);
+	const { exampleDay, sameDay } = getExampleDay();
 
 	withFake.filter(d => d.day === exampleDay).forEach(d => d.exampleDay = true);
 
@@ -219,7 +219,7 @@ const getTempData = async (id) => {
 		color: "primary"
 	};
 
-	const sameDay = !withFake.find(d => d.exampleDay && d.rank === 1);
+	// const sameDay = !withFake.find(d => d.exampleDay && d.rank === 1);
 
 	const example2 = withFake.find(d => {
 		if (sameDay) return d.rank === 0 && d.exampleDay && !d.highlightAlt;
