@@ -52,7 +52,8 @@
   // $: if (el && $viewport.width && $viewport.height)
   //   $selectY = el.getBoundingClientRect().top + el.offsetHeight + 16;
 
-  $: width = `${city.length + 3}ch`;
+  $: pad = city.length < 9 ? 3 : city.length < 14 ? 2 : 1;
+  $: width = `${city.length + pad}ch`;
 
   onMount(() => {
     if (!jump) dispatch("changeStation", { station, jump });

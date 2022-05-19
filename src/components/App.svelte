@@ -79,7 +79,7 @@
 
 {#if rawData}
   {#key stationId}
-    <Figure {stationId} {custom} {rawData} {threshold} {heatmapData} />
+    <Figure {custom} {rawData} {threshold} {heatmapData} />
   {/key}
 {/if}
 
