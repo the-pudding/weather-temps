@@ -1,8 +1,8 @@
 <script>
-  export let title = "Title TK";
-  export let description = "Description TK";
-  export let url = "https://pudding.cool";
-  export let keywords = "";
+  export let title = "Tracking Heat Records in 400 U.S. cities";
+  export let description = "Was yesterday the hottest-ever for this time of year?";
+  export let url = "https://pudding.cool/projects/heat-records";
+  export let keywords = "weather,heat,weather data, climate data, climate change, global warming";
   export let preloadFont = [];
 </script>
 
@@ -22,7 +22,7 @@
   <meta property="og:image" content="{url}/assets/social-facebook.jpg" />
   <meta property="og:image:type" content="image/jpeg" />
   <meta property="og:image:width" content="1200" />
-  <meta property="og:image:height" content="600" />
+  <meta property="og:image:height" content="630" />
 
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:site" content="https://pudding.cool" />

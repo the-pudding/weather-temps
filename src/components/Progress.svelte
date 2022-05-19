@@ -16,9 +16,11 @@
 <style>
   div {
     position: fixed;
-    top: 0.25rem;
+    top: 0.4rem;
     left: 0;
-    width: 100%;
+    right: 0;
+    margin: 0 auto;
+    width: calc(100% - 10px);
     height: 100%;
     z-index: var(--z-overlay);
     pointer-events: none;
@@ -27,15 +29,16 @@
 
   span {
     display: block;
-    height: 0.25rem;
+    height: 2px;
     background: var(--color-fg);
-    opacity: 0.25;
+    opacity: 0.5;
     margin: 0 2px;
     flex: 1;
     transition: opacity 250ms;
+    border-radius: 10px;
   }
 
   span.complete {
-    opacity: 0.65;
+    opacity: 1;
   }
 </style>
