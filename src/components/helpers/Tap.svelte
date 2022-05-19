@@ -84,17 +84,12 @@
     outline: none;
     border: none;
     box-shadow: none;
-    /* pointer-events: auto; */
     display: flex;
   }
 
   button:disabled {
     opacity: 0.2;
     cursor: not-allowed;
-  }
-
-  button:hover {
-    /* background-color: rgba(255, 255, 255, 0.1); */
   }
 
   .left {
