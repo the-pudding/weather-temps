@@ -183,11 +183,11 @@ const getTempData = async (id) => {
 
 	// most recent record
 	const record = withFake.find(d => d.rank === 0);
-	// record.highlight = "record";
-	// record.annotation = {
-	// 	figure: "annual",
-	// 	text: `${format(record.date, "M/d/y")}, ${record.temp}°F`,
-	// };
+	record.highlight = "record";
+	record.annotation = {
+		figure: "annual",
+		text: `${format(record.date, "M/d/y")}`,
+	};
 
 	// recent 5 records NOT latest
 	withFake.filter(d => d.rank === 0 && d.highlight !== "latest").slice(0, 5).forEach(d => {

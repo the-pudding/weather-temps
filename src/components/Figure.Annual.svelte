@@ -56,7 +56,6 @@
   const extentExample = extent(exampleData, (d) => d[x]);
 
   const tweenExtentDay = tweened();
-  // const tweenOpacity = tweened();
 
   const formatTick = (d) => {
     const match = rawData.find((e) => e[x] === d);
