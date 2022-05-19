@@ -13,9 +13,11 @@
   {@const top = `${$yGet(d)}px`}
   {@const flip = $xGet(d) > $xRange[1] * 0.67}
   {@const alltime = d.highlight === "alltime"}
+  {@const delay = d.highlightAlt === "example1" ? 500 : 0}
+  {@const duration = d.highlightAlt === "example1" ? 250 : 0}
   <div
-    in:fade={{ delay: 1000 }}
-    out:fade={{ duration: 150 }}
+    in:fade={{ delay: alltime ? 2000 : 500 }}
+    out:fade={{ delay, duration }}
     style:left
     style:top
     class:flip
