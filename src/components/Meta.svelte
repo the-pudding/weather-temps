@@ -1,8 +1,8 @@
 <script>
-  export let title = "Tracking Heat Records in 400 U.S. cities";
-  export let description = "Was yesterday the hottest-ever for this time of year?";
-  export let url = "https://pudding.cool/projects/heat-records";
-  export let keywords = "weather,heat,weather data, climate data, climate change, global warming";
+  export let title = "";
+  export let description = "";
+  export let url = "";
+  export let keywords = "";
   export let preloadFont = [];
 </script>
 
