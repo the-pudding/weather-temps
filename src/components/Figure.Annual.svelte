@@ -70,7 +70,8 @@
   let tempHideTimer;
 
   $: showAxis = $activeSlide > 3 && $activeSlide < 7;
-  $: duration = $dir === "right" ? $dur : 0;
+  $: animate = [4, 7].includes($activeSlide);
+  $: duration = $dir === "right" && animate ? $dur : 0;
   $: delay = $dir === "right" && $activeSlide === 4 ? 1000 : 0;
   $: {
     if (delay) {
@@ -97,7 +98,6 @@
     easing: cubicInOut
   });
   $: xDomain = $tweenExtentDay;
-
   $: daysInView = xDomain[1] - xDomain[0];
   $: m = daysInView > threshold ? 0 : 2;
   $: margin = daysInView * m * 2;

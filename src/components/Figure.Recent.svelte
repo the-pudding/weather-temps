@@ -73,7 +73,8 @@
 
   $: showAxis = $activeSlide < 4 || $activeSlide > 6;
   $: showFirst = $activeSlide > 1 && $activeSlide < 6;
-  $: duration = $dir === "right" && showAxis ? $dur : 0;
+  $: animate = [2, 7].includes($activeSlide);
+  $: duration = $dir === "right" && animate ? $dur : 0;
   $: delay = $dir === "right" && $activeSlide === 4 ? 1000 : 0;
 
   $: x = $activeSlide < 5 ? "fakeDay" : "day";
