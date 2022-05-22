@@ -64,7 +64,7 @@
   $: showToggle = $activeSlide === 6;
 
   $: toggleData = rawData
-    ? rawData.filter((d) => d.highlight === "record5")
+    ? rawData.filter((d) => d.highlight.includes("record5"))
     : [];
 
   onMount(async () => {
