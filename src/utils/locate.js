@@ -8,12 +8,12 @@ locate(test = false).then(data => {
 
 const TEST_DATA = {
 	"ip": "143.244.47.74",
-	"hostname": "unn-143-244-47-74.datapacket.com",
+	"hostname": "",
 	"city": "New York City",
 	"region": "New York",
 	"country": "US",
 	"loc": "40.7143,-74.0060",
-	"org": "AS212238 Datacamp Limited",
+	"org": "",
 	"postal": "10004",
 	"timezone": "America/New_York"
 };
