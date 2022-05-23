@@ -313,7 +313,7 @@ const getHeatmapData = async (id) => {
 	}));
 
 	const maxYear = max(clean, d => d.year);
-	const minYear = maxYear - 10;
+	const minYear = maxYear - 9;
 
 	const data = clean.filter(d => d.year >= minYear);
 	return data;

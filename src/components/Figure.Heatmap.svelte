@@ -1,6 +1,14 @@
 <script>
   import { getContext } from "svelte";
-  import { ascending, descending, max, groups, range, scaleLinear } from "d3";
+  import {
+    ascending,
+    descending,
+    extent,
+    max,
+    groups,
+    range,
+    scaleLinear
+  } from "d3";
 
   const names = [
     "Jan",
@@ -24,7 +32,14 @@
 
   const years = groups(heatmapData, (d) => d.year);
 
+  const [minYear, maxYear] = extent(years, (d) => d[0]);
+  const allYears = years.map((d) => d[0]);
+
   years.forEach(([year, months]) => months.sort((a, b) => ascending(a.month)));
+
+  range(minYear, maxYear + 1).forEach((y) => {
+    if (!allYears.includes(y)) years.push([y, []]);
+  });
 
   years.sort((a, b) => descending(a[0], b[0]));
   const data = years.map(([year, m]) => {
