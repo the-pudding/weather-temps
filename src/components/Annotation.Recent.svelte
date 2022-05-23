@@ -16,7 +16,9 @@
   {@const x = $xGet(d) - w}
   {@const left = `${x - m}px`}
   {@const top = `${$yGet(d)}px`}
-  {@const fill = color[d.annotation.color] || "#fff"}
+  {@const fill = d.highlight.includes("latest")
+    ? color.tertiary
+    : color[d.annotation.color] || "#fff"}
   {@const opacity = d.annotation.color ? 1 : 0.7}
   {@const offset = d.annotation.offset || 0}
   {@const text = d.annotation.text}
