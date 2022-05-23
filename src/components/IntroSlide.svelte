@@ -31,7 +31,7 @@
             <span class="line">
               Tap to advance <span class="tap">{@html tapSvg}</span>
             </span>
-            <span class="line">Or use arrow keys &rarr;</span>
+            <span class="line desktop">Or use arrow keys &rarr;</span>
           </p>
         </div>
       </Slide>
@@ -86,8 +86,8 @@
     margin-bottom: 1rem;
   }
 
-  .tap {
-    /* margin-left: 0.75em; */
+  .desktop {
+    display: none;
   }
 
   :global(.tap svg) {
@@ -124,6 +124,12 @@
   @media only screen and (max-width: 374px) {
     .text {
       font-size: 24px;
+    }
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .desktop {
+      display: block;
     }
   }
 </style>
