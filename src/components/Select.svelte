@@ -52,7 +52,7 @@
   // $: if (el && $viewport.width && $viewport.height)
   //   $selectY = el.getBoundingClientRect().top + el.offsetHeight + 16;
 
-  $: pad = city.length < 9 ? 3 : city.length < 14 ? 2 : 1;
+  $: pad = city.length < 11 ? 3 : city.length < 14 ? 2 : 1;
   $: width = `${city.length + pad}ch`;
 
   onMount(() => {
