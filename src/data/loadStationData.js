@@ -284,7 +284,8 @@ const getTempData = async (id) => {
 
 	const record5 = rawData.filter(d => d.highlight && d.highlight.includes("record5"));
 	const minDate = min(record5, d => d.date);
-	custom["year-record5"] = format(minDate, "y");
+	const minDateYear = format(minDate, "y");
+	custom["year-record5"] = minDateYear === format(now, "y") ? `in the past ${formatDistanceStrict(now, minDate)}` : `since ${minDateYear}`;
 
 	custom["date-example1"] = format(example1.date, "MMMM do");
 	custom["year-example1"] = format(example1.date, "y");

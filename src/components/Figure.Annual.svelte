@@ -60,7 +60,7 @@
   const formatTick = (d) => {
     const match = rawData.find((e) => e[x] === d);
     if (!match) return "";
-    return timeFormat("%b %d")(match.date);
+    return timeFormat("%b")(match.date);
   };
 
   let highlight;
