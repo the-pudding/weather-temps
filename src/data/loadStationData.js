@@ -276,14 +276,15 @@ const getTempData = async (id) => {
 
 	custom["date-record"] = format(record.date, "MMMM do");
 
-	custom["duration-record"] = latest.daysSinceNow === record.daysSinceNow ? "yesterday" : formatDistanceStrict(latest.date, record.date);
+	custom["duration-record"] = latest.daysSinceNow === record.daysSinceNow ? "yesterday" : `${formatDistanceStrict(latest.date, record.date)} ago`;
 
 	custom["temp-record"] = `${record.temp}°F`;
 
 	custom["count-record5"] = "Five";
 
 	const record5 = rawData.filter(d => d.highlight && d.highlight.includes("record5"));
-	custom["year-record5"] = format(record5[record5.length - 1].date, "y");
+	const minDate = min(record5, d => d.date);
+	custom["year-record5"] = format(minDate, "y");
 
 	custom["date-example1"] = format(example1.date, "MMMM do");
 	custom["year-example1"] = format(example1.date, "y");
