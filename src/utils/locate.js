@@ -7,17 +7,16 @@ locate(test = false).then(data => {
 */
 
 const TEST_DATA = {
-	testing: "This is localhost testing data",
-	city: "Lee",
-	country: "US",
-	hostname: "cpe-74-76-154-164.nycap.res.rr.com",
-	ip: "74.76.154.164",
-	loc: "31.44,-100.45",
-	org: "AS11351 Charter Communications Inc",
-	postal: "01238",
-	region: "Massachusetts",
-	timezone: "America/New_York",
-}
+	"ip": "143.244.47.74",
+	"hostname": "unn-143-244-47-74.datapacket.com",
+	"city": "New York City",
+	"region": "New York",
+	"country": "US",
+	"loc": "40.7143,-74.0060",
+	"org": "AS212238 Datacamp Limited",
+	"postal": "10004",
+	"timezone": "America/New_York"
+};
 
 const MAX_TIME = 4000;
 
@@ -26,7 +25,6 @@ async function lookup(test) {
 	try {
 		const request = await fetch("https://ipinfo.io/json?token=6f0f9c88db028a");
 		const json = await request.json();
-		console.log(json);
 		if (json.country !== "US") return TEST_DATA;
 		return json;
 	} catch (err) {
