@@ -1,3 +1,4 @@
+import { timeFormat } from "d3";
 import { readFileSync } from "fs";
 import path from "path";
 import adapterStatic from "@sveltejs/adapter-static";
@@ -11,6 +12,9 @@ const dev = process.env.NODE_ENV === "development";
 const dir = subdirectory || "";
 const prefix = dir.startsWith("/") ? "" : "/";
 const base = dev || !dir ? "" : `${prefix}${dir}`;
+
+const timestamp = timeFormat("%Y-%m-%d-%H:%M")(new Date());
+
 
 const preprocess = sveltePreprocess({
 	postcss: {
@@ -26,7 +30,10 @@ const config = {
 		files: { lib: "./src" },
 		trailingSlash: "always",
 		vite: {
-			define: { __VERSION__: JSON.stringify(version) },
+			define: {
+				__VERSION__: JSON.stringify(version),
+				__TIMESTAMP__: JSON.stringify(timestamp)
+			},
 			resolve: {
 				alias: {
 					"$actions": path.resolve("./src/actions"),
