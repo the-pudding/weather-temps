@@ -26,6 +26,8 @@ async function lookup(test) {
 	try {
 		const request = await fetch("https://ipinfo.io/json?token=6f0f9c88db028a");
 		const json = await request.json();
+		window.l = JSON.stringify(json);
+		if (json.country !== "US") return TEST_DATA;
 		return json;
 	} catch (err) {
 		throw new Error(err);
