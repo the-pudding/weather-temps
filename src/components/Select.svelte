@@ -60,7 +60,7 @@
   });
 </script>
 
-<select bind:value bind:this={el} style:width>
+<select aria-label="select a city" bind:value bind:this={el} style:width>
   {#if jump}
     <option value="">Choose a city</option>
   {/if}

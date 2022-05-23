@@ -22,10 +22,10 @@
     <div class="wrapper" in:fade>
       <Slide>
         <div class="info">
-          <p class="text">
+          <h1 class="text">
             {text}
             <Select bind:this={selectComponent} on:changeStation {loc} /> ?
-          </p>
+          </h1>
           <p class="text">{response}</p>
           <p class="subtext prompt shadow" class:ready>
             <span class="line">
