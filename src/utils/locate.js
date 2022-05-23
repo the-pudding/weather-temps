@@ -12,8 +12,7 @@ const TEST_DATA = {
 	"city": "New York City",
 	"region": "New York",
 	"country": "US",
-	// "loc": "40.7143,-74.0060",
-	"loc": "42.1243,-72.7060",
+	"loc": "40.7143,-74.0060",
 	"org": "",
 	"postal": "10004",
 	"timezone": "America/New_York"
