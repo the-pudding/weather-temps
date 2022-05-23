@@ -17,7 +17,7 @@
   {@const left = `${x - m}px`}
   {@const top = `${$yGet(d)}px`}
   {@const fill =
-    d.highlight && d.highlight.includes("latest")
+    d.highlight && d.highlight.includes("latest") && d.daysSinceNow === 1
       ? color.tertiary
       : color[d.annotation.color] || "#fff"}
   {@const opacity = d.annotation.color ? 1 : 0.7}
