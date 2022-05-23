@@ -10,7 +10,7 @@
 </script>
 
 <section class:active class="outro">
-  <Slide>
+  <Slide index={10}>
     <p class="subtext">
       {prompt}
       <Select on:changeStation jump={true} />
@@ -63,7 +63,7 @@
     font-size: 1rem;
     line-height: 1.4;
   }
-  
+
   details p:nth-of-type(1) {
     border: none;
     line-height: 1.4;
@@ -75,17 +75,16 @@
     border-radius: 3px;
     font-size: 1.2rem;
     text-decoration: none;
-    padding: .3rem .6rem;
+    padding: 0.3rem 0.6rem;
     background-color: var(--color-gray-800);
     color: var(--color-fg-alt);
     z-index: calc(var(--z-overlay) + 1);
     margin-top: -1rem;
   }
 
-
   p:nth-of-type(1) {
     line-height: 2;
-    border-bottom: 2px solid rgba(255,255,255,.4);
+    border-bottom: 2px solid rgba(255, 255, 255, 0.4);
     padding-bottom: 2rem;
   }
 

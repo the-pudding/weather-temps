@@ -1,6 +1,7 @@
 <script>
   import Slide from "$components/helpers/Slider.Slide.svelte";
 
+  export let index;
   export let active;
   export let text;
   export let subtext;

@@ -19,7 +19,7 @@
 </script>
 
 <section class:active class="outro">
-  <Slide>
+  <Slide index={11}>
     <div class="stories">
       <p class="subtext">Check out some other stories from The Pudding:</p>
       {#each stories as { hed, url, image }}

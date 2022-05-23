@@ -20,7 +20,7 @@
 <section class:active>
   {#if loc !== undefined}
     <div class="wrapper" in:fade>
-      <Slide>
+      <Slide index={0}>
         <div class="info">
           <h1 class="text">
             {text}

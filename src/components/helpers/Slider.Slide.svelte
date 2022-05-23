@@ -1,22 +1,32 @@
 <script>
   import { getContext } from "svelte";
-  const { direction, width, height } = getContext("Slider");
+  import canTab from "$actions/canTab.js";
+  const { dir, cur, w, h } = getContext("Slider");
 
-  export let center;
-  $: w = $direction === "horizontal" ? `${$width}px` : "100%";
-  $: h = $direction === "vertical" ? `${$height}px` : "100%";
+  export let index;
+
+  $: width = $dir === "horizontal" ? `${$w}px` : "100%";
+  $: height = $dir === "vertical" ? `${$h}px` : "100%";
+  $: visible = index === $cur;
+  $: disable = !visible;
 </script>
 
-<div class="slide" class:center style="width: {w}; height: {h};">
+<section
+  class="slide"
+  class:visible
+  style:width
+  style:height
+  use:canTab={{ disable }}
+>
   <slot />
-</div>
+</section>
 
 <style>
-  .slide {
+  section {
     position: relative;
     width: 100%;
-    margin: 0 auto;
     height: 100%;
+    margin: 0 auto;
     display: flex;
     flex-direction: column;
     font-size: 1.5rem;
@@ -30,7 +40,7 @@
   }
 
   @media only screen and (min-width: 640px) {
-    .slide {
+    section {
       font-size: 1.5rem;
     }
 
@@ -40,7 +50,7 @@
   }
 
   @media only screen and (min-width: 1024px) {
-    .slide {
+    section {
       font-size: 2rem;
     }
     :global(.subtext) {

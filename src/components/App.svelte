@@ -84,7 +84,7 @@
 {/if}
 
 <article>
-  <Slider bind:this={slider} bind:active={$activeSlide} duration="0">
+  <Slider bind:this={slider} bind:current={$activeSlide} duration="0">
     <IntroSlide
       {...copy.intro}
       {loc}
@@ -95,9 +95,10 @@
       on:changeStation={changeStation}
     />
 
-    {#each copy.slides as { slide, text, subtext, color }}
+    {#each copy.slides as { slide, text, subtext, color }, i}
       {@const active = $activeSlide === +slide}
-      <ArticleSlide {active} {text} {subtext} {color} />
+      {@const index = i + 1}
+      <ArticleSlide {index} {active} {text} {subtext} {color} />
     {/each}
 
     <OutroSlide1
