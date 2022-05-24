@@ -3,7 +3,7 @@
   import { fade } from "svelte/transition";
   import { writable } from "svelte/store";
   import { max, extent } from "d3";
-  import { activeSlide } from "$stores/misc";
+  import { activeSlide, tableData, tableTitle } from "$stores/misc";
   import FigureRecent from "$components/Figure.Recent.svelte";
   import FigureAnnual from "$components/Figure.Annual.svelte";
   import FigureHeatmap from "$components/Figure.Heatmap.svelte";
@@ -84,7 +84,7 @@
       caption.reason = "a recent near-record is in context";
     } else if ($activeSlide === 3) {
       caption.chart = "Scatter plot";
-      caption.data = `recorded daily high temperatures for the past ${custom["timespan-recent"]}`;
+      caption.data = `recorded daily high temperatures for the past ${custom["timespan-recent"]} records`;
       caption.reason = "daily record highs are depicted";
     } else if ($activeSlide < 7) {
       caption.chart = "Scatter plot";
@@ -102,13 +102,16 @@
       caption.chart = "Heatmap";
       caption.data = `the number of records set or tied each month for the past 10 years`;
       caption.reason = "unusually hot months are depicted";
+      $tableData = null;
     } else {
       caption.chart = "";
       caption.data = "";
       caption.reason = "";
+      $tableData = null;
     }
   }
   $: figcaption = `${caption.chart} of ${caption.data} where ${caption.reason}`;
+  $: $tableTitle = caption.data;
 
   onMount(async () => {
     await tick();

@@ -12,8 +12,9 @@
   import ArticleSlide from "$components/ArticleSlide.svelte";
   import Header from "$components/Header.svelte";
   import Toggle from "$components/Toggle.svelte";
+  import Table from "$components/Table.svelte";
   import copy from "$data/doc.json";
-  import { activeSlide, dir } from "$stores/misc.js";
+  import { activeSlide, dir, tableVisible } from "$stores/misc.js";
   import loadStationData from "$data/loadStationData.js";
   import locate from "$utils/locate.js";
 
@@ -28,6 +29,7 @@
   let selectComponent;
 
   const onTap = ({ detail }) => {
+    if ($tableVisible) return;
     if (detail === "right") slider.next();
     else slider.prev();
     $dir = detail;
@@ -121,6 +123,8 @@
   {disabled}
   on:tap={onTap}
 />
+
+<Table />
 
 {#if !showHeader}
   <Progress current={$activeSlide - 1} total={11} />

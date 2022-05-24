@@ -1,6 +1,6 @@
 <script>
   import { getContext } from "svelte";
-  import { extent, timeFormat, max } from "d3";
+  import { extent, timeFormat, max, descending } from "d3";
   import { LayerCake, Canvas, Svg, Html } from "layercake";
   import { tweened } from "svelte/motion";
   import { cubicInOut } from "svelte/easing";
@@ -10,7 +10,7 @@
   import ScatterCanvas from "$components/charts/Scatter.canvas.svelte";
   import Column from "$components/Column.svelte";
   import Annotation from "$components/Annotation.Recent.svelte";
-  import { activeSlide, dir } from "$stores/misc.js";
+  import { activeSlide, dir, tableData } from "$stores/misc.js";
 
   export let width;
   export let height;
@@ -141,6 +141,34 @@
     }));
 
   $: columnTemp = getColumn(highlight);
+  $: {
+    if ($activeSlide === 1) {
+      $tableData = data.map((d) => ({
+        year: d.rawDate.substring(0, 4),
+        date: d.rawDate.substring(5),
+        "temperature (°F)": d.temp
+      }));
+      $tableData.sort((a, b) => descending(a.year, b.year));
+    } else if ($activeSlide === 2) {
+      $tableData = data
+        .filter((d) => d.daysSinceNow < threshold)
+        .map((d) => ({
+          year: d.rawDate.substring(0, 4),
+          date: d.rawDate.substring(5),
+          "temperature (°F)": d.temp
+        }));
+      $tableData.sort((a, b) => descending(a.date, b.date));
+    } else if ($activeSlide === 3) {
+      $tableData = data
+        .filter((d) => d.rank === 0)
+        .map((d) => ({
+          year: d.rawDate.substring(0, 4),
+          date: d.rawDate.substring(5),
+          "temperature (°F)": d.temp
+        }));
+      $tableData.sort((a, b) => descending(a.date, b.date));
+    }
+  }
 </script>
 
 {#if width}

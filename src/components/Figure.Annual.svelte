@@ -1,6 +1,6 @@
 <script>
   import { getContext } from "svelte";
-  import { extent, timeFormat, range } from "d3";
+  import { extent, timeFormat, range, ascending } from "d3";
   import { LayerCake, Canvas, Svg, Html } from "layercake";
   import { tweened } from "svelte/motion";
   import { cubicInOut } from "svelte/easing";
@@ -9,7 +9,7 @@
   import AxisY from "$components/charts/AxisY.svg.svelte";
   import ScatterCanvas from "$components/charts/Scatter.canvas.svelte";
   import Annotation from "$components/Annotation.Annual.svelte";
-  import { activeSlide, dir } from "$stores/misc.js";
+  import { activeSlide, dir, tableData } from "$stores/misc.js";
   import getExtentOverlay from "$utils/getExtentOverlay.js";
 
   export let width;
@@ -133,6 +133,19 @@
       return d[x] === extentExample[1];
     return false;
   });
+
+  $: {
+    if ($activeSlide < 7 && $activeSlide > 3 && data) {
+      $tableData = data
+        .filter((d) => d.rawDate)
+        .map((d) => ({
+          year: d.rawDate.substring(0, 4),
+          date: d.rawDate.substring(5),
+          "temperature (°F)": d.temp
+        }));
+      $tableData.sort((a, b) => ascending(a.date, b.date));
+    }
+  }
 </script>
 
 {#if width}
