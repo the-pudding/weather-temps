@@ -55,6 +55,7 @@
   let mounted = false;
   let width = 0;
   let height = 0;
+  let caption = {};
 
   const insertCustomText = () => {
     Object.keys(custom).forEach((key) => {
@@ -72,6 +73,38 @@
       ? `Number of times ${custom.location} set (or tied) a daily heat record`
       : custom.location;
   $: titleDek = $activeSlide === 9 ? "" : "Daily high temps.";
+  $: {
+    if ($activeSlide === 1) {
+      caption.chart = "Scatter plot";
+      caption.data = `recorded daily high temperatures for yesterday's date going back ${custom["count-oldest"]}`;
+      caption.reason = "yesterday is ranked in context";
+    } else if ($activeSlide === 2) {
+      caption.chart = "Scatter plot";
+      caption.data = `recorded daily high temperatures for the past ${custom["timespan-recent"]}`;
+      caption.reason = "a recent near-record is in context";
+    } else if ($activeSlide === 3) {
+      caption.chart = "Scatter plot";
+      caption.data = `recorded daily high temperatures for the past ${custom["timespan-recent"]}`;
+      caption.reason = "daily record highs are depicted";
+    } else if ($activeSlide < 7) {
+      caption.chart = "Scatter plot";
+      caption.data = `all-time daily high temperatures records for every day of the year`;
+      caption.reason = "the hottest temperatures are seen at once";
+    } else if ($activeSlide === 7) {
+      caption.chart = "Scatter plot";
+      caption.data = `recorded daily high temperatures for ${custom["date-example1"]} going back ${custom["count-oldest"]}`;
+      caption.reason = "the record for that days is depicted";
+    } else if ($activeSlide === 8) {
+      caption.chart = "Scatter plot";
+      caption.data = `recorded daily high temperatures for ${custom["date-example1"]} going back ${custom["count-oldest"]}`;
+      caption.reason = "the previous record for that days is depicted";
+    } else if ($activeSlide === 9) {
+      caption.chart = "Heatmap";
+      caption.data = `the number of records set or tied each month for the past 10 years`;
+      caption.reason = "unusually hot months are depicted";
+    }
+  }
+  $: figcaption = `${caption.chart} of ${caption.data} where ${caption.reason}`;
 
   onMount(async () => {
     await tick();
@@ -105,6 +138,7 @@
         <FigureHeatmap />
       </div>
     {/if}
+    <figcaption class="sr-only" aria-live="polite">{figcaption}</figcaption>
   </figure>
 {/if}
 
