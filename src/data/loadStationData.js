@@ -9,7 +9,7 @@ const getTempData = async (id) => {
 	const LEAP = 59; // leap year day of year
 
 	const stamp = Date.now();
-	const url = `https://pudding.cool/2022/03/weather-map-data/${id}.csv?v=${stamp}`;
+	const url = `https://pudding.cool/2022/03/weather-map-data/${id}.csv?version=${stamp}`;
 	const response = await fetch(url);
 	const csv = await response.text();
 	const raw = csvParse(csv);
@@ -301,7 +301,7 @@ const getTempData = async (id) => {
 
 const getHeatmapData = async (id) => {
 	const stamp = Date.now();
-	const url = `https://pudding.cool/2022/03/weather-map-data/${id}-heat.csv?v=${stamp}`;
+	const url = `https://pudding.cool/2022/03/weather-map-data/${id}-heat.csv?version=${stamp}`;
 	const response = await fetch(url);
 	const csv = await response.text();
 	const raw = csvParse(csv);
