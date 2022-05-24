@@ -34,13 +34,18 @@ async function lookup(test) {
 
 function init(test = false) {
 	return new Promise((resolve, reject) => {
-		const timeout = setTimeout(() => reject(new Error('timeout')), MAX_TIME);
+		const timeout = setTimeout(() => {
+			resolve(TEST_DATA);
+		}, MAX_TIME);
 		lookup(test)
 			.then((data) => {
 				clearTimeout(timeout);
 				resolve(data);
 			})
-			.catch(reject);
+			.catch((err) => {
+				console.log(err);
+				resolve(TEST_DATA);
+			});
 	});
 }
 
