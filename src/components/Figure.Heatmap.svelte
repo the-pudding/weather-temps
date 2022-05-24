@@ -84,9 +84,9 @@
   .table {
     padding: 1rem;
     font-family: var(--sans);
-    font-size: 14px;
+    font-size: 12px;
     max-width: 640px;
-    margin: 6rem auto 0 auto;
+    margin: 5rem auto 0 auto;
   }
 
   .tr {
@@ -154,8 +154,14 @@
       transform: translate(-50%, -50%);
     }
 
-    .td,
-    .th {
+    table {
+      font-size: 14px;
+    }
+  }
+
+  @media only screen and (min-width: 700px) {
+    .th,
+    .td {
       padding: 0.5rem 0;
     }
   }
