@@ -102,6 +102,10 @@
       caption.chart = "Heatmap";
       caption.data = `the number of records set or tied each month for the past 10 years`;
       caption.reason = "unusually hot months are depicted";
+    } else {
+      caption.chart = "";
+      caption.data = "";
+      caption.reason = "";
     }
   }
   $: figcaption = `${caption.chart} of ${caption.data} where ${caption.reason}`;
