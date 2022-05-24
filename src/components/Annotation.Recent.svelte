@@ -82,7 +82,7 @@
     display: block;
     width: var(--diam);
     height: var(--diam);
-    border-radius: 50%;
+    border-radius: var(--diam);
     border: 2px solid var(--color-fg);
     transform: translate(calc(var(--diam) - (var(--pad) * 0.5)), -50%);
     outline: 2px solid var(--color-bg);

@@ -16,6 +16,7 @@
   {@const delay = d.highlightAlt === "example1" ? 500 : 0}
   {@const duration = d.highlightAlt === "example1" ? 250 : 0}
   <div
+    class="c"
     in:fade={{ delay: alltime ? 2000 : 500 }}
     out:fade={{ delay, duration }}
     style:left
@@ -23,7 +24,7 @@
     class:flip
     class:alltime
   >
-    <span style="--w: {w}px;" />
+    <span class="circle" style="--w: {w}px;" />
     {#if d.annotation && data.length === 1}
       <p class="shadow">
         {d.annotation.text}
@@ -33,26 +34,26 @@
 {/each}
 
 <style>
-  div {
+  .c {
     position: absolute;
     top: 0;
     left: 50%;
     transition: all 1s ease-in-out;
   }
 
-  div.alltime {
+  .alltime {
     transition: none;
   }
 
-  span {
+  .circle {
     display: block;
     width: 1rem;
     height: 1rem;
     margin-left: calc(var(--w) * 0.5);
     transform: translate(-50%, -50%);
-    border: 2px solid var(--color-bg);
-    outline: 2px solid var(--color-fg);
-    border-radius: 50%;
+    border: 2px solid var(--color-fg);
+    outline: 2px solid var(--color-bg);
+    border-radius: 1rem;
   }
 
   p {
