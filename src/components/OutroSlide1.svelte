@@ -93,23 +93,4 @@
       font-size: 18px;
     }
   }
-
-  @media only screen and (max-width: 475px) {
-    .text {
-      font-size: 28px;
-      line-height: 1.4;
-    }
-  }
-
-  @media only screen and (max-width: 424px) {
-    .text {
-      font-size: 26px;
-    }
-  }
-
-  @media only screen and (max-width: 374px) {
-    .text {
-      font-size: 24px;
-    }
-  }
 </style>

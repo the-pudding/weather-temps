@@ -153,10 +153,6 @@
       visibility: visible;
       transform: translate(-50%, -50%);
     }
-
-    table {
-      font-size: 14px;
-    }
   }
 
   @media only screen and (min-width: 700px) {
